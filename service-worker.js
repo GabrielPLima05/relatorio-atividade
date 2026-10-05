@@ -2,16 +2,19 @@
 
 
 /* =========================================================
-   NOME E VERSÃO DO CACHE
+   VERSÃO DO CACHE
+
+   IMPORTANTE:
+   Sempre que fizermos uma atualização importante
+   no aplicativo, aumentaremos esta versão.
 ========================================================= */
 
 const CACHE_NAME =
-    "relatorio-atividade-v1";
-
+    "relatorio-atividade-v2";
 
 
 /* =========================================================
-   ARQUIVOS NECESSÁRIOS PARA FUNCIONAMENTO OFFLINE
+   ARQUIVOS ESSENCIAIS
 ========================================================= */
 
 const ARQUIVOS_OFFLINE = [
@@ -27,9 +30,8 @@ const ARQUIVOS_OFFLINE = [
 ];
 
 
-
 /* =========================================================
-   INSTALAÇÃO DO SERVICE WORKER
+   INSTALAÇÃO
 ========================================================= */
 
 self.addEventListener(
@@ -65,7 +67,6 @@ self.addEventListener(
     }
 
 );
-
 
 
 /* =========================================================
@@ -132,9 +133,8 @@ self.addEventListener(
 );
 
 
-
 /* =========================================================
-   INTERCEPTAR REQUISIÇÕES
+   FUNCIONAMENTO ONLINE / OFFLINE
 ========================================================= */
 
 self.addEventListener(
@@ -166,8 +166,8 @@ self.addEventListener(
                     function (arquivoCache) {
 
                         /*
-                        Se o arquivo já estiver salvo
-                        offline, utiliza o cache.
+                        Se já estiver no cache,
+                        utiliza o arquivo local.
                         */
 
                         if (
@@ -180,8 +180,8 @@ self.addEventListener(
 
 
                         /*
-                        Caso contrário,
-                        tenta buscar na internet.
+                        Se não estiver no cache,
+                        tenta buscar pela internet.
                         */
 
                         return fetch(
@@ -191,11 +191,6 @@ self.addEventListener(
                         .then(
 
                             function (resposta) {
-
-                                /*
-                                Não armazenamos respostas
-                                inválidas.
-                                */
 
                                 if (
                                     !resposta
@@ -245,8 +240,9 @@ self.addEventListener(
                             function () {
 
                                 /*
-                                Se estiver offline e for uma
-                                navegação, volta para o formulário.
+                                Se estiver completamente offline
+                                e for uma navegação, abre o
+                                formulário principal.
                                 */
 
                                 if (
