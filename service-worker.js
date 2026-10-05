@@ -3,18 +3,14 @@
 
 /* =========================================================
    VERSÃO DO CACHE
-
-   IMPORTANTE:
-   Sempre que fizermos uma atualização importante
-   no aplicativo, aumentaremos esta versão.
 ========================================================= */
 
 const CACHE_NAME =
-    "relatorio-atividade-v2";
+    "relatorio-atividade-v3";
 
 
 /* =========================================================
-   ARQUIVOS ESSENCIAIS
+   ARQUIVOS DO APLICATIVO
 ========================================================= */
 
 const ARQUIVOS_OFFLINE = [
@@ -134,7 +130,7 @@ self.addEventListener(
 
 
 /* =========================================================
-   FUNCIONAMENTO ONLINE / OFFLINE
+   ONLINE / OFFLINE
 ========================================================= */
 
 self.addEventListener(
@@ -165,11 +161,6 @@ self.addEventListener(
 
                     function (arquivoCache) {
 
-                        /*
-                        Se já estiver no cache,
-                        utiliza o arquivo local.
-                        */
-
                         if (
                             arquivoCache
                         ) {
@@ -178,11 +169,6 @@ self.addEventListener(
 
                         }
 
-
-                        /*
-                        Se não estiver no cache,
-                        tenta buscar pela internet.
-                        */
 
                         return fetch(
                             event.request
@@ -217,11 +203,8 @@ self.addEventListener(
                                         function (cache) {
 
                                             cache.put(
-
                                                 event.request,
-
                                                 copia
-
                                             );
 
                                         }
@@ -238,12 +221,6 @@ self.addEventListener(
                         .catch(
 
                             function () {
-
-                                /*
-                                Se estiver completamente offline
-                                e for uma navegação, abre o
-                                formulário principal.
-                                */
 
                                 if (
                                     event.request.mode
