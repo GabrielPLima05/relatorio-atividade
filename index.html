@@ -10,16 +10,12 @@
     >
 
     <meta name="theme-color" content="#17365d">
-
     <meta name="mobile-web-app-capable" content="yes">
-
     <meta name="apple-mobile-web-app-capable" content="yes">
-
     <meta
         name="apple-mobile-web-app-status-bar-style"
         content="default"
     >
-
     <meta
         name="apple-mobile-web-app-title"
         content="Relatório"
@@ -27,21 +23,9 @@
 
     <title>Relatório de Realização de Atividade</title>
 
-    <link
-        rel="manifest"
-        href="./manifest.json"
-    >
-
-    <link
-        rel="icon"
-        type="image/png"
-        href="./icons/icon.png"
-    >
-
-    <link
-        rel="apple-touch-icon"
-        href="./icons/icon.png"
-    >
+    <link rel="manifest" href="./manifest.json">
+    <link rel="icon" type="image/png" href="./icons/icon.png">
+    <link rel="apple-touch-icon" href="./icons/icon.png">
 
     <style>
 
@@ -57,22 +41,14 @@
         body {
             margin: 0;
             padding: 0;
-
-            font-family:
-                Arial,
-                Helvetica,
-                sans-serif;
-
+            font-family: Arial, Helvetica, sans-serif;
             background: #f3f6fa;
-
             color: #1f2937;
         }
 
         .container {
             max-width: 880px;
-
             margin: auto;
-
             padding: 15px;
         }
 
@@ -82,17 +58,13 @@
 
         .cabecalho {
             background: #17365d;
-
             color: white;
-
             padding: 20px;
-
             border-radius: 14px;
         }
 
         .cabecalho h1 {
             margin: 0 0 7px 0;
-
             font-size: 21px;
         }
 
@@ -102,13 +74,9 @@
 
         #status {
             background: white;
-
             color: #17365d;
-
             padding: 10px;
-
             border-radius: 8px;
-
             font-size: 13px;
         }
 
@@ -118,22 +86,15 @@
 
         .card {
             background: white;
-
             margin-top: 14px;
-
             padding: 17px;
-
             border-radius: 13px;
-
-            border:
-                1px solid #d8e0ea;
+            border: 1px solid #d8e0ea;
         }
 
         .card h2 {
             margin-top: 0;
-
             color: #17365d;
-
             font-size: 17px;
         }
 
@@ -143,10 +104,7 @@
 
         .campo {
             display: block;
-
-            margin:
-                14px 0 5px 0;
-
+            margin: 14px 0 5px 0;
             font-weight: bold;
         }
 
@@ -154,49 +112,60 @@
         input[type="tel"],
         textarea {
             width: 100%;
-
             padding: 12px;
-
-            border:
-                1px solid #c7d0db;
-
+            border: 1px solid #c7d0db;
             border-radius: 8px;
-
             font-size: 16px;
-
-            font-family:
-                Arial,
-                Helvetica,
-                sans-serif;
+            font-family: Arial, Helvetica, sans-serif;
         }
 
         textarea {
             min-height: 120px;
-
             resize: vertical;
         }
 
         /* =====================================================
-           BOTÃO DE FOTOS
+           BOTÕES DE FOTOS
         ===================================================== */
 
-        .botao-foto {
-            display: inline-block;
+        .acoes-fotos {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 10px;
+        }
 
-            background: #e6eef8;
+        .botao-camera,
+        .botao-galeria {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
 
-            color: #17365d;
+            min-height: 46px;
+
+            padding: 11px 14px;
 
             border-radius: 8px;
 
-            padding: 12px 15px;
-
+            font-size: 14px;
             font-weight: bold;
 
             cursor: pointer;
         }
 
-        .botao-foto input {
+        .botao-camera {
+            background: #17365d;
+            color: white;
+        }
+
+        .botao-galeria {
+            background: #e6eef8;
+            color: #17365d;
+            border: 1px solid #c5d5e8;
+        }
+
+        .botao-camera input,
+        .botao-galeria input {
             display: none;
         }
 
@@ -206,12 +175,8 @@
 
         .galeria {
             display: grid;
-
-            grid-template-columns:
-                repeat(2, 1fr);
-
+            grid-template-columns: repeat(2, 1fr);
             gap: 10px;
-
             margin-top: 12px;
         }
 
@@ -220,9 +185,7 @@
 
             background: white;
 
-            border:
-                1px solid #d8e0ea;
-
+            border: 1px solid #d8e0ea;
             border-radius: 9px;
 
             overflow: hidden;
@@ -241,17 +204,13 @@
         }
 
         .legenda {
-            width:
-                calc(100% - 12px);
+            width: calc(100% - 12px);
 
-            margin:
-                7px 6px 0 6px;
+            margin: 7px 6px 0 6px;
 
             padding: 8px;
 
-            border:
-                1px solid #c7d0db;
-
+            border: 1px solid #c7d0db;
             border-radius: 7px;
 
             font-size: 13px;
@@ -261,21 +220,17 @@
             position: absolute;
 
             right: 5px;
-
             top: 5px;
 
             width: 34px;
-
             height: 34px;
 
             padding: 0;
 
             border: none;
-
             border-radius: 50%;
 
             background: #b42318;
-
             color: white;
 
             font-size: 20px;
@@ -286,69 +241,53 @@
         .nota,
         .contador {
             margin-top: 8px;
-
             color: #667085;
-
             font-size: 12px;
-
             line-height: 1.4;
         }
 
         /* =====================================================
-           BOTÕES
+           BOTÕES PRINCIPAIS
         ===================================================== */
 
         .acoes {
             display: flex;
-
             flex-wrap: wrap;
-
             gap: 8px;
         }
 
         button {
             border: none;
-
             border-radius: 8px;
-
             padding: 12px 15px;
-
             font-size: 14px;
-
             font-weight: bold;
-
             cursor: pointer;
         }
 
         #instalar {
             display: none;
-
             background: #7a4e00;
-
             color: white;
         }
 
         #pdf {
             background: #17365d;
-
             color: white;
         }
 
         #baixar {
             background: #16794b;
-
             color: white;
         }
 
         #salvar {
             background: #e6eef8;
-
             color: #17365d;
         }
 
         #limpar {
             background: #fee4e2;
-
             color: #b42318;
         }
 
@@ -359,8 +298,26 @@
         @media (min-width: 650px) {
 
             .galeria {
-                grid-template-columns:
-                    repeat(3, 1fr);
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+        }
+
+        /* =====================================================
+           CELULAR
+        ===================================================== */
+
+        @media (max-width: 480px) {
+
+            .acoes-fotos {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .botao-camera,
+            .botao-galeria {
+                width: 100%;
+                text-align: center;
             }
 
         }
@@ -402,14 +359,9 @@
 
         <section class="card">
 
-            <h2>
-                Informações
-            </h2>
+            <h2>Informações</h2>
 
-            <label
-                class="campo"
-                for="nome"
-            >
+            <label class="campo" for="nome">
                 1. Insira seu nome *
             </label>
 
@@ -420,10 +372,7 @@
             >
 
 
-            <label
-                class="campo"
-                for="area"
-            >
+            <label class="campo" for="area">
                 2. Insira a área de realização da atividade *
             </label>
 
@@ -434,10 +383,7 @@
             >
 
 
-            <label
-                class="campo"
-                for="atividade"
-            >
+            <label class="campo" for="atividade">
                 3. Insira a atividade realizada *
             </label>
 
@@ -448,10 +394,7 @@
             >
 
 
-            <label
-                class="campo"
-                for="contato"
-            >
+            <label class="campo" for="contato">
                 4. Insira nº de contato
             </label>
 
@@ -461,10 +404,7 @@
             >
 
 
-            <label
-                class="campo"
-                for="empresa"
-            >
+            <label class="campo" for="empresa">
                 5. Empresa *
             </label>
 
@@ -475,10 +415,7 @@
             >
 
 
-            <label
-                class="campo"
-                for="descricao"
-            >
+            <label class="campo" for="descricao">
                 8. Descrição da Atividade *
             </label>
 
@@ -500,23 +437,45 @@
                 6. Imagens ANTES
             </h2>
 
-            <label class="botao-foto">
+            <div class="acoes-fotos">
 
-                📷 Tirar / adicionar fotos
+                <!-- CÂMERA -->
 
-                <input
-                    id="inputAntes"
-                    type="file"
-                    accept="image/*"
-                    multiple
-                >
+                <label class="botao-camera">
 
-            </label>
+                    📷 Tirar foto
+
+                    <input
+                        id="cameraAntes"
+                        type="file"
+                        accept="image/*"
+                        capture="environment"
+                    >
+
+                </label>
+
+
+                <!-- GALERIA -->
+
+                <label class="botao-galeria">
+
+                    🖼️ Galeria
+
+                    <input
+                        id="galeriaInputAntes"
+                        type="file"
+                        accept="image/*"
+                        multiple
+                    >
+
+                </label>
+
+            </div>
 
             <div class="nota">
-                Você pode tirar uma nova foto ou selecionar
-                imagens existentes no celular.
-                A legenda é opcional.
+                Use <strong>Tirar foto</strong> para abrir a câmera
+                ou <strong>Galeria</strong> para escolher imagens
+                existentes no celular.
             </div>
 
             <div
@@ -544,23 +503,45 @@
                 7. Imagens DEPOIS
             </h2>
 
-            <label class="botao-foto">
+            <div class="acoes-fotos">
 
-                📷 Tirar / adicionar fotos
+                <!-- CÂMERA -->
 
-                <input
-                    id="inputDepois"
-                    type="file"
-                    accept="image/*"
-                    multiple
-                >
+                <label class="botao-camera">
 
-            </label>
+                    📷 Tirar foto
+
+                    <input
+                        id="cameraDepois"
+                        type="file"
+                        accept="image/*"
+                        capture="environment"
+                    >
+
+                </label>
+
+
+                <!-- GALERIA -->
+
+                <label class="botao-galeria">
+
+                    🖼️ Galeria
+
+                    <input
+                        id="galeriaInputDepois"
+                        type="file"
+                        accept="image/*"
+                        multiple
+                    >
+
+                </label>
+
+            </div>
 
             <div class="nota">
-                Você pode tirar uma nova foto ou selecionar
-                imagens existentes no celular.
-                A legenda é opcional.
+                Use <strong>Tirar foto</strong> para abrir a câmera
+                ou <strong>Galeria</strong> para escolher imagens
+                existentes no celular.
             </div>
 
             <div
@@ -651,9 +632,7 @@
 ========================================================= */
 
 function elemento(id) {
-
     return document.getElementById(id);
-
 }
 
 
@@ -663,58 +642,42 @@ function elemento(id) {
 
 if ("serviceWorker" in navigator) {
 
-    window.addEventListener(
+    window.addEventListener("load", function () {
 
-        "load",
+        navigator.serviceWorker
+            .register("./service-worker.js")
 
-        function () {
+            .then(function () {
 
-            navigator.serviceWorker
-                .register("./service-worker.js")
-
-                .then(
-
-                    function () {
-
-                        console.log(
-                            "Service Worker registrado."
-                        );
-
-                    }
-
-                )
-
-                .catch(
-
-                    function (erro) {
-
-                        console.error(
-                            "Erro ao registrar Service Worker:",
-                            erro
-                        );
-
-                    }
-
+                console.log(
+                    "Service Worker registrado."
                 );
 
-        }
+            })
 
-    );
+            .catch(function (erro) {
+
+                console.error(
+                    "Erro ao registrar Service Worker:",
+                    erro
+                );
+
+            });
+
+    });
 
 }
 
 
 /* =========================================================
-   INSTALAÇÃO DA PWA
+   INSTALAÇÃO
 ========================================================= */
 
 let eventoInstalacao = null;
 
 
 window.addEventListener(
-
     "beforeinstallprompt",
-
     function (evento) {
 
         evento.preventDefault();
@@ -728,40 +691,28 @@ window.addEventListener(
             "inline-block";
 
     }
-
 );
 
 
 elemento("instalar")
     .addEventListener(
-
         "click",
-
         async function () {
 
             if (!eventoInstalacao) {
 
                 alert(
-
                     "Abra o menu do navegador e escolha 'Instalar aplicativo' ou 'Adicionar à tela inicial'."
-
                 );
 
                 return;
-
             }
-
 
             eventoInstalacao.prompt();
 
+            await eventoInstalacao.userChoice;
 
-            await eventoInstalacao
-                .userChoice;
-
-
-            eventoInstalacao =
-                null;
-
+            eventoInstalacao = null;
 
             elemento("instalar")
                 .style
@@ -769,14 +720,11 @@ elemento("instalar")
                 "none";
 
         }
-
     );
 
 
 window.addEventListener(
-
     "appinstalled",
-
     function () {
 
         elemento("status")
@@ -784,7 +732,6 @@ window.addEventListener(
             "Aplicativo instalado com sucesso.";
 
     }
-
 );
 
 
@@ -836,23 +783,17 @@ function renderizarGaleria(
     const galeria =
         elemento(idGaleria);
 
-
     galeria.innerHTML =
         "";
 
 
     lista.forEach(
-
-        function (
-            item,
-            indice
-        ) {
+        function (item, indice) {
 
             const bloco =
                 document.createElement(
                     "div"
                 );
-
 
             bloco.className =
                 "foto";
@@ -863,17 +804,27 @@ function renderizarGaleria(
                     "img"
                 );
 
-
-            imagem.src =
+            const urlImagem =
                 URL.createObjectURL(
                     item.file
                 );
 
+            imagem.src =
+                urlImagem;
 
             imagem.alt =
                 "Foto "
                 +
                 (indice + 1);
+
+            imagem.onload =
+                function () {
+
+                    URL.revokeObjectURL(
+                        urlImagem
+                    );
+
+                };
 
 
             const legenda =
@@ -881,34 +832,27 @@ function renderizarGaleria(
                     "input"
                 );
 
-
             legenda.type =
                 "text";
-
 
             legenda.className =
                 "legenda";
 
-
             legenda.placeholder =
                 "Legenda da imagem (opcional)";
-
 
             legenda.value =
                 item.legenda || "";
 
 
             legenda.addEventListener(
-
                 "input",
-
                 function () {
 
                     item.legenda =
                         legenda.value;
 
                 }
-
             );
 
 
@@ -917,34 +861,27 @@ function renderizarGaleria(
                     "button"
                 );
 
-
             remover.type =
                 "button";
-
 
             remover.className =
                 "remover";
 
-
             remover.textContent =
                 "×";
-
 
             remover.title =
                 "Remover foto";
 
 
             remover.addEventListener(
-
                 "click",
-
                 function () {
 
                     lista.splice(
                         indice,
                         1
                     );
-
 
                     renderizarGaleria(
                         lista,
@@ -953,7 +890,6 @@ function renderizarGaleria(
                     );
 
                 }
-
             );
 
 
@@ -961,23 +897,19 @@ function renderizarGaleria(
                 imagem
             );
 
-
             bloco.appendChild(
                 remover
             );
 
-
             bloco.appendChild(
                 legenda
             );
-
 
             galeria.appendChild(
                 bloco
             );
 
         }
-
     );
 
 
@@ -988,13 +920,9 @@ function renderizarGaleria(
         +
         (
             lista.length === 1
-
             ?
-
             " foto"
-
             :
-
             " fotos"
         );
 
@@ -1019,14 +947,11 @@ function adicionarFotos(
 
 
     arquivos.forEach(
-
         function (arquivo) {
 
             if (
                 arquivo.type
-                    .startsWith(
-                        "image/"
-                    )
+                    .startsWith("image/")
             ) {
 
                 lista.push({
@@ -1045,7 +970,6 @@ function adicionarFotos(
             }
 
         }
-
     );
 
 
@@ -1063,14 +987,12 @@ function adicionarFotos(
 
 
 /* =========================================================
-   EVENTOS DAS FOTOS
+   CÂMERA — ANTES
 ========================================================= */
 
-elemento("inputAntes")
+elemento("cameraAntes")
     .addEventListener(
-
         "change",
-
         function () {
 
             adicionarFotos(
@@ -1081,15 +1003,36 @@ elemento("inputAntes")
             );
 
         }
-
     );
 
 
-elemento("inputDepois")
+/* =========================================================
+   GALERIA — ANTES
+========================================================= */
+
+elemento("galeriaInputAntes")
     .addEventListener(
-
         "change",
+        function () {
 
+            adicionarFotos(
+                this,
+                fotosAntes,
+                "galeriaAntes",
+                "contadorAntes"
+            );
+
+        }
+    );
+
+
+/* =========================================================
+   CÂMERA — DEPOIS
+========================================================= */
+
+elemento("cameraDepois")
+    .addEventListener(
+        "change",
         function () {
 
             adicionarFotos(
@@ -1100,7 +1043,26 @@ elemento("inputDepois")
             );
 
         }
+    );
 
+
+/* =========================================================
+   GALERIA — DEPOIS
+========================================================= */
+
+elemento("galeriaInputDepois")
+    .addEventListener(
+        "change",
+        function () {
+
+            adicionarFotos(
+                this,
+                fotosDepois,
+                "galeriaDepois",
+                "contadorDepois"
+            );
+
+        }
     );
 
 
@@ -1157,9 +1119,7 @@ function escaparHTML(texto) {
         texto ?? ""
     )
     .replace(
-
         /[&<>"']/g,
-
         function (caractere) {
 
             const mapa = {
@@ -1177,7 +1137,6 @@ function escaparHTML(texto) {
             ];
 
         }
-
     );
 
 }
@@ -1192,7 +1151,6 @@ function arquivoParaBase64(
 ) {
 
     return new Promise(
-
         function (
             resolver,
             rejeitar
@@ -1200,7 +1158,6 @@ function arquivoParaBase64(
 
             const leitor =
                 new FileReader();
-
 
             leitor.onload =
                 function () {
@@ -1211,17 +1168,14 @@ function arquivoParaBase64(
 
                 };
 
-
             leitor.onerror =
                 rejeitar;
-
 
             leitor.readAsDataURL(
                 arquivo
             );
 
         }
-
     );
 
 }
@@ -1234,19 +1188,14 @@ function arquivoParaBase64(
 function dataHoraAtual() {
 
     return new Intl.DateTimeFormat(
-
         "pt-BR",
-
         {
-
             dateStyle:
                 "short",
 
             timeStyle:
                 "short"
-
         }
-
     )
     .format(
         new Date()
@@ -1326,7 +1275,6 @@ function gerarFotosRelatorio(
 
     const imagens =
         lista.map(
-
             function (
                 item,
                 indice
@@ -1359,9 +1307,7 @@ function gerarFotosRelatorio(
                         >
 
                         <figcaption>
-
                             ${textoLegenda}
-
                         </figcaption>
 
                     </figure>
@@ -1369,7 +1315,6 @@ function gerarFotosRelatorio(
                 `;
 
             }
-
         )
         .join("");
 
@@ -1381,9 +1326,7 @@ function gerarFotosRelatorio(
         </h2>
 
         <div class="photos">
-
             ${imagens}
-
         </div>
 
     `;
@@ -1405,7 +1348,6 @@ async function montarRelatorio() {
         await Promise.all(
 
             fotosAntes.map(
-
                 async function (item) {
 
                     return {
@@ -1421,7 +1363,6 @@ async function montarRelatorio() {
                     };
 
                 }
-
             )
 
         );
@@ -1431,7 +1372,6 @@ async function montarRelatorio() {
         await Promise.all(
 
             fotosDepois.map(
-
                 async function (item) {
 
                     return {
@@ -1447,7 +1387,6 @@ async function montarRelatorio() {
                     };
 
                 }
-
             )
 
         );
@@ -1933,9 +1872,7 @@ ${blocoDepois}
 
 elemento("salvar")
     .addEventListener(
-
         "click",
-
         function () {
 
             localStorage.setItem(
@@ -1955,7 +1892,6 @@ elemento("salvar")
                 "Dados textuais salvos neste dispositivo.";
 
         }
-
     );
 
 
@@ -1985,7 +1921,6 @@ try {
             dadosSalvos
         )
         .forEach(
-
             function (campo) {
 
                 if (
@@ -2002,7 +1937,6 @@ try {
                 }
 
             }
-
         );
 
     }
@@ -2024,9 +1958,7 @@ catch (erro) {
 
 elemento("limpar")
     .addEventListener(
-
         "click",
-
         function () {
 
             const confirmar =
@@ -2038,9 +1970,7 @@ elemento("limpar")
 
 
             if (!confirmar) {
-
                 return;
-
             }
 
 
@@ -2081,7 +2011,6 @@ elemento("limpar")
                 "Formulário limpo.";
 
         }
-
     );
 
 
@@ -2091,9 +2020,7 @@ elemento("limpar")
 
 elemento("pdf")
     .addEventListener(
-
         "click",
-
         async function () {
 
             const formulario =
@@ -2214,7 +2141,6 @@ window.onload = function () {
 
 
                 setTimeout(
-
                     function () {
 
                         URL.revokeObjectURL(
@@ -2224,7 +2150,6 @@ window.onload = function () {
                     },
 
                     60000
-
                 );
 
             }
@@ -2242,15 +2167,12 @@ window.onload = function () {
 
 
                 alert(
-
                     "Não foi possível gerar o relatório."
-
                 );
 
             }
 
         }
-
     );
 
 
@@ -2260,9 +2182,7 @@ window.onload = function () {
 
 elemento("baixar")
     .addEventListener(
-
         "click",
-
         async function () {
 
             const formulario =
@@ -2374,7 +2294,6 @@ elemento("baixar")
 
 
                 setTimeout(
-
                     function () {
 
                         URL.revokeObjectURL(
@@ -2384,7 +2303,6 @@ elemento("baixar")
                     },
 
                     5000
-
                 );
 
 
@@ -2409,7 +2327,6 @@ elemento("baixar")
             }
 
         }
-
     );
 
 
