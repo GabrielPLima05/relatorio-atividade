@@ -1,0 +1,21 @@
+{
+    "name": "Relatório de Realização de Atividade",
+    "short_name": "Relatório",
+    "description": "Aplicativo para registro e relatório fotográfico de atividades.",
+    "lang": "pt-BR",
+    "start_url": "./index.html",
+    "scope": "./",
+    "display": "standalone",
+    "orientation": "portrait",
+    "background_color": "#f3f6fa",
+    "theme_color": "#17365d",
+
+    "icons": [
+        {
+            "src": "./icons/icon.png",
+            "sizes": "1024x1024",
+            "type": "image/png",
+            "purpose": "any"
+        }
+    ]
+}

@@ -1,0 +1,2783 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    >
+
+    <meta
+        name="theme-color"
+        content="#17365d"
+    >
+
+    <meta
+        name="mobile-web-app-capable"
+        content="yes"
+    >
+
+    <meta
+        name="apple-mobile-web-app-capable"
+        content="yes"
+    >
+
+    <meta
+        name="apple-mobile-web-app-status-bar-style"
+        content="default"
+    >
+
+    <meta
+        name="apple-mobile-web-app-title"
+        content="Relatório"
+    >
+
+
+    <title>
+        Relatório de Realização de Atividade
+    </title>
+
+
+    <!-- MANIFESTO DA PWA -->
+
+    <link
+        rel="manifest"
+        href="./manifest.json"
+    >
+
+
+    <!-- ÍCONE -->
+
+    <link
+        rel="icon"
+        type="image/png"
+        href="./icons/icon.png"
+    >
+
+    <link
+        rel="apple-touch-icon"
+        href="./icons/icon.png"
+    >
+
+
+    <style>
+
+        /* =====================================================
+           CONFIGURAÇÃO GERAL
+        ===================================================== */
+
+        * {
+
+            box-sizing: border-box;
+
+        }
+
+
+        html {
+
+            margin: 0;
+
+            padding: 0;
+
+        }
+
+
+        body {
+
+            margin: 0;
+
+            padding: 0;
+
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+
+            background:
+                #f3f6fa;
+
+            color:
+                #1f2937;
+
+        }
+
+
+        .container {
+
+            max-width:
+                880px;
+
+            margin:
+                auto;
+
+            padding:
+                15px;
+
+        }
+
+
+        /* =====================================================
+           CABEÇALHO
+        ===================================================== */
+
+        .cabecalho {
+
+            background:
+                #17365d;
+
+            color:
+                white;
+
+            padding:
+                20px;
+
+            border-radius:
+                14px;
+
+        }
+
+
+        .cabecalho h1 {
+
+            margin:
+                0 0 7px 0;
+
+            font-size:
+                21px;
+
+        }
+
+
+        .cabecalho p {
+
+            margin:
+                0 0 12px 0;
+
+        }
+
+
+        #status {
+
+            background:
+                white;
+
+            color:
+                #17365d;
+
+            padding:
+                10px;
+
+            border-radius:
+                8px;
+
+            font-size:
+                13px;
+
+        }
+
+
+        /* =====================================================
+           CARDS
+        ===================================================== */
+
+        .card {
+
+            background:
+                white;
+
+            margin-top:
+                14px;
+
+            padding:
+                17px;
+
+            border-radius:
+                13px;
+
+            border:
+                1px solid #d8e0ea;
+
+        }
+
+
+        .card h2 {
+
+            margin-top:
+                0;
+
+            color:
+                #17365d;
+
+            font-size:
+                17px;
+
+        }
+
+
+        /* =====================================================
+           CAMPOS
+        ===================================================== */
+
+        .campo {
+
+            display:
+                block;
+
+            margin:
+                14px 0 5px 0;
+
+            font-weight:
+                bold;
+
+        }
+
+
+        input[type="text"],
+        input[type="tel"],
+        textarea {
+
+            width:
+                100%;
+
+            padding:
+                12px;
+
+            border:
+                1px solid #c7d0db;
+
+            border-radius:
+                8px;
+
+            font-size:
+                16px;
+
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+
+        }
+
+
+        textarea {
+
+            min-height:
+                120px;
+
+            resize:
+                vertical;
+
+        }
+
+
+        /* =====================================================
+           BOTÃO DE FOTOS
+        ===================================================== */
+
+        .botao-foto {
+
+            display:
+                inline-block;
+
+            background:
+                #e6eef8;
+
+            color:
+                #17365d;
+
+            border-radius:
+                8px;
+
+            padding:
+                12px 15px;
+
+            font-weight:
+                bold;
+
+            cursor:
+                pointer;
+
+        }
+
+
+        .botao-foto input {
+
+            display:
+                none;
+
+        }
+
+
+        /* =====================================================
+           GALERIA
+        ===================================================== */
+
+        .galeria {
+
+            display:
+                grid;
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap:
+                10px;
+
+            margin-top:
+                12px;
+
+        }
+
+
+        .foto {
+
+            position:
+                relative;
+
+            background:
+                white;
+
+            border:
+                1px solid #d8e0ea;
+
+            border-radius:
+                9px;
+
+            overflow:
+                hidden;
+
+            padding-bottom:
+                8px;
+
+        }
+
+
+        .foto img {
+
+            display:
+                block;
+
+            width:
+                100%;
+
+            aspect-ratio:
+                1;
+
+            object-fit:
+                cover;
+
+        }
+
+
+        .legenda {
+
+            width:
+                calc(100% - 12px);
+
+            margin:
+                7px 6px 0 6px;
+
+            padding:
+                8px;
+
+            border:
+                1px solid #c7d0db;
+
+            border-radius:
+                7px;
+
+            font-size:
+                13px;
+
+        }
+
+
+        .remover {
+
+            position:
+                absolute;
+
+            right:
+                5px;
+
+            top:
+                5px;
+
+            width:
+                34px;
+
+            height:
+                34px;
+
+            padding:
+                0;
+
+            border:
+                none;
+
+            border-radius:
+                50%;
+
+            background:
+                #b42318;
+
+            color:
+                white;
+
+            font-size:
+                20px;
+
+            cursor:
+                pointer;
+
+        }
+
+
+        /* =====================================================
+           INFORMAÇÕES AUXILIARES
+        ===================================================== */
+
+        .nota,
+        .contador {
+
+            margin-top:
+                8px;
+
+            color:
+                #667085;
+
+            font-size:
+                12px;
+
+            line-height:
+                1.4;
+
+        }
+
+
+        /* =====================================================
+           BOTÕES
+        ===================================================== */
+
+        .acoes {
+
+            display:
+                flex;
+
+            flex-wrap:
+                wrap;
+
+            gap:
+                8px;
+
+        }
+
+
+        button {
+
+            border:
+                none;
+
+            border-radius:
+                8px;
+
+            padding:
+                12px 15px;
+
+            font-size:
+                14px;
+
+            font-weight:
+                bold;
+
+            cursor:
+                pointer;
+
+        }
+
+
+        #instalar {
+
+            display:
+                none;
+
+            background:
+                #7a4e00;
+
+            color:
+                white;
+
+        }
+
+
+        #pdf {
+
+            background:
+                #17365d;
+
+            color:
+                white;
+
+        }
+
+
+        #baixar {
+
+            background:
+                #16794b;
+
+            color:
+                white;
+
+        }
+
+
+        #salvar {
+
+            background:
+                #e6eef8;
+
+            color:
+                #17365d;
+
+        }
+
+
+        #limpar {
+
+            background:
+                #fee4e2;
+
+            color:
+                #b42318;
+
+        }
+
+
+        /* =====================================================
+           COMPUTADOR / TABLET
+        ===================================================== */
+
+        @media (min-width: 650px) {
+
+            .galeria {
+
+                grid-template-columns:
+                    repeat(3, 1fr);
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <main class="container">
+
+
+        <!-- =================================================
+             CABEÇALHO
+        ================================================== -->
+
+        <section class="cabecalho">
+
+            <h1>
+                RELATÓRIO DE REALIZAÇÃO DE ATIVIDADE
+            </h1>
+
+            <p>
+                Formulário offline com registro fotográfico.
+            </p>
+
+            <div id="status">
+
+                Pronto para preenchimento.
+
+            </div>
+
+        </section>
+
+
+
+        <form id="formulario">
+
+
+            <!-- =============================================
+                 INFORMAÇÕES
+            ============================================== -->
+
+            <section class="card">
+
+                <h2>
+                    Informações
+                </h2>
+
+
+                <label
+                    class="campo"
+                    for="nome"
+                >
+                    1. Insira seu nome *
+                </label>
+
+                <input
+                    id="nome"
+                    type="text"
+                    required
+                >
+
+
+                <label
+                    class="campo"
+                    for="area"
+                >
+                    2. Insira a área de realização da atividade *
+                </label>
+
+                <input
+                    id="area"
+                    type="text"
+                    required
+                >
+
+
+                <label
+                    class="campo"
+                    for="atividade"
+                >
+                    3. Insira a atividade realizada *
+                </label>
+
+                <input
+                    id="atividade"
+                    type="text"
+                    required
+                >
+
+
+                <label
+                    class="campo"
+                    for="contato"
+                >
+                    4. Insira nº de contato
+                </label>
+
+                <input
+                    id="contato"
+                    type="tel"
+                >
+
+
+                <label
+                    class="campo"
+                    for="empresa"
+                >
+                    5. Empresa *
+                </label>
+
+                <input
+                    id="empresa"
+                    type="text"
+                    required
+                >
+
+
+                <label
+                    class="campo"
+                    for="descricao"
+                >
+                    8. Descrição da Atividade *
+                </label>
+
+                <textarea
+                    id="descricao"
+                    required
+                ></textarea>
+
+            </section>
+
+
+
+            <!-- =============================================
+                 IMAGENS ANTES
+            ============================================== -->
+
+            <section class="card">
+
+                <h2>
+                    6. Imagens ANTES
+                </h2>
+
+
+                <label class="botao-foto">
+
+                    📷 Tirar / adicionar fotos
+
+                    <input
+                        id="inputAntes"
+                        type="file"
+                        accept="image/*"
+                        capture="environment"
+                        multiple
+                    >
+
+                </label>
+
+
+                <div class="nota">
+
+                    Você pode adicionar várias imagens.
+                    A legenda de cada imagem é opcional.
+
+                </div>
+
+
+                <div
+                    id="contadorAntes"
+                    class="contador"
+                >
+
+                    0 fotos
+
+                </div>
+
+
+                <div
+                    id="galeriaAntes"
+                    class="galeria"
+                ></div>
+
+            </section>
+
+
+
+            <!-- =============================================
+                 IMAGENS DEPOIS
+            ============================================== -->
+
+            <section class="card">
+
+                <h2>
+                    7. Imagens DEPOIS
+                </h2>
+
+
+                <label class="botao-foto">
+
+                    📷 Tirar / adicionar fotos
+
+                    <input
+                        id="inputDepois"
+                        type="file"
+                        accept="image/*"
+                        capture="environment"
+                        multiple
+                    >
+
+                </label>
+
+
+                <div class="nota">
+
+                    Você pode adicionar várias imagens.
+                    A legenda de cada imagem é opcional.
+
+                </div>
+
+
+                <div
+                    id="contadorDepois"
+                    class="contador"
+                >
+
+                    0 fotos
+
+                </div>
+
+
+                <div
+                    id="galeriaDepois"
+                    class="galeria"
+                ></div>
+
+            </section>
+
+
+
+            <!-- =============================================
+                 AÇÕES
+            ============================================== -->
+
+            <section class="card">
+
+
+                <div class="acoes">
+
+
+                    <button
+                        id="instalar"
+                        type="button"
+                    >
+
+                        📲 Instalar aplicativo
+
+                    </button>
+
+
+                    <button
+                        id="pdf"
+                        type="button"
+                    >
+
+                        📄 Abrir / Salvar como PDF
+
+                    </button>
+
+
+                    <button
+                        id="baixar"
+                        type="button"
+                    >
+
+                        ⬇️ Baixar relatório
+
+                    </button>
+
+
+                    <button
+                        id="salvar"
+                        type="button"
+                    >
+
+                        💾 Salvar dados
+
+                    </button>
+
+
+                    <button
+                        id="limpar"
+                        type="button"
+                    >
+
+                        🗑️ Limpar
+
+                    </button>
+
+
+                </div>
+
+
+                <div class="nota">
+
+                    Relatório configurado em A4 retrato.<br>
+
+                    Margem superior: 3 cm<br>
+
+                    Margem esquerda: 3 cm<br>
+
+                    Margem inferior: 2 cm<br>
+
+                    Margem direita: 2 cm
+
+                </div>
+
+
+            </section>
+
+
+        </form>
+
+
+    </main>
+
+
+
+<script>
+
+"use strict";
+
+
+/* =========================================================
+   FUNÇÃO AUXILIAR
+========================================================= */
+
+function elemento(id) {
+
+    return document.getElementById(id);
+
+}
+
+
+
+/* =========================================================
+   SERVICE WORKER
+========================================================= */
+
+if ("serviceWorker" in navigator) {
+
+    window.addEventListener(
+
+        "load",
+
+        function () {
+
+            navigator.serviceWorker
+                .register("./service-worker.js")
+
+                .then(
+
+                    function () {
+
+                        console.log(
+                            "Service Worker registrado."
+                        );
+
+                    }
+
+                )
+
+                .catch(
+
+                    function (erro) {
+
+                        console.error(
+                            "Erro ao registrar Service Worker:",
+                            erro
+                        );
+
+                    }
+
+                );
+
+        }
+
+    );
+
+}
+
+
+
+/* =========================================================
+   INSTALAÇÃO DA PWA
+========================================================= */
+
+let eventoInstalacao = null;
+
+
+window.addEventListener(
+
+    "beforeinstallprompt",
+
+    function (evento) {
+
+        evento.preventDefault();
+
+        eventoInstalacao =
+            evento;
+
+        elemento("instalar")
+            .style
+            .display =
+            "inline-block";
+
+    }
+
+);
+
+
+
+elemento("instalar")
+    .addEventListener(
+
+        "click",
+
+        async function () {
+
+            if (!eventoInstalacao) {
+
+                alert(
+
+                    "Se a instalação automática não estiver disponível, abra o menu do navegador e escolha 'Instalar aplicativo' ou 'Adicionar à tela inicial'."
+
+                );
+
+                return;
+
+            }
+
+
+            eventoInstalacao.prompt();
+
+
+            await eventoInstalacao
+                .userChoice;
+
+
+            eventoInstalacao =
+                null;
+
+
+            elemento("instalar")
+                .style
+                .display =
+                "none";
+
+        }
+
+    );
+
+
+
+window.addEventListener(
+
+    "appinstalled",
+
+    function () {
+
+        elemento("status")
+            .textContent =
+
+            "Aplicativo instalado com sucesso.";
+
+    }
+
+);
+
+
+
+/* =========================================================
+   VARIÁVEIS DAS FOTOS
+========================================================= */
+
+let fotosAntes = [];
+
+let fotosDepois = [];
+
+
+
+/* =========================================================
+   GERAR ID
+========================================================= */
+
+function gerarId() {
+
+    if (
+        window.crypto &&
+        crypto.randomUUID
+    ) {
+
+        return crypto.randomUUID();
+
+    }
+
+
+    return (
+        Date.now()
+        +
+        "-"
+        +
+        Math.random()
+    );
+
+}
+
+
+
+/* =========================================================
+   RENDERIZAR GALERIA
+========================================================= */
+
+function renderizarGaleria(
+
+    lista,
+
+    idGaleria,
+
+    idContador
+
+) {
+
+    const galeria =
+        elemento(idGaleria);
+
+
+    galeria.innerHTML =
+        "";
+
+
+    lista.forEach(
+
+        function (
+            item,
+            indice
+        ) {
+
+            const bloco =
+                document.createElement(
+                    "div"
+                );
+
+
+            bloco.className =
+                "foto";
+
+
+            const imagem =
+                document.createElement(
+                    "img"
+                );
+
+
+            imagem.src =
+                URL.createObjectURL(
+                    item.file
+                );
+
+
+            imagem.alt =
+                "Foto "
+                +
+                (indice + 1);
+
+
+
+            const legenda =
+                document.createElement(
+                    "input"
+                );
+
+
+            legenda.type =
+                "text";
+
+
+            legenda.className =
+                "legenda";
+
+
+            legenda.placeholder =
+                "Legenda da imagem (opcional)";
+
+
+            legenda.value =
+                item.legenda || "";
+
+
+            legenda.addEventListener(
+
+                "input",
+
+                function () {
+
+                    item.legenda =
+                        legenda.value;
+
+                }
+
+            );
+
+
+
+            const remover =
+                document.createElement(
+                    "button"
+                );
+
+
+            remover.type =
+                "button";
+
+
+            remover.className =
+                "remover";
+
+
+            remover.textContent =
+                "×";
+
+
+            remover.title =
+                "Remover foto";
+
+
+            remover.addEventListener(
+
+                "click",
+
+                function () {
+
+                    lista.splice(
+                        indice,
+                        1
+                    );
+
+
+                    renderizarGaleria(
+
+                        lista,
+
+                        idGaleria,
+
+                        idContador
+
+                    );
+
+                }
+
+            );
+
+
+
+            bloco.appendChild(
+                imagem
+            );
+
+
+            bloco.appendChild(
+                remover
+            );
+
+
+            bloco.appendChild(
+                legenda
+            );
+
+
+            galeria.appendChild(
+                bloco
+            );
+
+        }
+
+    );
+
+
+
+    elemento(idContador)
+        .textContent =
+
+        lista.length
+        +
+        (
+            lista.length === 1
+
+            ?
+
+            " foto"
+
+            :
+
+            " fotos"
+        );
+
+}
+
+
+
+/* =========================================================
+   ADICIONAR FOTOS
+========================================================= */
+
+function adicionarFotos(
+
+    input,
+
+    lista,
+
+    idGaleria,
+
+    idContador
+
+) {
+
+    const arquivos =
+        Array.from(
+            input.files || []
+        );
+
+
+    arquivos.forEach(
+
+        function (arquivo) {
+
+            if (
+                arquivo.type
+                    .startsWith(
+                        "image/"
+                    )
+            ) {
+
+                lista.push({
+
+                    id:
+                        gerarId(),
+
+                    file:
+                        arquivo,
+
+                    legenda:
+                        ""
+
+                });
+
+            }
+
+        }
+
+    );
+
+
+    input.value =
+        "";
+
+
+    renderizarGaleria(
+
+        lista,
+
+        idGaleria,
+
+        idContador
+
+    );
+
+}
+
+
+
+/* =========================================================
+   EVENTOS DAS FOTOS
+========================================================= */
+
+elemento("inputAntes")
+    .addEventListener(
+
+        "change",
+
+        function () {
+
+            adicionarFotos(
+
+                this,
+
+                fotosAntes,
+
+                "galeriaAntes",
+
+                "contadorAntes"
+
+            );
+
+        }
+
+    );
+
+
+
+elemento("inputDepois")
+    .addEventListener(
+
+        "change",
+
+        function () {
+
+            adicionarFotos(
+
+                this,
+
+                fotosDepois,
+
+                "galeriaDepois",
+
+                "contadorDepois"
+
+            );
+
+        }
+
+    );
+
+
+
+/* =========================================================
+   DADOS DO FORMULÁRIO
+========================================================= */
+
+function obterDados() {
+
+    return {
+
+        nome:
+            elemento("nome")
+                .value
+                .trim(),
+
+        area:
+            elemento("area")
+                .value
+                .trim(),
+
+        atividade:
+            elemento("atividade")
+                .value
+                .trim(),
+
+        contato:
+            elemento("contato")
+                .value
+                .trim(),
+
+        empresa:
+            elemento("empresa")
+                .value
+                .trim(),
+
+        descricao:
+            elemento("descricao")
+                .value
+                .trim()
+
+    };
+
+}
+
+
+
+/* =========================================================
+   PROTEÇÃO DO HTML
+========================================================= */
+
+function escaparHTML(texto) {
+
+    return String(
+        texto ?? ""
+    )
+    .replace(
+
+        /[&<>"']/g,
+
+        function (caractere) {
+
+            const mapa = {
+
+                "&":
+                    "&amp;",
+
+                "<":
+                    "&lt;",
+
+                ">":
+                    "&gt;",
+
+                '"':
+                    "&quot;",
+
+                "'":
+                    "&#39;"
+
+            };
+
+
+            return mapa[
+                caractere
+            ];
+
+        }
+
+    );
+
+}
+
+
+
+/* =========================================================
+   CONVERTER FOTO PARA BASE64
+========================================================= */
+
+function arquivoParaBase64(
+    arquivo
+) {
+
+    return new Promise(
+
+        function (
+            resolver,
+            rejeitar
+        ) {
+
+            const leitor =
+                new FileReader();
+
+
+            leitor.onload =
+                function () {
+
+                    resolver(
+                        leitor.result
+                    );
+
+                };
+
+
+            leitor.onerror =
+                rejeitar;
+
+
+            leitor.readAsDataURL(
+                arquivo
+            );
+
+        }
+
+    );
+
+}
+
+
+
+/* =========================================================
+   DATA E HORA
+========================================================= */
+
+function dataHoraAtual() {
+
+    return new Intl.DateTimeFormat(
+
+        "pt-BR",
+
+        {
+
+            dateStyle:
+                "short",
+
+            timeStyle:
+                "short"
+
+        }
+
+    )
+    .format(
+        new Date()
+    );
+
+}
+
+
+
+/* =========================================================
+   NOME SEGURO PARA ARQUIVO
+========================================================= */
+
+function nomeArquivo(texto) {
+
+    return String(
+        texto || "relatorio"
+    )
+
+    .normalize(
+        "NFD"
+    )
+
+    .replace(
+        /[\u0300-\u036f]/g,
+        ""
+    )
+
+    .replace(
+        /[^a-zA-Z0-9_-]+/g,
+        "_"
+    )
+
+    .replace(
+        /^_+|_+$/g,
+        ""
+    )
+
+    .slice(
+        0,
+        50
+    )
+
+    ||
+
+    "relatorio";
+
+}
+
+
+
+/* =========================================================
+   GERAR BLOCO DE FOTOS DO RELATÓRIO
+========================================================= */
+
+function gerarFotosRelatorio(
+
+    lista,
+
+    titulo
+
+) {
+
+    if (
+        lista.length === 0
+    ) {
+
+        return `
+
+            <h2>
+                ${titulo}
+            </h2>
+
+            <p>
+                Nenhuma foto registrada.
+            </p>
+
+        `;
+
+    }
+
+
+    const imagens =
+        lista.map(
+
+            function (
+                item,
+                indice
+            ) {
+
+                const textoLegenda =
+
+                    item.legenda
+
+                    ?
+
+                    escaparHTML(
+                        item.legenda
+                    )
+
+                    :
+
+                    "Foto "
+                    +
+                    (indice + 1);
+
+
+                return `
+
+                    <figure>
+
+                        <img
+                            src="${item.src}"
+                            alt="Foto ${indice + 1}"
+                        >
+
+                        <figcaption>
+
+                            ${textoLegenda}
+
+                        </figcaption>
+
+                    </figure>
+
+                `;
+
+            }
+
+        )
+        .join("");
+
+
+    return `
+
+        <h2>
+            ${titulo}
+        </h2>
+
+        <div class="photos">
+
+            ${imagens}
+
+        </div>
+
+    `;
+
+}
+
+
+
+/* =========================================================
+   MONTAR RELATÓRIO
+========================================================= */
+
+async function montarRelatorio() {
+
+    const dados =
+        obterDados();
+
+
+
+    const antes =
+        await Promise.all(
+
+            fotosAntes.map(
+
+                async function (item) {
+
+                    return {
+
+                        src:
+                            await arquivoParaBase64(
+                                item.file
+                            ),
+
+                        legenda:
+                            item.legenda || ""
+
+                    };
+
+                }
+
+            )
+
+        );
+
+
+
+    const depois =
+        await Promise.all(
+
+            fotosDepois.map(
+
+                async function (item) {
+
+                    return {
+
+                        src:
+                            await arquivoParaBase64(
+                                item.file
+                            ),
+
+                        legenda:
+                            item.legenda || ""
+
+                    };
+
+                }
+
+            )
+
+        );
+
+
+
+    const blocoAntes =
+        gerarFotosRelatorio(
+
+            antes,
+
+            "REGISTRO FOTOGRÁFICO — ANTES"
+
+        );
+
+
+
+    const blocoDepois =
+        gerarFotosRelatorio(
+
+            depois,
+
+            "REGISTRO FOTOGRÁFICO — DEPOIS"
+
+        );
+
+
+
+    return `
+
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>
+Relatório de Realização de Atividade
+</title>
+
+
+<style>
+
+@page {
+
+    size:
+        A4 portrait;
+
+    margin:
+        3cm
+        2cm
+        2cm
+        3cm;
+
+}
+
+
+* {
+
+    box-sizing:
+        border-box;
+
+}
+
+
+html {
+
+    background:
+        #d9dde3;
+
+}
+
+
+body {
+
+    width:
+        210mm;
+
+    min-height:
+        297mm;
+
+    margin:
+        20px auto;
+
+    padding:
+        3cm
+        2cm
+        2cm
+        3cm;
+
+    background:
+        white;
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    color:
+        #20242a;
+
+    font-size:
+        10.5pt;
+
+    box-shadow:
+        0 4px 18px
+        rgba(
+            0,
+            0,
+            0,
+            0.18
+        );
+
+}
+
+
+h1 {
+
+    margin:
+        0 0 15px 0;
+
+    text-align:
+        center;
+
+    color:
+        #17365d;
+
+    font-size:
+        19pt;
+
+}
+
+
+h2 {
+
+    margin-top:
+        20px;
+
+    padding-bottom:
+        4px;
+
+    color:
+        #17365d;
+
+    font-size:
+        13pt;
+
+    border-bottom:
+        2px solid #17365d;
+
+}
+
+
+table {
+
+    width:
+        100%;
+
+    border-collapse:
+        collapse;
+
+}
+
+
+th,
+td {
+
+    padding:
+        7px;
+
+    border:
+        1px solid #ccd5df;
+
+    text-align:
+        left;
+
+    vertical-align:
+        top;
+
+}
+
+
+th {
+
+    width:
+        27%;
+
+    background:
+        #edf3f8;
+
+}
+
+
+.descricao {
+
+    min-height:
+        55px;
+
+    padding:
+        10px;
+
+    border:
+        1px solid #ccd5df;
+
+    white-space:
+        pre-wrap;
+
+}
+
+
+.photos {
+
+    display:
+        grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap:
+        8mm;
+
+}
+
+
+figure {
+
+    margin:
+        0;
+
+    padding:
+        5px;
+
+    border:
+        1px solid #ccd5df;
+
+    text-align:
+        center;
+
+    break-inside:
+        avoid;
+
+    page-break-inside:
+        avoid;
+
+}
+
+
+figure img {
+
+    display:
+        block;
+
+    width:
+        100%;
+
+    height:
+        90mm;
+
+    object-fit:
+        contain;
+
+}
+
+
+figcaption {
+
+    padding-top:
+        5px;
+
+    color:
+        #4b5563;
+
+    font-size:
+        9pt;
+
+}
+
+
+.rodape {
+
+    margin-top:
+        20px;
+
+    color:
+        #667085;
+
+    font-size:
+        8pt;
+
+    text-align:
+        center;
+
+}
+
+
+@media print {
+
+    html {
+
+        background:
+            white;
+
+    }
+
+
+    body {
+
+        width:
+            auto;
+
+        min-height:
+            auto;
+
+        margin:
+            0;
+
+        padding:
+            0;
+
+        background:
+            white;
+
+        box-shadow:
+            none;
+
+    }
+
+}
+
+
+@media screen and (max-width: 220mm) {
+
+    html {
+
+        background:
+            white;
+
+    }
+
+
+    body {
+
+        width:
+            100%;
+
+        min-height:
+            100vh;
+
+        margin:
+            0;
+
+        padding:
+            25px 20px;
+
+        box-shadow:
+            none;
+
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<h1>
+    RELATÓRIO DE REALIZAÇÃO DE ATIVIDADE
+</h1>
+
+
+<table>
+
+    <tr>
+
+        <th>
+            Nome
+        </th>
+
+        <td>
+            ${escaparHTML(dados.nome)}
+        </td>
+
+    </tr>
+
+
+    <tr>
+
+        <th>
+            Área
+        </th>
+
+        <td>
+            ${escaparHTML(dados.area)}
+        </td>
+
+    </tr>
+
+
+    <tr>
+
+        <th>
+            Atividade
+        </th>
+
+        <td>
+            ${escaparHTML(dados.atividade)}
+        </td>
+
+    </tr>
+
+
+    <tr>
+
+        <th>
+            Contato
+        </th>
+
+        <td>
+            ${escaparHTML(dados.contato || "—")}
+        </td>
+
+    </tr>
+
+
+    <tr>
+
+        <th>
+            Empresa
+        </th>
+
+        <td>
+            ${escaparHTML(dados.empresa)}
+        </td>
+
+    </tr>
+
+
+    <tr>
+
+        <th>
+            Data/Hora
+        </th>
+
+        <td>
+            ${escaparHTML(dataHoraAtual())}
+        </td>
+
+    </tr>
+
+</table>
+
+
+
+<h2>
+    DESCRIÇÃO DA ATIVIDADE
+</h2>
+
+
+<div class="descricao">
+
+${escaparHTML(dados.descricao)}
+
+</div>
+
+
+
+${blocoAntes}
+
+
+${blocoDepois}
+
+
+
+<div class="rodape">
+
+    Documento gerado em
+    ${escaparHTML(dataHoraAtual())}
+
+</div>
+
+
+</body>
+
+</html>
+
+`;
+
+}
+
+
+
+/* =========================================================
+   SALVAR DADOS
+========================================================= */
+
+elemento("salvar")
+    .addEventListener(
+
+        "click",
+
+        function () {
+
+            localStorage.setItem(
+
+                "relatorioAtividade",
+
+                JSON.stringify(
+                    obterDados()
+                )
+
+            );
+
+
+            elemento("status")
+                .textContent =
+
+                "Dados textuais salvos neste dispositivo.";
+
+        }
+
+    );
+
+
+
+/* =========================================================
+   RESTAURAR DADOS SALVOS
+========================================================= */
+
+try {
+
+    const dadosSalvos =
+        JSON.parse(
+
+            localStorage.getItem(
+                "relatorioAtividade"
+            )
+
+            ||
+
+            "null"
+
+        );
+
+
+    if (dadosSalvos) {
+
+        Object.keys(
+            dadosSalvos
+        )
+        .forEach(
+
+            function (campo) {
+
+                if (
+                    elemento(campo)
+                ) {
+
+                    elemento(campo)
+                        .value =
+
+                        dadosSalvos[campo]
+                        ||
+                        "";
+
+                }
+
+            }
+
+        );
+
+    }
+
+}
+catch (erro) {
+
+    console.error(
+        "Erro ao restaurar dados:",
+        erro
+    );
+
+}
+
+
+
+/* =========================================================
+   LIMPAR
+========================================================= */
+
+elemento("limpar")
+    .addEventListener(
+
+        "click",
+
+        function () {
+
+            const confirmar =
+                window.confirm(
+
+                    "Deseja realmente limpar os dados, fotos e legendas?"
+
+                );
+
+
+            if (!confirmar) {
+
+                return;
+
+            }
+
+
+            elemento("formulario")
+                .reset();
+
+
+            fotosAntes =
+                [];
+
+
+            fotosDepois =
+                [];
+
+
+            renderizarGaleria(
+
+                fotosAntes,
+
+                "galeriaAntes",
+
+                "contadorAntes"
+
+            );
+
+
+            renderizarGaleria(
+
+                fotosDepois,
+
+                "galeriaDepois",
+
+                "contadorDepois"
+
+            );
+
+
+            localStorage.removeItem(
+                "relatorioAtividade"
+            );
+
+
+            elemento("status")
+                .textContent =
+
+                "Formulário limpo.";
+
+        }
+
+    );
+
+
+
+/* =========================================================
+   ABRIR E SALVAR COMO PDF
+========================================================= */
+
+elemento("pdf")
+    .addEventListener(
+
+        "click",
+
+        async function () {
+
+            const formulario =
+                elemento(
+                    "formulario"
+                );
+
+
+            if (
+                !formulario.reportValidity()
+            ) {
+
+                return;
+
+            }
+
+
+            elemento("status")
+                .textContent =
+
+                "Montando relatório...";
+
+
+            try {
+
+                const documento =
+                    await montarRelatorio();
+
+
+                const documentoImpressao =
+
+                    documento.replace(
+
+                        "</body>",
+
+                        `
+
+<script>
+
+window.onload = function () {
+
+    setTimeout(
+
+        function () {
+
+            window.print();
+
+        },
+
+        500
+
+    );
+
+};
+
+<\/script>
+
+</body>
+
+`
+
+                    );
+
+
+                const blob =
+                    new Blob(
+
+                        [
+                            documentoImpressao
+                        ],
+
+                        {
+
+                            type:
+                                "text/html;charset=utf-8"
+
+                        }
+
+                    );
+
+
+                const url =
+                    URL.createObjectURL(
+                        blob
+                    );
+
+
+                const janela =
+                    window.open(
+
+                        url,
+
+                        "_blank"
+
+                    );
+
+
+                if (!janela) {
+
+                    alert(
+
+                        "O navegador bloqueou a abertura do relatório. Permita pop-ups para este aplicativo."
+
+                    );
+
+
+                    elemento("status")
+                        .textContent =
+
+                        "Não foi possível abrir o relatório.";
+
+                }
+                else {
+
+                    elemento("status")
+                        .textContent =
+
+                        "Relatório aberto. Escolha Salvar como PDF na tela de impressão.";
+
+                }
+
+
+                setTimeout(
+
+                    function () {
+
+                        URL.revokeObjectURL(
+                            url
+                        );
+
+                    },
+
+                    60000
+
+                );
+
+            }
+            catch (erro) {
+
+                console.error(
+                    erro
+                );
+
+
+                elemento("status")
+                    .textContent =
+
+                    "Erro ao gerar relatório.";
+
+
+                alert(
+
+                    "Não foi possível gerar o relatório."
+
+                );
+
+            }
+
+        }
+
+    );
+
+
+
+/* =========================================================
+   BAIXAR RELATÓRIO HTML
+========================================================= */
+
+elemento("baixar")
+    .addEventListener(
+
+        "click",
+
+        async function () {
+
+            const formulario =
+                elemento(
+                    "formulario"
+                );
+
+
+            if (
+                !formulario.reportValidity()
+            ) {
+
+                return;
+
+            }
+
+
+            elemento("status")
+                .textContent =
+
+                "Preparando relatório...";
+
+
+            try {
+
+                const documento =
+                    await montarRelatorio();
+
+
+                const blob =
+                    new Blob(
+
+                        [
+                            documento
+                        ],
+
+                        {
+
+                            type:
+                                "text/html;charset=utf-8"
+
+                        }
+
+                    );
+
+
+                const url =
+                    URL.createObjectURL(
+                        blob
+                    );
+
+
+                const link =
+                    document.createElement(
+                        "a"
+                    );
+
+
+                const dados =
+                    obterDados();
+
+
+                const data =
+                    new Date()
+                    .toISOString()
+                    .slice(
+                        0,
+                        10
+                    );
+
+
+                link.href =
+                    url;
+
+
+                link.download =
+
+                    "Relatorio_"
+
+                    +
+
+                    nomeArquivo(
+                        dados.atividade
+                    )
+
+                    +
+
+                    "_"
+
+                    +
+
+                    data
+
+                    +
+
+                    ".html";
+
+
+                document.body
+                    .appendChild(
+                        link
+                    );
+
+
+                link.click();
+
+
+                link.remove();
+
+
+                setTimeout(
+
+                    function () {
+
+                        URL.revokeObjectURL(
+                            url
+                        );
+
+                    },
+
+                    5000
+
+                );
+
+
+                elemento("status")
+                    .textContent =
+
+                    "Relatório baixado.";
+
+            }
+            catch (erro) {
+
+                console.error(
+                    erro
+                );
+
+
+                elemento("status")
+                    .textContent =
+
+                    "Erro ao baixar relatório.";
+
+            }
+
+        }
+
+    );
+
+
+</script>
+
+
+</body>
+
+</html>
