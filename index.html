@@ -2,7 +2,6 @@
 <html lang="pt-BR">
 
 <head>
-
     <meta charset="UTF-8">
 
     <meta
@@ -10,20 +9,11 @@
         content="width=device-width, initial-scale=1.0, viewport-fit=cover"
     >
 
-    <meta
-        name="theme-color"
-        content="#17365d"
-    >
+    <meta name="theme-color" content="#17365d">
 
-    <meta
-        name="mobile-web-app-capable"
-        content="yes"
-    >
+    <meta name="mobile-web-app-capable" content="yes">
 
-    <meta
-        name="apple-mobile-web-app-capable"
-        content="yes"
-    >
+    <meta name="apple-mobile-web-app-capable" content="yes">
 
     <meta
         name="apple-mobile-web-app-status-bar-style"
@@ -35,21 +25,12 @@
         content="Relatório"
     >
 
-
-    <title>
-        Relatório de Realização de Atividade
-    </title>
-
-
-    <!-- MANIFESTO DA PWA -->
+    <title>Relatório de Realização de Atividade</title>
 
     <link
         rel="manifest"
         href="./manifest.json"
     >
-
-
-    <!-- ÍCONE -->
 
     <link
         rel="icon"
@@ -62,33 +43,19 @@
         href="./icons/icon.png"
     >
 
-
     <style>
 
-        /* =====================================================
-           CONFIGURAÇÃO GERAL
-        ===================================================== */
-
         * {
-
             box-sizing: border-box;
-
         }
-
 
         html {
-
             margin: 0;
-
             padding: 0;
-
         }
 
-
         body {
-
             margin: 0;
-
             padding: 0;
 
             font-family:
@@ -96,478 +63,304 @@
                 Helvetica,
                 sans-serif;
 
-            background:
-                #f3f6fa;
+            background: #f3f6fa;
 
-            color:
-                #1f2937;
-
+            color: #1f2937;
         }
-
 
         .container {
+            max-width: 880px;
 
-            max-width:
-                880px;
+            margin: auto;
 
-            margin:
-                auto;
-
-            padding:
-                15px;
-
+            padding: 15px;
         }
-
 
         /* =====================================================
            CABEÇALHO
         ===================================================== */
 
         .cabecalho {
+            background: #17365d;
 
-            background:
-                #17365d;
+            color: white;
 
-            color:
-                white;
+            padding: 20px;
 
-            padding:
-                20px;
-
-            border-radius:
-                14px;
-
+            border-radius: 14px;
         }
-
 
         .cabecalho h1 {
+            margin: 0 0 7px 0;
 
-            margin:
-                0 0 7px 0;
-
-            font-size:
-                21px;
-
+            font-size: 21px;
         }
-
 
         .cabecalho p {
-
-            margin:
-                0 0 12px 0;
-
+            margin: 0 0 12px 0;
         }
-
 
         #status {
+            background: white;
 
-            background:
-                white;
+            color: #17365d;
 
-            color:
-                #17365d;
+            padding: 10px;
 
-            padding:
-                10px;
+            border-radius: 8px;
 
-            border-radius:
-                8px;
-
-            font-size:
-                13px;
-
+            font-size: 13px;
         }
-
 
         /* =====================================================
            CARDS
         ===================================================== */
 
         .card {
+            background: white;
 
-            background:
-                white;
+            margin-top: 14px;
 
-            margin-top:
-                14px;
+            padding: 17px;
 
-            padding:
-                17px;
-
-            border-radius:
-                13px;
+            border-radius: 13px;
 
             border:
                 1px solid #d8e0ea;
-
         }
-
 
         .card h2 {
+            margin-top: 0;
 
-            margin-top:
-                0;
+            color: #17365d;
 
-            color:
-                #17365d;
-
-            font-size:
-                17px;
-
+            font-size: 17px;
         }
-
 
         /* =====================================================
            CAMPOS
         ===================================================== */
 
         .campo {
-
-            display:
-                block;
+            display: block;
 
             margin:
                 14px 0 5px 0;
 
-            font-weight:
-                bold;
-
+            font-weight: bold;
         }
-
 
         input[type="text"],
         input[type="tel"],
         textarea {
+            width: 100%;
 
-            width:
-                100%;
-
-            padding:
-                12px;
+            padding: 12px;
 
             border:
                 1px solid #c7d0db;
 
-            border-radius:
-                8px;
+            border-radius: 8px;
 
-            font-size:
-                16px;
+            font-size: 16px;
 
             font-family:
                 Arial,
                 Helvetica,
                 sans-serif;
-
         }
-
 
         textarea {
+            min-height: 120px;
 
-            min-height:
-                120px;
-
-            resize:
-                vertical;
-
+            resize: vertical;
         }
-
 
         /* =====================================================
            BOTÃO DE FOTOS
         ===================================================== */
 
         .botao-foto {
+            display: inline-block;
 
-            display:
-                inline-block;
+            background: #e6eef8;
 
-            background:
-                #e6eef8;
+            color: #17365d;
 
-            color:
-                #17365d;
+            border-radius: 8px;
 
-            border-radius:
-                8px;
+            padding: 12px 15px;
 
-            padding:
-                12px 15px;
+            font-weight: bold;
 
-            font-weight:
-                bold;
-
-            cursor:
-                pointer;
-
+            cursor: pointer;
         }
-
 
         .botao-foto input {
-
-            display:
-                none;
-
+            display: none;
         }
-
 
         /* =====================================================
            GALERIA
         ===================================================== */
 
         .galeria {
-
-            display:
-                grid;
+            display: grid;
 
             grid-template-columns:
                 repeat(2, 1fr);
 
-            gap:
-                10px;
+            gap: 10px;
 
-            margin-top:
-                12px;
-
+            margin-top: 12px;
         }
 
-
         .foto {
+            position: relative;
 
-            position:
-                relative;
-
-            background:
-                white;
+            background: white;
 
             border:
                 1px solid #d8e0ea;
 
-            border-radius:
-                9px;
+            border-radius: 9px;
 
-            overflow:
-                hidden;
+            overflow: hidden;
 
-            padding-bottom:
-                8px;
-
+            padding-bottom: 8px;
         }
-
 
         .foto img {
+            display: block;
 
-            display:
-                block;
+            width: 100%;
 
-            width:
-                100%;
+            aspect-ratio: 1;
 
-            aspect-ratio:
-                1;
-
-            object-fit:
-                cover;
-
+            object-fit: cover;
         }
 
-
         .legenda {
-
             width:
                 calc(100% - 12px);
 
             margin:
                 7px 6px 0 6px;
 
-            padding:
-                8px;
+            padding: 8px;
 
             border:
                 1px solid #c7d0db;
 
-            border-radius:
-                7px;
+            border-radius: 7px;
 
-            font-size:
-                13px;
-
+            font-size: 13px;
         }
-
 
         .remover {
+            position: absolute;
 
-            position:
-                absolute;
+            right: 5px;
 
-            right:
-                5px;
+            top: 5px;
 
-            top:
-                5px;
+            width: 34px;
 
-            width:
-                34px;
+            height: 34px;
 
-            height:
-                34px;
+            padding: 0;
 
-            padding:
-                0;
+            border: none;
 
-            border:
-                none;
+            border-radius: 50%;
 
-            border-radius:
-                50%;
+            background: #b42318;
 
-            background:
-                #b42318;
+            color: white;
 
-            color:
-                white;
+            font-size: 20px;
 
-            font-size:
-                20px;
-
-            cursor:
-                pointer;
-
+            cursor: pointer;
         }
-
-
-        /* =====================================================
-           INFORMAÇÕES AUXILIARES
-        ===================================================== */
 
         .nota,
         .contador {
+            margin-top: 8px;
 
-            margin-top:
-                8px;
+            color: #667085;
 
-            color:
-                #667085;
+            font-size: 12px;
 
-            font-size:
-                12px;
-
-            line-height:
-                1.4;
-
+            line-height: 1.4;
         }
-
 
         /* =====================================================
            BOTÕES
         ===================================================== */
 
         .acoes {
+            display: flex;
 
-            display:
-                flex;
+            flex-wrap: wrap;
 
-            flex-wrap:
-                wrap;
-
-            gap:
-                8px;
-
+            gap: 8px;
         }
-
 
         button {
+            border: none;
 
-            border:
-                none;
+            border-radius: 8px;
 
-            border-radius:
-                8px;
+            padding: 12px 15px;
 
-            padding:
-                12px 15px;
+            font-size: 14px;
 
-            font-size:
-                14px;
+            font-weight: bold;
 
-            font-weight:
-                bold;
-
-            cursor:
-                pointer;
-
+            cursor: pointer;
         }
-
 
         #instalar {
+            display: none;
 
-            display:
-                none;
+            background: #7a4e00;
 
-            background:
-                #7a4e00;
-
-            color:
-                white;
-
+            color: white;
         }
-
 
         #pdf {
+            background: #17365d;
 
-            background:
-                #17365d;
-
-            color:
-                white;
-
+            color: white;
         }
-
 
         #baixar {
+            background: #16794b;
 
-            background:
-                #16794b;
-
-            color:
-                white;
-
+            color: white;
         }
-
 
         #salvar {
+            background: #e6eef8;
 
-            background:
-                #e6eef8;
-
-            color:
-                #17365d;
-
+            color: #17365d;
         }
-
 
         #limpar {
+            background: #fee4e2;
 
-            background:
-                #fee4e2;
-
-            color:
-                #b42318;
-
+            color: #b42318;
         }
 
-
         /* =====================================================
-           COMPUTADOR / TABLET
+           TELAS MAIORES
         ===================================================== */
 
         @media (min-width: 650px) {
 
             .galeria {
-
                 grid-template-columns:
                     repeat(3, 1fr);
-
             }
 
         }
@@ -576,328 +369,276 @@
 
 </head>
 
-
 <body>
 
+<main class="container">
 
-    <main class="container">
+    <!-- =====================================================
+         CABEÇALHO
+    ====================================================== -->
+
+    <section class="cabecalho">
+
+        <h1>
+            RELATÓRIO DE REALIZAÇÃO DE ATIVIDADE
+        </h1>
+
+        <p>
+            Formulário offline com registro fotográfico.
+        </p>
+
+        <div id="status">
+            Pronto para preenchimento.
+        </div>
+
+    </section>
+
+
+    <form id="formulario">
+
+        <!-- =================================================
+             INFORMAÇÕES
+        ================================================== -->
+
+        <section class="card">
+
+            <h2>
+                Informações
+            </h2>
+
+            <label
+                class="campo"
+                for="nome"
+            >
+                1. Insira seu nome *
+            </label>
+
+            <input
+                id="nome"
+                type="text"
+                required
+            >
+
+
+            <label
+                class="campo"
+                for="area"
+            >
+                2. Insira a área de realização da atividade *
+            </label>
+
+            <input
+                id="area"
+                type="text"
+                required
+            >
+
+
+            <label
+                class="campo"
+                for="atividade"
+            >
+                3. Insira a atividade realizada *
+            </label>
+
+            <input
+                id="atividade"
+                type="text"
+                required
+            >
+
+
+            <label
+                class="campo"
+                for="contato"
+            >
+                4. Insira nº de contato
+            </label>
+
+            <input
+                id="contato"
+                type="tel"
+            >
+
+
+            <label
+                class="campo"
+                for="empresa"
+            >
+                5. Empresa *
+            </label>
+
+            <input
+                id="empresa"
+                type="text"
+                required
+            >
+
+
+            <label
+                class="campo"
+                for="descricao"
+            >
+                8. Descrição da Atividade *
+            </label>
+
+            <textarea
+                id="descricao"
+                required
+            ></textarea>
+
+        </section>
 
 
         <!-- =================================================
-             CABEÇALHO
+             IMAGENS ANTES
         ================================================== -->
 
-        <section class="cabecalho">
+        <section class="card">
 
-            <h1>
-                RELATÓRIO DE REALIZAÇÃO DE ATIVIDADE
-            </h1>
+            <h2>
+                6. Imagens ANTES
+            </h2>
 
-            <p>
-                Formulário offline com registro fotográfico.
-            </p>
+            <label class="botao-foto">
 
-            <div id="status">
+                📷 Tirar / adicionar fotos
 
-                Pronto para preenchimento.
+                <input
+                    id="inputAntes"
+                    type="file"
+                    accept="image/*"
+                    multiple
+                >
+
+            </label>
+
+            <div class="nota">
+                Você pode tirar uma nova foto ou selecionar
+                imagens existentes no celular.
+                A legenda é opcional.
+            </div>
+
+            <div
+                id="contadorAntes"
+                class="contador"
+            >
+                0 fotos
+            </div>
+
+            <div
+                id="galeriaAntes"
+                class="galeria"
+            ></div>
+
+        </section>
+
+
+        <!-- =================================================
+             IMAGENS DEPOIS
+        ================================================== -->
+
+        <section class="card">
+
+            <h2>
+                7. Imagens DEPOIS
+            </h2>
+
+            <label class="botao-foto">
+
+                📷 Tirar / adicionar fotos
+
+                <input
+                    id="inputDepois"
+                    type="file"
+                    accept="image/*"
+                    multiple
+                >
+
+            </label>
+
+            <div class="nota">
+                Você pode tirar uma nova foto ou selecionar
+                imagens existentes no celular.
+                A legenda é opcional.
+            </div>
+
+            <div
+                id="contadorDepois"
+                class="contador"
+            >
+                0 fotos
+            </div>
+
+            <div
+                id="galeriaDepois"
+                class="galeria"
+            ></div>
+
+        </section>
+
+
+        <!-- =================================================
+             AÇÕES
+        ================================================== -->
+
+        <section class="card">
+
+            <div class="acoes">
+
+                <button
+                    id="instalar"
+                    type="button"
+                >
+                    📲 Instalar aplicativo
+                </button>
+
+                <button
+                    id="pdf"
+                    type="button"
+                >
+                    📄 Abrir / Salvar como PDF
+                </button>
+
+                <button
+                    id="baixar"
+                    type="button"
+                >
+                    ⬇️ Baixar relatório
+                </button>
+
+                <button
+                    id="salvar"
+                    type="button"
+                >
+                    💾 Salvar dados
+                </button>
+
+                <button
+                    id="limpar"
+                    type="button"
+                >
+                    🗑️ Limpar
+                </button>
+
+            </div>
+
+            <div class="nota">
+
+                Relatório configurado em A4 retrato.<br>
+
+                Margem superior: 3 cm<br>
+                Margem esquerda: 3 cm<br>
+                Margem inferior: 2 cm<br>
+                Margem direita: 2 cm
 
             </div>
 
         </section>
 
+    </form>
 
-
-        <form id="formulario">
-
-
-            <!-- =============================================
-                 INFORMAÇÕES
-            ============================================== -->
-
-            <section class="card">
-
-                <h2>
-                    Informações
-                </h2>
-
-
-                <label
-                    class="campo"
-                    for="nome"
-                >
-                    1. Insira seu nome *
-                </label>
-
-                <input
-                    id="nome"
-                    type="text"
-                    required
-                >
-
-
-                <label
-                    class="campo"
-                    for="area"
-                >
-                    2. Insira a área de realização da atividade *
-                </label>
-
-                <input
-                    id="area"
-                    type="text"
-                    required
-                >
-
-
-                <label
-                    class="campo"
-                    for="atividade"
-                >
-                    3. Insira a atividade realizada *
-                </label>
-
-                <input
-                    id="atividade"
-                    type="text"
-                    required
-                >
-
-
-                <label
-                    class="campo"
-                    for="contato"
-                >
-                    4. Insira nº de contato
-                </label>
-
-                <input
-                    id="contato"
-                    type="tel"
-                >
-
-
-                <label
-                    class="campo"
-                    for="empresa"
-                >
-                    5. Empresa *
-                </label>
-
-                <input
-                    id="empresa"
-                    type="text"
-                    required
-                >
-
-
-                <label
-                    class="campo"
-                    for="descricao"
-                >
-                    8. Descrição da Atividade *
-                </label>
-
-                <textarea
-                    id="descricao"
-                    required
-                ></textarea>
-
-            </section>
-
-
-
-            <!-- =============================================
-                 IMAGENS ANTES
-            ============================================== -->
-
-            <section class="card">
-
-                <h2>
-                    6. Imagens ANTES
-                </h2>
-
-
-                <label class="botao-foto">
-
-                    📷 Tirar / adicionar fotos
-
-                    <input
-                        id="inputAntes"
-                        type="file"
-                        accept="image/*"
-                        capture="environment"
-                        multiple
-                    >
-
-                </label>
-
-
-                <div class="nota">
-
-                    Você pode adicionar várias imagens.
-                    A legenda de cada imagem é opcional.
-
-                </div>
-
-
-                <div
-                    id="contadorAntes"
-                    class="contador"
-                >
-
-                    0 fotos
-
-                </div>
-
-
-                <div
-                    id="galeriaAntes"
-                    class="galeria"
-                ></div>
-
-            </section>
-
-
-
-            <!-- =============================================
-                 IMAGENS DEPOIS
-            ============================================== -->
-
-            <section class="card">
-
-                <h2>
-                    7. Imagens DEPOIS
-                </h2>
-
-
-                <label class="botao-foto">
-
-                    📷 Tirar / adicionar fotos
-
-                    <input
-                        id="inputDepois"
-                        type="file"
-                        accept="image/*"
-                        capture="environment"
-                        multiple
-                    >
-
-                </label>
-
-
-                <div class="nota">
-
-                    Você pode adicionar várias imagens.
-                    A legenda de cada imagem é opcional.
-
-                </div>
-
-
-                <div
-                    id="contadorDepois"
-                    class="contador"
-                >
-
-                    0 fotos
-
-                </div>
-
-
-                <div
-                    id="galeriaDepois"
-                    class="galeria"
-                ></div>
-
-            </section>
-
-
-
-            <!-- =============================================
-                 AÇÕES
-            ============================================== -->
-
-            <section class="card">
-
-
-                <div class="acoes">
-
-
-                    <button
-                        id="instalar"
-                        type="button"
-                    >
-
-                        📲 Instalar aplicativo
-
-                    </button>
-
-
-                    <button
-                        id="pdf"
-                        type="button"
-                    >
-
-                        📄 Abrir / Salvar como PDF
-
-                    </button>
-
-
-                    <button
-                        id="baixar"
-                        type="button"
-                    >
-
-                        ⬇️ Baixar relatório
-
-                    </button>
-
-
-                    <button
-                        id="salvar"
-                        type="button"
-                    >
-
-                        💾 Salvar dados
-
-                    </button>
-
-
-                    <button
-                        id="limpar"
-                        type="button"
-                    >
-
-                        🗑️ Limpar
-
-                    </button>
-
-
-                </div>
-
-
-                <div class="nota">
-
-                    Relatório configurado em A4 retrato.<br>
-
-                    Margem superior: 3 cm<br>
-
-                    Margem esquerda: 3 cm<br>
-
-                    Margem inferior: 2 cm<br>
-
-                    Margem direita: 2 cm
-
-                </div>
-
-
-            </section>
-
-
-        </form>
-
-
-    </main>
-
+</main>
 
 
 <script>
@@ -914,7 +655,6 @@ function elemento(id) {
     return document.getElementById(id);
 
 }
-
 
 
 /* =========================================================
@@ -964,7 +704,6 @@ if ("serviceWorker" in navigator) {
 }
 
 
-
 /* =========================================================
    INSTALAÇÃO DA PWA
 ========================================================= */
@@ -993,7 +732,6 @@ window.addEventListener(
 );
 
 
-
 elemento("instalar")
     .addEventListener(
 
@@ -1005,7 +743,7 @@ elemento("instalar")
 
                 alert(
 
-                    "Se a instalação automática não estiver disponível, abra o menu do navegador e escolha 'Instalar aplicativo' ou 'Adicionar à tela inicial'."
+                    "Abra o menu do navegador e escolha 'Instalar aplicativo' ou 'Adicionar à tela inicial'."
 
                 );
 
@@ -1035,7 +773,6 @@ elemento("instalar")
     );
 
 
-
 window.addEventListener(
 
     "appinstalled",
@@ -1044,7 +781,6 @@ window.addEventListener(
 
         elemento("status")
             .textContent =
-
             "Aplicativo instalado com sucesso.";
 
     }
@@ -1052,15 +788,13 @@ window.addEventListener(
 );
 
 
-
 /* =========================================================
-   VARIÁVEIS DAS FOTOS
+   FOTOS
 ========================================================= */
 
 let fotosAntes = [];
 
 let fotosDepois = [];
-
 
 
 /* =========================================================
@@ -1078,7 +812,6 @@ function gerarId() {
 
     }
 
-
     return (
         Date.now()
         +
@@ -1090,19 +823,14 @@ function gerarId() {
 }
 
 
-
 /* =========================================================
    RENDERIZAR GALERIA
 ========================================================= */
 
 function renderizarGaleria(
-
     lista,
-
     idGaleria,
-
     idContador
-
 ) {
 
     const galeria =
@@ -1148,7 +876,6 @@ function renderizarGaleria(
                 (indice + 1);
 
 
-
             const legenda =
                 document.createElement(
                     "input"
@@ -1183,7 +910,6 @@ function renderizarGaleria(
                 }
 
             );
-
 
 
             const remover =
@@ -1221,19 +947,14 @@ function renderizarGaleria(
 
 
                     renderizarGaleria(
-
                         lista,
-
                         idGaleria,
-
                         idContador
-
                     );
 
                 }
 
             );
-
 
 
             bloco.appendChild(
@@ -1260,7 +981,6 @@ function renderizarGaleria(
     );
 
 
-
     elemento(idContador)
         .textContent =
 
@@ -1281,21 +1001,15 @@ function renderizarGaleria(
 }
 
 
-
 /* =========================================================
    ADICIONAR FOTOS
 ========================================================= */
 
 function adicionarFotos(
-
     input,
-
     lista,
-
     idGaleria,
-
     idContador
-
 ) {
 
     const arquivos =
@@ -1340,17 +1054,12 @@ function adicionarFotos(
 
 
     renderizarGaleria(
-
         lista,
-
         idGaleria,
-
         idContador
-
     );
 
 }
-
 
 
 /* =========================================================
@@ -1365,21 +1074,15 @@ elemento("inputAntes")
         function () {
 
             adicionarFotos(
-
                 this,
-
                 fotosAntes,
-
                 "galeriaAntes",
-
                 "contadorAntes"
-
             );
 
         }
 
     );
-
 
 
 elemento("inputDepois")
@@ -1390,15 +1093,10 @@ elemento("inputDepois")
         function () {
 
             adicionarFotos(
-
                 this,
-
                 fotosDepois,
-
                 "galeriaDepois",
-
                 "contadorDepois"
-
             );
 
         }
@@ -1406,9 +1104,8 @@ elemento("inputDepois")
     );
 
 
-
 /* =========================================================
-   DADOS DO FORMULÁRIO
+   DADOS
 ========================================================= */
 
 function obterDados() {
@@ -1450,9 +1147,8 @@ function obterDados() {
 }
 
 
-
 /* =========================================================
-   PROTEÇÃO DO HTML
+   ESCAPAR HTML
 ========================================================= */
 
 function escaparHTML(texto) {
@@ -1468,23 +1164,13 @@ function escaparHTML(texto) {
 
             const mapa = {
 
-                "&":
-                    "&amp;",
-
-                "<":
-                    "&lt;",
-
-                ">":
-                    "&gt;",
-
-                '"':
-                    "&quot;",
-
-                "'":
-                    "&#39;"
+                "&": "&amp;",
+                "<": "&lt;",
+                ">": "&gt;",
+                '"': "&quot;",
+                "'": "&#39;"
 
             };
-
 
             return mapa[
                 caractere
@@ -1497,9 +1183,8 @@ function escaparHTML(texto) {
 }
 
 
-
 /* =========================================================
-   CONVERTER FOTO PARA BASE64
+   ARQUIVO PARA BASE64
 ========================================================= */
 
 function arquivoParaBase64(
@@ -1542,9 +1227,8 @@ function arquivoParaBase64(
 }
 
 
-
 /* =========================================================
-   DATA E HORA
+   DATA/HORA
 ========================================================= */
 
 function dataHoraAtual() {
@@ -1571,9 +1255,8 @@ function dataHoraAtual() {
 }
 
 
-
 /* =========================================================
-   NOME SEGURO PARA ARQUIVO
+   NOME DO ARQUIVO
 ========================================================= */
 
 function nomeArquivo(texto) {
@@ -1613,17 +1296,13 @@ function nomeArquivo(texto) {
 }
 
 
-
 /* =========================================================
-   GERAR BLOCO DE FOTOS DO RELATÓRIO
+   FOTOS NO RELATÓRIO
 ========================================================= */
 
 function gerarFotosRelatorio(
-
     lista,
-
     titulo
-
 ) {
 
     if (
@@ -1712,7 +1391,6 @@ function gerarFotosRelatorio(
 }
 
 
-
 /* =========================================================
    MONTAR RELATÓRIO
 ========================================================= */
@@ -1721,7 +1399,6 @@ async function montarRelatorio() {
 
     const dados =
         obterDados();
-
 
 
     const antes =
@@ -1750,7 +1427,6 @@ async function montarRelatorio() {
         );
 
 
-
     const depois =
         await Promise.all(
 
@@ -1777,27 +1453,18 @@ async function montarRelatorio() {
         );
 
 
-
     const blocoAntes =
         gerarFotosRelatorio(
-
             antes,
-
             "REGISTRO FOTOGRÁFICO — ANTES"
-
         );
-
 
 
     const blocoDepois =
         gerarFotosRelatorio(
-
             depois,
-
             "REGISTRO FOTOGRÁFICO — DEPOIS"
-
         );
-
 
 
     return `
@@ -1819,7 +1486,6 @@ async function montarRelatorio() {
 Relatório de Realização de Atividade
 </title>
 
-
 <style>
 
 @page {
@@ -1837,18 +1503,14 @@ Relatório de Realização de Atividade
 
 
 * {
-
     box-sizing:
         border-box;
-
 }
 
 
 html {
-
     background:
         #d9dde3;
-
 }
 
 
@@ -2077,10 +1739,8 @@ figcaption {
 @media print {
 
     html {
-
         background:
             white;
-
     }
 
 
@@ -2112,10 +1772,8 @@ figcaption {
 @media screen and (max-width: 220mm) {
 
     html {
-
         background:
             white;
-
     }
 
 
@@ -2143,7 +1801,6 @@ figcaption {
 </style>
 
 </head>
-
 
 <body>
 
@@ -2235,7 +1892,6 @@ figcaption {
 </table>
 
 
-
 <h2>
     DESCRIÇÃO DA ATIVIDADE
 </h2>
@@ -2248,12 +1904,10 @@ ${escaparHTML(dados.descricao)}
 </div>
 
 
-
 ${blocoAntes}
 
 
 ${blocoDepois}
-
 
 
 <div class="rodape">
@@ -2271,7 +1925,6 @@ ${blocoDepois}
 `;
 
 }
-
 
 
 /* =========================================================
@@ -2306,9 +1959,8 @@ elemento("salvar")
     );
 
 
-
 /* =========================================================
-   RESTAURAR DADOS SALVOS
+   RESTAURAR DADOS
 ========================================================= */
 
 try {
@@ -2366,7 +2018,6 @@ catch (erro) {
 }
 
 
-
 /* =========================================================
    LIMPAR
 ========================================================= */
@@ -2406,24 +2057,16 @@ elemento("limpar")
 
 
             renderizarGaleria(
-
                 fotosAntes,
-
                 "galeriaAntes",
-
                 "contadorAntes"
-
             );
 
 
             renderizarGaleria(
-
                 fotosDepois,
-
                 "galeriaDepois",
-
                 "contadorDepois"
-
             );
 
 
@@ -2442,9 +2085,8 @@ elemento("limpar")
     );
 
 
-
 /* =========================================================
-   ABRIR E SALVAR COMO PDF
+   PDF
 ========================================================= */
 
 elemento("pdf")
@@ -2541,11 +2183,8 @@ window.onload = function () {
 
                 const janela =
                     window.open(
-
                         url,
-
                         "_blank"
-
                     );
 
 
@@ -2615,9 +2254,8 @@ window.onload = function () {
     );
 
 
-
 /* =========================================================
-   BAIXAR RELATÓRIO HTML
+   BAIXAR RELATÓRIO
 ========================================================= */
 
 elemento("baixar")
@@ -2776,7 +2414,6 @@ elemento("baixar")
 
 
 </script>
-
 
 </body>
 
