@@ -12,14 +12,8 @@
     <meta name="theme-color" content="#17365d">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta
-        name="apple-mobile-web-app-status-bar-style"
-        content="default"
-    >
-    <meta
-        name="apple-mobile-web-app-title"
-        content="Relatório"
-    >
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Relatório">
 
     <title>Relatório de Realização de Atividade</title>
 
@@ -31,11 +25,6 @@
 
         * {
             box-sizing: border-box;
-        }
-
-        html {
-            margin: 0;
-            padding: 0;
         }
 
         body {
@@ -78,6 +67,12 @@
             padding: 10px;
             border-radius: 8px;
             font-size: 13px;
+        }
+
+        .versao {
+            margin-top: 10px;
+            font-size: 12px;
+            opacity: 0.85;
         }
 
         /* =====================================================
@@ -125,30 +120,32 @@
         }
 
         /* =====================================================
-           BOTÕES DE FOTOS
+           FOTO
         ===================================================== */
 
         .acoes-fotos {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
             margin-top: 10px;
         }
 
         .botao-camera,
         .botao-galeria {
-            display: inline-flex;
+            display: flex;
             align-items: center;
             justify-content: center;
 
-            min-height: 46px;
+            min-height: 48px;
 
-            padding: 11px 14px;
+            padding: 12px;
 
             border-radius: 8px;
 
             font-size: 14px;
             font-weight: bold;
+
+            text-align: center;
 
             cursor: pointer;
         }
@@ -247,7 +244,7 @@
         }
 
         /* =====================================================
-           BOTÕES PRINCIPAIS
+           BOTÕES
         ===================================================== */
 
         .acoes {
@@ -292,7 +289,22 @@
         }
 
         /* =====================================================
-           TELAS MAIORES
+           RODAPÉ
+        ===================================================== */
+
+        .rodape-app {
+            text-align: center;
+            color: #667085;
+            font-size: 12px;
+            padding: 25px 10px 35px 10px;
+        }
+
+        .rodape-app strong {
+            color: #17365d;
+        }
+
+        /* =====================================================
+           RESPONSIVIDADE
         ===================================================== */
 
         @media (min-width: 650px) {
@@ -303,21 +315,10 @@
 
         }
 
-        /* =====================================================
-           CELULAR
-        ===================================================== */
-
-        @media (max-width: 480px) {
+        @media (max-width: 400px) {
 
             .acoes-fotos {
-                display: grid;
-                grid-template-columns: 1fr 1fr;
-            }
-
-            .botao-camera,
-            .botao-galeria {
-                width: 100%;
-                text-align: center;
+                grid-template-columns: 1fr;
             }
 
         }
@@ -346,6 +347,10 @@
 
         <div id="status">
             Pronto para preenchimento.
+        </div>
+
+        <div class="versao">
+            Versão 5.0
         </div>
 
     </section>
@@ -439,8 +444,6 @@
 
             <div class="acoes-fotos">
 
-                <!-- CÂMERA -->
-
                 <label class="botao-camera">
 
                     📷 Tirar foto
@@ -455,11 +458,9 @@
                 </label>
 
 
-                <!-- GALERIA -->
-
                 <label class="botao-galeria">
 
-                    🖼️ Galeria
+                    🖼️ Abrir galeria
 
                     <input
                         id="galeriaInputAntes"
@@ -473,9 +474,8 @@
             </div>
 
             <div class="nota">
-                Use <strong>Tirar foto</strong> para abrir a câmera
-                ou <strong>Galeria</strong> para escolher imagens
-                existentes no celular.
+                Use a câmera para tirar uma nova foto ou
+                abra a galeria para selecionar imagens existentes.
             </div>
 
             <div
@@ -505,8 +505,6 @@
 
             <div class="acoes-fotos">
 
-                <!-- CÂMERA -->
-
                 <label class="botao-camera">
 
                     📷 Tirar foto
@@ -521,11 +519,9 @@
                 </label>
 
 
-                <!-- GALERIA -->
-
                 <label class="botao-galeria">
 
-                    🖼️ Galeria
+                    🖼️ Abrir galeria
 
                     <input
                         id="galeriaInputDepois"
@@ -539,9 +535,8 @@
             </div>
 
             <div class="nota">
-                Use <strong>Tirar foto</strong> para abrir a câmera
-                ou <strong>Galeria</strong> para escolher imagens
-                existentes no celular.
+                Use a câmera para tirar uma nova foto ou
+                abra a galeria para selecionar imagens existentes.
             </div>
 
             <div
@@ -606,18 +601,29 @@
 
             <div class="nota">
 
-                Relatório configurado em A4 retrato.<br>
+                Relatório A4 retrato.<br>
 
-                Margem superior: 3 cm<br>
-                Margem esquerda: 3 cm<br>
-                Margem inferior: 2 cm<br>
-                Margem direita: 2 cm
+                Superior: 3 cm |
+                Esquerda: 3 cm |
+                Inferior: 2 cm |
+                Direita: 2 cm
 
             </div>
 
         </section>
 
     </form>
+
+
+    <div class="rodape-app">
+
+        Relatório de Realização de Atividade<br>
+
+        <strong>
+            Versão 5.0
+        </strong>
+
+    </div>
 
 </main>
 
@@ -628,11 +634,17 @@
 
 
 /* =========================================================
-   FUNÇÃO AUXILIAR
+   CONFIGURAÇÃO
 ========================================================= */
 
+const APP_VERSION =
+    "5.0";
+
+
 function elemento(id) {
+
     return document.getElementById(id);
+
 }
 
 
@@ -642,29 +654,43 @@ function elemento(id) {
 
 if ("serviceWorker" in navigator) {
 
-    window.addEventListener("load", function () {
+    window.addEventListener(
+        "load",
+        async function () {
 
-        navigator.serviceWorker
-            .register("./service-worker.js")
+            try {
 
-            .then(function () {
+                const registro =
+                    await navigator.serviceWorker.register(
+                        "./service-worker.js"
+                    );
+
+
+                /*
+                 * Solicita imediatamente ao navegador
+                 * uma verificação por uma versão nova
+                 * do Service Worker.
+                 */
+
+                registro.update();
+
 
                 console.log(
-                    "Service Worker registrado."
+                    "Service Worker V5 registrado."
                 );
 
-            })
-
-            .catch(function (erro) {
+            }
+            catch (erro) {
 
                 console.error(
                     "Erro ao registrar Service Worker:",
                     erro
                 );
 
-            });
+            }
 
-    });
+        }
+    );
 
 }
 
@@ -673,7 +699,8 @@ if ("serviceWorker" in navigator) {
    INSTALAÇÃO
 ========================================================= */
 
-let eventoInstalacao = null;
+let eventoInstalacao =
+    null;
 
 
 window.addEventListener(
@@ -684,6 +711,7 @@ window.addEventListener(
 
         eventoInstalacao =
             evento;
+
 
         elemento("instalar")
             .style
@@ -702,17 +730,23 @@ elemento("instalar")
             if (!eventoInstalacao) {
 
                 alert(
-                    "Abra o menu do navegador e escolha 'Instalar aplicativo' ou 'Adicionar à tela inicial'."
+                    "Use o menu do navegador e escolha Instalar aplicativo ou Adicionar à tela inicial."
                 );
 
                 return;
+
             }
+
 
             eventoInstalacao.prompt();
 
+
             await eventoInstalacao.userChoice;
 
-            eventoInstalacao = null;
+
+            eventoInstalacao =
+                null;
+
 
             elemento("instalar")
                 .style
@@ -723,25 +757,16 @@ elemento("instalar")
     );
 
 
-window.addEventListener(
-    "appinstalled",
-    function () {
-
-        elemento("status")
-            .textContent =
-            "Aplicativo instalado com sucesso.";
-
-    }
-);
-
-
 /* =========================================================
    FOTOS
 ========================================================= */
 
-let fotosAntes = [];
+let fotosAntes =
+    [];
 
-let fotosDepois = [];
+
+let fotosDepois =
+    [];
 
 
 /* =========================================================
@@ -758,6 +783,7 @@ function gerarId() {
         return crypto.randomUUID();
 
     }
+
 
     return (
         Date.now()
@@ -783,6 +809,7 @@ function renderizarGaleria(
     const galeria =
         elemento(idGaleria);
 
+
     galeria.innerHTML =
         "";
 
@@ -795,51 +822,64 @@ function renderizarGaleria(
                     "div"
                 );
 
+
             bloco.className =
                 "foto";
 
+
+            /* IMAGEM */
 
             const imagem =
                 document.createElement(
                     "img"
                 );
 
-            const urlImagem =
+
+            const url =
                 URL.createObjectURL(
                     item.file
                 );
 
+
             imagem.src =
-                urlImagem;
+                url;
+
 
             imagem.alt =
                 "Foto "
                 +
                 (indice + 1);
 
+
             imagem.onload =
                 function () {
 
                     URL.revokeObjectURL(
-                        urlImagem
+                        url
                     );
 
                 };
 
+
+            /* LEGENDA */
 
             const legenda =
                 document.createElement(
                     "input"
                 );
 
+
             legenda.type =
                 "text";
+
 
             legenda.className =
                 "legenda";
 
+
             legenda.placeholder =
-                "Legenda da imagem (opcional)";
+                "Legenda opcional";
+
 
             legenda.value =
                 item.legenda || "";
@@ -856,19 +896,25 @@ function renderizarGaleria(
             );
 
 
+            /* REMOVER */
+
             const remover =
                 document.createElement(
                     "button"
                 );
 
+
             remover.type =
                 "button";
+
 
             remover.className =
                 "remover";
 
+
             remover.textContent =
                 "×";
+
 
             remover.title =
                 "Remover foto";
@@ -882,6 +928,7 @@ function renderizarGaleria(
                         indice,
                         1
                     );
+
 
                     renderizarGaleria(
                         lista,
@@ -897,13 +944,16 @@ function renderizarGaleria(
                 imagem
             );
 
+
             bloco.appendChild(
                 remover
             );
 
+
             bloco.appendChild(
                 legenda
             );
+
 
             galeria.appendChild(
                 bloco
@@ -930,7 +980,7 @@ function renderizarGaleria(
 
 
 /* =========================================================
-   ADICIONAR FOTOS
+   ADICIONAR FOTO
 ========================================================= */
 
 function adicionarFotos(
@@ -950,8 +1000,10 @@ function adicionarFotos(
         function (arquivo) {
 
             if (
-                arquivo.type
-                    .startsWith("image/")
+                arquivo.type &&
+                arquivo.type.startsWith(
+                    "image/"
+                )
             ) {
 
                 lista.push({
@@ -987,7 +1039,7 @@ function adicionarFotos(
 
 
 /* =========================================================
-   CÂMERA — ANTES
+   EVENTOS DAS FOTOS
 ========================================================= */
 
 elemento("cameraAntes")
@@ -1006,10 +1058,6 @@ elemento("cameraAntes")
     );
 
 
-/* =========================================================
-   GALERIA — ANTES
-========================================================= */
-
 elemento("galeriaInputAntes")
     .addEventListener(
         "change",
@@ -1026,10 +1074,6 @@ elemento("galeriaInputAntes")
     );
 
 
-/* =========================================================
-   CÂMERA — DEPOIS
-========================================================= */
-
 elemento("cameraDepois")
     .addEventListener(
         "change",
@@ -1045,10 +1089,6 @@ elemento("cameraDepois")
         }
     );
 
-
-/* =========================================================
-   GALERIA — DEPOIS
-========================================================= */
 
 elemento("galeriaInputDepois")
     .addEventListener(
@@ -1132,6 +1172,7 @@ function escaparHTML(texto) {
 
             };
 
+
             return mapa[
                 caractere
             ];
@@ -1143,7 +1184,7 @@ function escaparHTML(texto) {
 
 
 /* =========================================================
-   ARQUIVO PARA BASE64
+   BASE64
 ========================================================= */
 
 function arquivoParaBase64(
@@ -1159,6 +1200,7 @@ function arquivoParaBase64(
             const leitor =
                 new FileReader();
 
+
             leitor.onload =
                 function () {
 
@@ -1168,8 +1210,10 @@ function arquivoParaBase64(
 
                 };
 
+
             leitor.onerror =
                 rejeitar;
+
 
             leitor.readAsDataURL(
                 arquivo
@@ -1190,11 +1234,13 @@ function dataHoraAtual() {
     return new Intl.DateTimeFormat(
         "pt-BR",
         {
+
             dateStyle:
                 "short",
 
             timeStyle:
                 "short"
+
         }
     )
     .format(
@@ -1205,7 +1251,7 @@ function dataHoraAtual() {
 
 
 /* =========================================================
-   NOME DO ARQUIVO
+   NOME DE ARQUIVO
 ========================================================= */
 
 function nomeArquivo(texto) {
@@ -1246,7 +1292,7 @@ function nomeArquivo(texto) {
 
 
 /* =========================================================
-   FOTOS NO RELATÓRIO
+   FOTOS DO RELATÓRIO
 ========================================================= */
 
 function gerarFotosRelatorio(
@@ -1484,15 +1530,6 @@ body {
     font-size:
         10.5pt;
 
-    box-shadow:
-        0 4px 18px
-        rgba(
-            0,
-            0,
-            0,
-            0.18
-        );
-
 }
 
 
@@ -1697,9 +1734,6 @@ figcaption {
         padding:
             0;
 
-        background:
-            white;
-
         box-shadow:
             none;
 
@@ -1730,9 +1764,6 @@ figcaption {
         padding:
             25px 20px;
 
-        box-shadow:
-            none;
-
     }
 
 }
@@ -1753,9 +1784,7 @@ figcaption {
 
     <tr>
 
-        <th>
-            Nome
-        </th>
+        <th>Nome</th>
 
         <td>
             ${escaparHTML(dados.nome)}
@@ -1766,9 +1795,7 @@ figcaption {
 
     <tr>
 
-        <th>
-            Área
-        </th>
+        <th>Área</th>
 
         <td>
             ${escaparHTML(dados.area)}
@@ -1779,9 +1806,7 @@ figcaption {
 
     <tr>
 
-        <th>
-            Atividade
-        </th>
+        <th>Atividade</th>
 
         <td>
             ${escaparHTML(dados.atividade)}
@@ -1792,12 +1817,12 @@ figcaption {
 
     <tr>
 
-        <th>
-            Contato
-        </th>
+        <th>Contato</th>
 
         <td>
-            ${escaparHTML(dados.contato || "—")}
+            ${escaparHTML(
+                dados.contato || "—"
+            )}
         </td>
 
     </tr>
@@ -1805,9 +1830,7 @@ figcaption {
 
     <tr>
 
-        <th>
-            Empresa
-        </th>
+        <th>Empresa</th>
 
         <td>
             ${escaparHTML(dados.empresa)}
@@ -1818,12 +1841,12 @@ figcaption {
 
     <tr>
 
-        <th>
-            Data/Hora
-        </th>
+        <th>Data/Hora</th>
 
         <td>
-            ${escaparHTML(dataHoraAtual())}
+            ${escaparHTML(
+                dataHoraAtual()
+            )}
         </td>
 
     </tr>
@@ -1837,9 +1860,7 @@ figcaption {
 
 
 <div class="descricao">
-
 ${escaparHTML(dados.descricao)}
-
 </div>
 
 
@@ -1852,7 +1873,9 @@ ${blocoDepois}
 <div class="rodape">
 
     Documento gerado em
-    ${escaparHTML(dataHoraAtual())}
+    ${escaparHTML(
+        dataHoraAtual()
+    )}
 
 </div>
 
@@ -1888,7 +1911,6 @@ elemento("salvar")
 
             elemento("status")
                 .textContent =
-
                 "Dados textuais salvos neste dispositivo.";
 
         }
@@ -1929,7 +1951,6 @@ try {
 
                     elemento(campo)
                         .value =
-
                         dadosSalvos[campo]
                         ||
                         "";
@@ -1962,15 +1983,15 @@ elemento("limpar")
         function () {
 
             const confirmar =
-                window.confirm(
-
-                    "Deseja realmente limpar os dados, fotos e legendas?"
-
+                confirm(
+                    "Deseja limpar os dados, fotos e legendas?"
                 );
 
 
             if (!confirmar) {
+
                 return;
+
             }
 
 
@@ -2007,7 +2028,6 @@ elemento("limpar")
 
             elemento("status")
                 .textContent =
-
                 "Formulário limpo.";
 
         }
@@ -2040,7 +2060,6 @@ elemento("pdf")
 
             elemento("status")
                 .textContent =
-
                 "Montando relatório...";
 
 
@@ -2051,7 +2070,6 @@ elemento("pdf")
 
 
                 const documentoImpressao =
-
                     documento.replace(
 
                         "</body>",
@@ -2093,10 +2111,8 @@ window.onload = function () {
                         ],
 
                         {
-
                             type:
                                 "text/html;charset=utf-8"
-
                         }
 
                     );
@@ -2118,15 +2134,12 @@ window.onload = function () {
                 if (!janela) {
 
                     alert(
-
                         "O navegador bloqueou a abertura do relatório. Permita pop-ups para este aplicativo."
-
                     );
 
 
                     elemento("status")
                         .textContent =
-
                         "Não foi possível abrir o relatório.";
 
                 }
@@ -2134,8 +2147,7 @@ window.onload = function () {
 
                     elemento("status")
                         .textContent =
-
-                        "Relatório aberto. Escolha Salvar como PDF na tela de impressão.";
+                        "Relatório aberto. Escolha Salvar como PDF.";
 
                 }
 
@@ -2162,7 +2174,6 @@ window.onload = function () {
 
                 elemento("status")
                     .textContent =
-
                     "Erro ao gerar relatório.";
 
 
@@ -2177,7 +2188,7 @@ window.onload = function () {
 
 
 /* =========================================================
-   BAIXAR RELATÓRIO
+   DOWNLOAD
 ========================================================= */
 
 elemento("baixar")
@@ -2202,7 +2213,6 @@ elemento("baixar")
 
             elemento("status")
                 .textContent =
-
                 "Preparando relatório...";
 
 
@@ -2220,10 +2230,8 @@ elemento("baixar")
                         ],
 
                         {
-
                             type:
                                 "text/html;charset=utf-8"
-
                         }
 
                     );
@@ -2308,7 +2316,6 @@ elemento("baixar")
 
                 elemento("status")
                     .textContent =
-
                     "Relatório baixado.";
 
             }
@@ -2321,14 +2328,12 @@ elemento("baixar")
 
                 elemento("status")
                     .textContent =
-
                     "Erro ao baixar relatório.";
 
             }
 
         }
     );
-
 
 </script>
 
