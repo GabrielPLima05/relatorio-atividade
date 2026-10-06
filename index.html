@@ -5,18 +5,19 @@
 <meta charset="UTF-8">
 
 <meta name="viewport"
-      content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 
 <meta name="theme-color" content="#17365d">
 
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Relatório">
 
 <title>Relatório de Realização de Atividade</title>
 
 <link rel="manifest" href="./manifest.json">
-<link rel="icon" href="./icons/icon.png">
+<link rel="icon" type="image/png" href="./icons/icon.png">
 <link rel="apple-touch-icon" href="./icons/icon.png">
 
 <style>
@@ -27,6 +28,7 @@
 
 body {
     margin: 0;
+    padding: 0;
     font-family: Arial, Helvetica, sans-serif;
     background: #f3f6fa;
     color: #1f2937;
@@ -38,9 +40,9 @@ body {
     padding: 15px;
 }
 
-/* ==============================
+/* ==========================================
    CABEÇALHO
-============================== */
+========================================== */
 
 .cabecalho {
     background: #17365d;
@@ -72,9 +74,9 @@ body {
     opacity: .85;
 }
 
-/* ==============================
+/* ==========================================
    CARDS
-============================== */
+========================================== */
 
 .card {
     background: white;
@@ -90,9 +92,9 @@ body {
     font-size: 17px;
 }
 
-/* ==============================
+/* ==========================================
    CAMPOS
-============================== */
+========================================== */
 
 .campo {
     display: block;
@@ -103,14 +105,10 @@ body {
 input[type="text"],
 input[type="tel"],
 textarea {
-
     width: 100%;
-
     padding: 12px;
-
     border: 1px solid #c7d0db;
     border-radius: 8px;
-
     font-size: 16px;
     font-family: Arial, Helvetica, sans-serif;
 }
@@ -120,38 +118,32 @@ textarea {
     resize: vertical;
 }
 
-/* ==============================
+/* ==========================================
    FOTOS
-============================== */
+========================================== */
 
 .acoes-fotos {
-
     display: grid;
-
-    grid-template-columns:
-        1fr 1fr;
-
+    grid-template-columns: 1fr 1fr;
     gap: 10px;
-
     margin-top: 10px;
 }
 
 .botao-camera,
 .botao-galeria {
-
     display: flex;
-
     align-items: center;
     justify-content: center;
 
     min-height: 48px;
-
     padding: 12px;
 
     border-radius: 8px;
 
+    font-size: 14px;
     font-weight: bold;
 
+    text-align: center;
     cursor: pointer;
 }
 
@@ -161,11 +153,8 @@ textarea {
 }
 
 .botao-galeria {
-
     background: #e6eef8;
-
     color: #17365d;
-
     border: 1px solid #c5d5e8;
 }
 
@@ -174,30 +163,23 @@ textarea {
     display: none;
 }
 
-/* ==============================
+/* ==========================================
    GALERIA
-============================== */
+========================================== */
 
 .galeria {
-
     display: grid;
-
-    grid-template-columns:
-        repeat(2,1fr);
-
+    grid-template-columns: repeat(2, 1fr);
     gap: 10px;
-
     margin-top: 12px;
 }
 
 .foto {
-
     position: relative;
 
     background: white;
 
     border: 1px solid #d8e0ea;
-
     border-radius: 9px;
 
     overflow: hidden;
@@ -206,29 +188,24 @@ textarea {
 }
 
 .foto img {
-
+    display: block;
     width: 100%;
-
     aspect-ratio: 1;
-
     object-fit: cover;
 }
 
 .legenda {
-
     width: calc(100% - 12px);
-
     margin: 7px 6px 0;
-
     padding: 8px;
 
     border: 1px solid #c7d0db;
-
     border-radius: 7px;
+
+    font-size: 13px;
 }
 
 .remover {
-
     position: absolute;
 
     right: 5px;
@@ -237,12 +214,12 @@ textarea {
     width: 34px;
     height: 34px;
 
-    border: none;
+    padding: 0;
 
+    border: none;
     border-radius: 50%;
 
     background: #b42318;
-
     color: white;
 
     font-size: 20px;
@@ -252,38 +229,38 @@ textarea {
 
 .nota,
 .contador {
-
     margin-top: 8px;
-
     color: #667085;
-
     font-size: 12px;
+    line-height: 1.4;
 }
 
-/* ==============================
+/* ==========================================
    BOTÕES
-============================== */
+========================================== */
 
 .acoes {
-
     display: flex;
-
     flex-wrap: wrap;
-
     gap: 8px;
 }
 
 button {
-
     border: none;
-
     border-radius: 8px;
 
     padding: 12px 15px;
 
+    font-size: 14px;
     font-weight: bold;
 
     cursor: pointer;
+}
+
+#instalar {
+    display: none;
+    background: #7a4e00;
+    color: white;
 }
 
 #salvar {
@@ -306,51 +283,44 @@ button {
     color: #b42318;
 }
 
-/* ==============================
+/* ==========================================
    RELATÓRIOS SALVOS
-============================== */
+========================================== */
 
 #painelRelatorios {
     display: none;
 }
 
 .relatorio-item {
-
     border: 1px solid #d8e0ea;
-
     border-radius: 10px;
 
     padding: 12px;
-
     margin-top: 10px;
 }
 
 .relatorio-item strong {
-
     display: block;
-
     color: #17365d;
-
     font-size: 16px;
 }
 
 .relatorio-info {
-
     font-size: 13px;
-
     color: #667085;
-
     margin-top: 4px;
 }
 
+.relatorio-fotos {
+    margin-top: 5px;
+    font-size: 12px;
+    color: #667085;
+}
+
 .relatorio-botoes {
-
     display: flex;
-
     flex-wrap: wrap;
-
     gap: 6px;
-
     margin-top: 10px;
 }
 
@@ -369,34 +339,37 @@ button {
     color: #b42318;
 }
 
-/* ==============================
+/* ==========================================
    RODAPÉ
-============================== */
+========================================== */
 
 .rodape {
-
     text-align: center;
-
     color: #667085;
-
     font-size: 12px;
-
-    padding: 25px;
+    padding: 25px 10px 35px;
 }
 
-@media(min-width:650px) {
+.rodape strong {
+    color: #17365d;
+}
+
+/* ==========================================
+   RESPONSIVO
+========================================== */
+
+@media (min-width: 650px) {
 
     .galeria {
-        grid-template-columns:
-            repeat(3,1fr);
+        grid-template-columns: repeat(3, 1fr);
     }
 
 }
 
-@media(max-width:400px) {
+@media (max-width: 400px) {
 
     .acoes-fotos {
-        grid-template-columns:1fr;
+        grid-template-columns: 1fr;
     }
 
 }
@@ -405,10 +378,13 @@ button {
 
 </head>
 
-
 <body>
 
 <main class="container">
+
+<!-- ==========================================
+     CABEÇALHO
+=========================================== -->
 
 <section class="cabecalho">
 
@@ -425,7 +401,7 @@ Aplicativo pronto.
 </div>
 
 <div class="versao">
-Versão 6.0
+Versão 6.1
 </div>
 
 </section>
@@ -433,67 +409,80 @@ Versão 6.0
 
 <form id="formulario">
 
+<!-- ==========================================
+     INFORMAÇÕES
+=========================================== -->
+
 <section class="card">
 
-<h2>Informações</h2>
+<h2>
+Informações
+</h2>
 
-<label class="campo">
+
+<label class="campo" for="nome">
 1. Insira seu nome *
 </label>
 
-<input id="nome"
-       type="text"
-       required>
+<input
+id="nome"
+type="text"
+required>
 
 
-<label class="campo">
+<label class="campo" for="area">
 2. Insira a área de realização da atividade *
 </label>
 
-<input id="area"
-       type="text"
-       required>
+<input
+id="area"
+type="text"
+required>
 
 
-<label class="campo">
+<label class="campo" for="atividade">
 3. Insira a atividade realizada *
 </label>
 
-<input id="atividade"
-       type="text"
-       required>
+<input
+id="atividade"
+type="text"
+required>
 
 
-<label class="campo">
+<label class="campo" for="contato">
 4. Insira nº de contato
 </label>
 
-<input id="contato"
-       type="tel">
+<input
+id="contato"
+type="tel">
 
 
-<label class="campo">
+<label class="campo" for="empresa">
 5. Empresa *
 </label>
 
-<input id="empresa"
-       type="text"
-       required>
+<input
+id="empresa"
+type="text"
+required>
 
 
-<label class="campo">
+<label class="campo" for="descricao">
 8. Descrição da Atividade *
 </label>
 
-<textarea id="descricao"
-          required></textarea>
+<textarea
+id="descricao"
+required></textarea>
 
 </section>
 
 
-<!-- ==========================
-     ANTES
-=========================== -->
+<!-- ==========================================
+     FOTOS ANTES
+=========================================== -->
 
 <section class="card">
 
@@ -530,21 +519,27 @@ multiple>
 
 </div>
 
-<div id="contadorAntes"
-     class="contador">
+<div class="nota">
+Você pode tirar novas fotos ou selecionar várias imagens existentes.
+</div>
+
+<div
+id="contadorAntes"
+class="contador">
 0 fotos
 </div>
 
-<div id="galeriaAntes"
-     class="galeria">
+<div
+id="galeriaAntes"
+class="galeria">
 </div>
 
 </section>
 
 
-<!-- ==========================
-     DEPOIS
-=========================== -->
+<!-- ==========================================
+     FOTOS DEPOIS
+=========================================== -->
 
 <section class="card">
 
@@ -581,25 +576,45 @@ multiple>
 
 </div>
 
-<div id="contadorDepois"
-     class="contador">
+<div class="nota">
+Você pode tirar novas fotos ou selecionar várias imagens existentes.
+</div>
+
+<div
+id="contadorDepois"
+class="contador">
 0 fotos
 </div>
 
-<div id="galeriaDepois"
-     class="galeria">
+<div
+id="galeriaDepois"
+class="galeria">
 </div>
 
 </section>
 
 
-<!-- ==========================
+<!-- ==========================================
      AÇÕES
-=========================== -->
+=========================================== -->
 
 <section class="card">
 
+<h2>
+Ações
+</h2>
+
 <div class="acoes">
+
+
+<button
+id="instalar"
+type="button">
+
+📲 Instalar aplicativo
+
+</button>
+
 
 <button
 id="salvar"
@@ -636,6 +651,14 @@ type="button">
 
 </button>
 
+
+</div>
+
+<div class="nota">
+
+Os relatórios salvos ficam armazenados neste dispositivo
+e podem ser acessados mesmo sem internet.
+
 </div>
 
 </section>
@@ -643,9 +666,9 @@ type="button">
 </form>
 
 
-<!-- ==========================
+<!-- ==========================================
      RELATÓRIOS SALVOS
-=========================== -->
+=========================================== -->
 
 <section
 id="painelRelatorios"
@@ -668,7 +691,7 @@ Relatório de Realização de Atividade
 <br>
 
 <strong>
-Versão 6.0
+Versão 6.1
 </strong>
 
 </div>
@@ -682,6 +705,79 @@ Versão 6.0
 
 
 /* =========================================================
+   FUNÇÃO AUXILIAR
+========================================================= */
+
+function el(id) {
+
+    return document.getElementById(id);
+
+}
+
+
+/* =========================================================
+   ELEMENTOS
+========================================================= */
+
+const formulario =
+    el("formulario");
+
+const statusApp =
+    el("status");
+
+const nome =
+    el("nome");
+
+const area =
+    el("area");
+
+const atividade =
+    el("atividade");
+
+const contato =
+    el("contato");
+
+const empresa =
+    el("empresa");
+
+const descricao =
+    el("descricao");
+
+const cameraAntes =
+    el("cameraAntes");
+
+const galeriaAntesInput =
+    el("galeriaAntesInput");
+
+const cameraDepois =
+    el("cameraDepois");
+
+const galeriaDepoisInput =
+    el("galeriaDepoisInput");
+
+const btnInstalar =
+    el("instalar");
+
+const btnSalvar =
+    el("salvar");
+
+const btnRelatorios =
+    el("relatorios");
+
+const btnPdf =
+    el("pdf");
+
+const btnLimpar =
+    el("limpar");
+
+const painelRelatorios =
+    el("painelRelatorios");
+
+const listaRelatorios =
+    el("listaRelatorios");
+
+
+/* =========================================================
    SERVICE WORKER
 ========================================================= */
 
@@ -689,7 +785,7 @@ if ("serviceWorker" in navigator) {
 
     window.addEventListener(
         "load",
-        async () => {
+        async function () {
 
             try {
 
@@ -697,15 +793,20 @@ if ("serviceWorker" in navigator) {
                     await navigator.serviceWorker.register(
                         "./service-worker.js",
                         {
-                            updateViaCache:
-                                "none"
+                            updateViaCache: "none"
                         }
                     );
 
+
                 await registro.update();
 
+
+                console.log(
+                    "Service Worker registrado."
+                );
+
             }
-            catch(erro) {
+            catch (erro) {
 
                 console.error(
                     "Erro Service Worker:",
@@ -721,7 +822,122 @@ if ("serviceWorker" in navigator) {
 
 
 /* =========================================================
-   BANCO INDEXEDDB
+   ATUALIZAÇÃO DO SERVICE WORKER
+========================================================= */
+
+let recarregando =
+    false;
+
+
+if ("serviceWorker" in navigator) {
+
+    navigator.serviceWorker.addEventListener(
+        "controllerchange",
+        function () {
+
+            if (recarregando) {
+                return;
+            }
+
+
+            recarregando =
+                true;
+
+
+            window.location.reload();
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   INSTALAÇÃO DO APLICATIVO
+========================================================= */
+
+let eventoInstalacao =
+    null;
+
+
+window.addEventListener(
+    "beforeinstallprompt",
+    function (evento) {
+
+        evento.preventDefault();
+
+
+        eventoInstalacao =
+            evento;
+
+
+        btnInstalar.style.display =
+            "inline-block";
+
+    }
+);
+
+
+btnInstalar.addEventListener(
+    "click",
+    async function () {
+
+        if (!eventoInstalacao) {
+
+            alert(
+                "Se o aplicativo já estiver instalado, não é necessário instalá-lo novamente. Caso contrário, abra o menu do navegador e escolha 'Instalar aplicativo' ou 'Adicionar à tela inicial'."
+            );
+
+            return;
+
+        }
+
+
+        eventoInstalacao.prompt();
+
+
+        const resultado =
+            await eventoInstalacao.userChoice;
+
+
+        console.log(
+            "Resultado da instalação:",
+            resultado.outcome
+        );
+
+
+        eventoInstalacao =
+            null;
+
+
+        btnInstalar.style.display =
+            "none";
+
+    }
+);
+
+
+window.addEventListener(
+    "appinstalled",
+    function () {
+
+        eventoInstalacao =
+            null;
+
+
+        btnInstalar.style.display =
+            "none";
+
+
+        statusApp.textContent =
+            "Aplicativo instalado.";
+
+    }
+);
+
+
+/* =========================================================
+   INDEXEDDB
 ========================================================= */
 
 const DB_NAME =
@@ -737,7 +953,7 @@ const STORE_NAME =
 function abrirBanco() {
 
     return new Promise(
-        (resolve,reject) => {
+        function (resolve, reject) {
 
             const request =
                 indexedDB.open(
@@ -747,7 +963,7 @@ function abrirBanco() {
 
 
             request.onupgradeneeded =
-                event => {
+                function (event) {
 
                     const db =
                         event.target.result;
@@ -763,7 +979,7 @@ function abrirBanco() {
                             db.createObjectStore(
                                 STORE_NAME,
                                 {
-                                    keyPath:"id"
+                                    keyPath: "id"
                                 }
                             );
 
@@ -772,7 +988,7 @@ function abrirBanco() {
                             "data",
                             "data",
                             {
-                                unique:false
+                                unique: false
                             }
                         );
 
@@ -782,17 +998,23 @@ function abrirBanco() {
 
 
             request.onsuccess =
-                () =>
+                function () {
+
                     resolve(
                         request.result
                     );
 
+                };
+
 
             request.onerror =
-                () =>
+                function () {
+
                     reject(
                         request.error
                     );
+
+                };
 
         }
     );
@@ -804,27 +1026,31 @@ function abrirBanco() {
    VARIÁVEIS
 ========================================================= */
 
-let fotosAntes = [];
+let fotosAntes =
+    [];
 
-let fotosDepois = [];
+let fotosDepois =
+    [];
 
-let relatorioAbertoId = null;
+let relatorioAbertoId =
+    null;
 
 
 /* =========================================================
-   ID
+   GERAR ID
 ========================================================= */
 
 function gerarId() {
 
     if (
-        crypto &&
+        window.crypto &&
         crypto.randomUUID
     ) {
 
         return crypto.randomUUID();
 
     }
+
 
     return (
         Date.now()
@@ -838,14 +1064,14 @@ function gerarId() {
 
 
 /* =========================================================
-   ADICIONAR FOTO
+   ADICIONAR FOTOS
 ========================================================= */
 
 function adicionarFotos(
     input,
     lista,
-    galeria,
-    contador
+    galeriaId,
+    contadorId
 ) {
 
     const arquivos =
@@ -855,9 +1081,10 @@ function adicionarFotos(
 
 
     arquivos.forEach(
-        arquivo => {
+        function (arquivo) {
 
             if (
+                arquivo.type &&
                 arquivo.type.startsWith(
                     "image/"
                 )
@@ -882,20 +1109,21 @@ function adicionarFotos(
     );
 
 
-    input.value = "";
+    input.value =
+        "";
 
 
     renderizarGaleria(
         lista,
-        galeria,
-        contador
+        galeriaId,
+        contadorId
     );
 
 }
 
 
 /* =========================================================
-   GALERIA
+   RENDERIZAR GALERIA
 ========================================================= */
 
 function renderizarGaleria(
@@ -905,16 +1133,15 @@ function renderizarGaleria(
 ) {
 
     const galeria =
-        document.getElementById(
-            galeriaId
-        );
+        el(galeriaId);
 
 
-    galeria.innerHTML = "";
+    galeria.innerHTML =
+        "";
 
 
     lista.forEach(
-        (foto,index) => {
+        function (foto, index) {
 
             const bloco =
                 document.createElement(
@@ -925,6 +1152,8 @@ function renderizarGaleria(
             bloco.className =
                 "foto";
 
+
+            /* IMAGEM */
 
             const img =
                 document.createElement(
@@ -938,20 +1167,36 @@ function renderizarGaleria(
                 );
 
 
-            img.src = url;
+            img.src =
+                url;
+
+
+            img.alt =
+                "Foto "
+                +
+                (index + 1);
 
 
             img.onload =
-                () =>
+                function () {
+
                     URL.revokeObjectURL(
                         url
                     );
 
+                };
+
+
+            /* LEGENDA */
 
             const legenda =
                 document.createElement(
                     "input"
                 );
+
+
+            legenda.type =
+                "text";
 
 
             legenda.className =
@@ -966,14 +1211,18 @@ function renderizarGaleria(
                 foto.legenda || "";
 
 
-            legenda.oninput =
-                () => {
+            legenda.addEventListener(
+                "input",
+                function () {
 
                     foto.legenda =
                         legenda.value;
 
-                };
+                }
+            );
 
+
+            /* REMOVER */
 
             const remover =
                 document.createElement(
@@ -989,12 +1238,17 @@ function renderizarGaleria(
                 "remover";
 
 
-            remover.innerText =
+            remover.textContent =
                 "×";
 
 
-            remover.onclick =
-                () => {
+            remover.title =
+                "Remover foto";
+
+
+            remover.addEventListener(
+                "click",
+                function () {
 
                     lista.splice(
                         index,
@@ -1008,7 +1262,8 @@ function renderizarGaleria(
                         contadorId
                     );
 
-                };
+                }
+            );
 
 
             bloco.appendChild(
@@ -1034,12 +1289,12 @@ function renderizarGaleria(
     );
 
 
-    document.getElementById(
-        contadorId
-    ).innerText =
+    el(contadorId).textContent =
 
         lista.length
+
         +
+
         (
             lista.length === 1
             ?
@@ -1055,8 +1310,9 @@ function renderizarGaleria(
    EVENTOS DAS FOTOS
 ========================================================= */
 
-cameraAntes.onchange =
-    function() {
+cameraAntes.addEventListener(
+    "change",
+    function () {
 
         adicionarFotos(
             this,
@@ -1065,11 +1321,13 @@ cameraAntes.onchange =
             "contadorAntes"
         );
 
-    };
+    }
+);
 
 
-galeriaAntesInput.onchange =
-    function() {
+galeriaAntesInput.addEventListener(
+    "change",
+    function () {
 
         adicionarFotos(
             this,
@@ -1078,24 +1336,13 @@ galeriaAntesInput.onchange =
             "contadorAntes"
         );
 
-    };
+    }
+);
 
 
-cameraDepois.onchange =
-    function() {
-
-        adicionarFotos(
-            this,
-            fotosDepois,
-            "galeriaDepois",
-            "contadorDepois"
-        );
-
-    };
-
-
-galeriaDepoisInput.onchange =
-    function() {
+cameraDepois.addEventListener(
+    "change",
+    function () {
 
         adicionarFotos(
             this,
@@ -1104,11 +1351,27 @@ galeriaDepoisInput.onchange =
             "contadorDepois"
         );
 
-    };
+    }
+);
+
+
+galeriaDepoisInput.addEventListener(
+    "change",
+    function () {
+
+        adicionarFotos(
+            this,
+            fotosDepois,
+            "galeriaDepois",
+            "contadorDepois"
+        );
+
+    }
+);
 
 
 /* =========================================================
-   DADOS
+   OBTER DADOS
 ========================================================= */
 
 function obterDados() {
@@ -1142,21 +1405,140 @@ function obterDados() {
    SALVAR RELATÓRIO
 ========================================================= */
 
-salvar.onclick =
-async function() {
+btnSalvar.addEventListener(
+    "click",
+    async function () {
 
-    if (
-        !formulario.reportValidity()
-    ) {
+        if (
+            !formulario.reportValidity()
+        ) {
 
-        return;
+            return;
+
+        }
+
+
+        statusApp.textContent =
+            "Salvando relatório...";
+
+
+        try {
+
+            const db =
+                await abrirBanco();
+
+
+            const transaction =
+                db.transaction(
+                    STORE_NAME,
+                    "readwrite"
+                );
+
+
+            const store =
+                transaction.objectStore(
+                    STORE_NAME
+                );
+
+
+            const agora =
+                new Date();
+
+
+            const relatorio = {
+
+                id:
+                    relatorioAbertoId
+                    ||
+                    gerarId(),
+
+                data:
+                    agora.toISOString(),
+
+                dados:
+                    obterDados(),
+
+                fotosAntes:
+                    fotosAntes,
+
+                fotosDepois:
+                    fotosDepois
+
+            };
+
+
+            store.put(
+                relatorio
+            );
+
+
+            await new Promise(
+                function (resolve, reject) {
+
+                    transaction.oncomplete =
+                        resolve;
+
+
+                    transaction.onerror =
+                        function () {
+
+                            reject(
+                                transaction.error
+                            );
+
+                        };
+
+
+                    transaction.onabort =
+                        function () {
+
+                            reject(
+                                transaction.error
+                            );
+
+                        };
+
+                }
+            );
+
+
+            relatorioAbertoId =
+                relatorio.id;
+
+
+            statusApp.textContent =
+                "✓ Relatório salvo neste dispositivo.";
+
+
+            await listarRelatorios();
+
+        }
+        catch (erro) {
+
+            console.error(
+                erro
+            );
+
+
+            statusApp.textContent =
+                "Erro ao salvar relatório.";
+
+
+            alert(
+                "Não foi possível salvar o relatório. Verifique o espaço disponível no dispositivo."
+            );
+
+        }
 
     }
+);
 
 
-    status.innerText =
-        "Salvando relatório...";
+/* =========================================================
+   LISTAR RELATÓRIOS
+========================================================= */
 
+async function listarRelatorios() {
 
     try {
 
@@ -1167,7 +1549,7 @@ async function() {
         const transaction =
             db.transaction(
                 STORE_NAME,
-                "readwrite"
+                "readonly"
             );
 
 
@@ -1177,303 +1559,334 @@ async function() {
             );
 
 
-        const agora =
-            new Date();
+        const request =
+            store.getAll();
 
 
-        const relatorio = {
+        request.onsuccess =
+            function () {
 
-            id:
-                relatorioAbertoId
-                ||
-                gerarId(),
+                const registros =
+                    request.result.sort(
+                        function (a, b) {
 
-            data:
-                agora.toISOString(),
+                            return (
+                                new Date(b.data)
+                                -
+                                new Date(a.data)
+                            );
 
-            dados:
-                obterDados(),
-
-            fotosAntes:
-                fotosAntes,
-
-            fotosDepois:
-                fotosDepois
-
-        };
+                        }
+                    );
 
 
-        store.put(
-            relatorio
-        );
+                listaRelatorios.innerHTML =
+                    "";
 
 
-        await new Promise(
-            (resolve,reject) => {
+                if (
+                    registros.length === 0
+                ) {
 
-                transaction.oncomplete =
-                    resolve;
+                    listaRelatorios.innerHTML =
+                        "<p>Nenhum relatório salvo neste dispositivo.</p>";
 
-                transaction.onerror =
-                    () =>
-                        reject(
-                            transaction.error
+
+                    return;
+
+                }
+
+
+                registros.forEach(
+                    function (relatorio) {
+
+                        const item =
+                            document.createElement(
+                                "div"
+                            );
+
+
+                        item.className =
+                            "relatorio-item";
+
+
+                        /* TÍTULO */
+
+                        const titulo =
+                            document.createElement(
+                                "strong"
+                            );
+
+
+                        titulo.textContent =
+                            relatorio.dados.atividade
+                            ||
+                            "Relatório";
+
+
+                        /* INFORMAÇÕES */
+
+                        const info =
+                            document.createElement(
+                                "div"
+                            );
+
+
+                        info.className =
+                            "relatorio-info";
+
+
+                        const dataFormatada =
+                            new Date(
+                                relatorio.data
+                            )
+                            .toLocaleString(
+                                "pt-BR"
+                            );
+
+
+                        info.textContent =
+
+                            dataFormatada
+
+                            +
+
+                            (
+                                relatorio.dados.empresa
+
+                                ?
+
+                                " • "
+                                +
+                                relatorio.dados.empresa
+
+                                :
+
+                                ""
+                            );
+
+
+                        /* CONTAGEM DE FOTOS */
+
+                        const infoFotos =
+                            document.createElement(
+                                "div"
+                            );
+
+
+                        infoFotos.className =
+                            "relatorio-fotos";
+
+
+                        const qtdAntes =
+                            (
+                                relatorio.fotosAntes
+                                ||
+                                []
+                            ).length;
+
+
+                        const qtdDepois =
+                            (
+                                relatorio.fotosDepois
+                                ||
+                                []
+                            ).length;
+
+
+                        infoFotos.textContent =
+
+                            "Antes: "
+                            +
+                            qtdAntes
+                            +
+                            " foto(s)"
+
+                            +
+
+                            " • Depois: "
+                            +
+                            qtdDepois
+                            +
+                            " foto(s)";
+
+
+                        /* BOTÕES */
+
+                        const botoes =
+                            document.createElement(
+                                "div"
+                            );
+
+
+                        botoes.className =
+                            "relatorio-botoes";
+
+
+                        /* ABRIR */
+
+                        const abrir =
+                            document.createElement(
+                                "button"
+                            );
+
+
+                        abrir.type =
+                            "button";
+
+
+                        abrir.className =
+                            "btn-abrir";
+
+
+                        abrir.textContent =
+                            "✏️ Abrir";
+
+
+                        abrir.addEventListener(
+                            "click",
+                            function () {
+
+                                abrirRelatorio(
+                                    relatorio.id
+                                );
+
+                            }
                         );
 
-            }
-        );
+
+                        /* PDF */
+
+                        const pdfItem =
+                            document.createElement(
+                                "button"
+                            );
 
 
-        relatorioAbertoId =
-            relatorio.id;
+                        pdfItem.type =
+                            "button";
 
 
-        status.innerText =
-            "Relatório salvo neste dispositivo.";
+                        pdfItem.className =
+                            "btn-pdf";
 
 
-        await listarRelatorios();
+                        pdfItem.textContent =
+                            "📄 PDF";
+
+
+                        pdfItem.addEventListener(
+                            "click",
+                            async function () {
+
+                                await abrirRelatorio(
+                                    relatorio.id
+                                );
+
+
+                                await gerarPDF();
+
+                            }
+                        );
+
+
+                        /* EXCLUIR */
+
+                        const excluir =
+                            document.createElement(
+                                "button"
+                            );
+
+
+                        excluir.type =
+                            "button";
+
+
+                        excluir.className =
+                            "btn-excluir";
+
+
+                        excluir.textContent =
+                            "🗑️ Excluir";
+
+
+                        excluir.addEventListener(
+                            "click",
+                            function () {
+
+                                excluirRelatorio(
+                                    relatorio.id
+                                );
+
+                            }
+                        );
+
+
+                        botoes.appendChild(
+                            abrir
+                        );
+
+
+                        botoes.appendChild(
+                            pdfItem
+                        );
+
+
+                        botoes.appendChild(
+                            excluir
+                        );
+
+
+                        item.appendChild(
+                            titulo
+                        );
+
+
+                        item.appendChild(
+                            info
+                        );
+
+
+                        item.appendChild(
+                            infoFotos
+                        );
+
+
+                        item.appendChild(
+                            botoes
+                        );
+
+
+                        listaRelatorios.appendChild(
+                            item
+                        );
+
+                    }
+                );
+
+            };
+
+
+            request.onerror =
+                function () {
+
+                    listaRelatorios.innerHTML =
+                        "<p>Erro ao carregar relatórios.</p>";
+
+                };
 
     }
-    catch(erro) {
+    catch (erro) {
 
         console.error(
             erro
         );
 
 
-        status.innerText =
-            "Erro ao salvar relatório.";
-
-
-        alert(
-            "Não foi possível salvar o relatório."
-        );
+        listaRelatorios.innerHTML =
+            "<p>Erro ao acessar o armazenamento local.</p>";
 
     }
-
-};
-
-
-/* =========================================================
-   LISTAR RELATÓRIOS
-========================================================= */
-
-async function listarRelatorios() {
-
-    const db =
-        await abrirBanco();
-
-
-    const transaction =
-        db.transaction(
-            STORE_NAME,
-            "readonly"
-        );
-
-
-    const store =
-        transaction.objectStore(
-            STORE_NAME
-        );
-
-
-    const request =
-        store.getAll();
-
-
-    request.onsuccess =
-        () => {
-
-            const registros =
-                request.result
-                .sort(
-                    (a,b) =>
-                        new Date(b.data)
-                        -
-                        new Date(a.data)
-                );
-
-
-            listaRelatorios.innerHTML =
-                "";
-
-
-            if (
-                registros.length === 0
-            ) {
-
-                listaRelatorios.innerHTML =
-                    "<p>Nenhum relatório salvo.</p>";
-
-                return;
-
-            }
-
-
-            registros.forEach(
-                relatorio => {
-
-                    const item =
-                        document.createElement(
-                            "div"
-                        );
-
-
-                    item.className =
-                        "relatorio-item";
-
-
-                    const titulo =
-                        document.createElement(
-                            "strong"
-                        );
-
-
-                    titulo.innerText =
-                        relatorio.dados.atividade
-                        ||
-                        "Relatório";
-
-
-                    const info =
-                        document.createElement(
-                            "div"
-                        );
-
-
-                    info.className =
-                        "relatorio-info";
-
-
-                    info.innerText =
-
-                        new Date(
-                            relatorio.data
-                        )
-                        .toLocaleString(
-                            "pt-BR"
-                        )
-
-                        +
-
-                        " • "
-
-                        +
-
-                        (
-                            relatorio.dados.empresa
-                            ||
-                            ""
-                        );
-
-
-                    const botoes =
-                        document.createElement(
-                            "div"
-                        );
-
-
-                    botoes.className =
-                        "relatorio-botoes";
-
-
-                    /* ABRIR */
-
-                    const abrir =
-                        document.createElement(
-                            "button"
-                        );
-
-
-                    abrir.innerText =
-                        "✏️ Abrir";
-
-
-                    abrir.className =
-                        "btn-abrir";
-
-
-                    abrir.onclick =
-                        () =>
-                            abrirRelatorio(
-                                relatorio.id
-                            );
-
-
-                    /* PDF */
-
-                    const pdfBtn =
-                        document.createElement(
-                            "button"
-                        );
-
-
-                    pdfBtn.innerText =
-                        "📄 PDF";
-
-
-                    pdfBtn.className =
-                        "btn-pdf";
-
-
-                    pdfBtn.onclick =
-                        async () => {
-
-                            await abrirRelatorio(
-                                relatorio.id
-                            );
-
-                            await gerarPDF();
-
-                        };
-
-
-                    /* EXCLUIR */
-
-                    const excluir =
-                        document.createElement(
-                            "button"
-                        );
-
-
-                    excluir.innerText =
-                        "🗑️ Excluir";
-
-
-                    excluir.className =
-                        "btn-excluir";
-
-
-                    excluir.onclick =
-                        () =>
-                            excluirRelatorio(
-                                relatorio.id
-                            );
-
-
-                    botoes.append(
-                        abrir,
-                        pdfBtn,
-                        excluir
-                    );
-
-
-                    item.append(
-                        titulo,
-                        info,
-                        botoes
-                    );
-
-
-                    listaRelatorios.appendChild(
-                        item
-                    );
-
-                }
-            );
-
-        };
 
 }
 
@@ -1508,10 +1921,10 @@ async function abrirRelatorio(id) {
 
 
     return new Promise(
-        (resolve,reject) => {
+        function (resolve, reject) {
 
             request.onsuccess =
-                () => {
+                function () {
 
                     const relatorio =
                         request.result;
@@ -1524,6 +1937,7 @@ async function abrirRelatorio(id) {
                                 "Relatório não encontrado."
                             )
                         );
+
 
                         return;
 
@@ -1580,13 +1994,17 @@ async function abrirRelatorio(id) {
                     );
 
 
-                    status.innerText =
-                        "Relatório carregado.";
+                    painelRelatorios.style.display =
+                        "none";
+
+
+                    statusApp.textContent =
+                        "Relatório carregado para edição.";
 
 
                     window.scrollTo({
-                        top:0,
-                        behavior:"smooth"
+                        top: 0,
+                        behavior: "smooth"
                     });
 
 
@@ -1598,10 +2016,13 @@ async function abrirRelatorio(id) {
 
 
             request.onerror =
-                () =>
+                function () {
+
                     reject(
                         request.error
                     );
+
+                };
 
         }
     );
@@ -1610,14 +2031,14 @@ async function abrirRelatorio(id) {
 
 
 /* =========================================================
-   EXCLUIR
+   EXCLUIR RELATÓRIO
 ========================================================= */
 
 async function excluirRelatorio(id) {
 
     if (
         !confirm(
-            "Deseja excluir este relatório?"
+            "Deseja excluir permanentemente este relatório do dispositivo?"
         )
     ) {
 
@@ -1626,99 +2047,125 @@ async function excluirRelatorio(id) {
     }
 
 
-    const db =
-        await abrirBanco();
+    try {
+
+        const db =
+            await abrirBanco();
 
 
-    const transaction =
-        db.transaction(
-            STORE_NAME,
-            "readwrite"
+        const transaction =
+            db.transaction(
+                STORE_NAME,
+                "readwrite"
+            );
+
+
+        transaction
+            .objectStore(
+                STORE_NAME
+            )
+            .delete(
+                id
+            );
+
+
+        transaction.oncomplete =
+            async function () {
+
+                if (
+                    relatorioAbertoId === id
+                ) {
+
+                    relatorioAbertoId =
+                        null;
+
+                }
+
+
+                statusApp.textContent =
+                    "Relatório excluído.";
+
+
+                await listarRelatorios();
+
+            };
+
+    }
+    catch (erro) {
+
+        console.error(
+            erro
         );
 
 
-    transaction
-        .objectStore(
-            STORE_NAME
-        )
-        .delete(
-            id
+        alert(
+            "Não foi possível excluir o relatório."
         );
 
-
-    transaction.oncomplete =
-        () => {
-
-            if (
-                relatorioAbertoId === id
-            ) {
-
-                relatorioAbertoId =
-                    null;
-
-            }
-
-
-            listarRelatorios();
-
-        };
+    }
 
 }
 
 
 /* =========================================================
-   PAINEL RELATÓRIOS
+   PAINEL DE RELATÓRIOS
 ========================================================= */
 
-relatorios.onclick =
-async function() {
+btnRelatorios.addEventListener(
+    "click",
+    async function () {
 
-    if (
-        painelRelatorios.style.display
-        ===
-        "block"
-    ) {
+        if (
+            painelRelatorios.style.display ===
+            "block"
+        ) {
+
+            painelRelatorios.style.display =
+                "none";
+
+
+            return;
+
+        }
+
 
         painelRelatorios.style.display =
-            "none";
+            "block";
 
-        return;
+
+        await listarRelatorios();
+
+
+        painelRelatorios.scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+        });
 
     }
-
-
-    painelRelatorios.style.display =
-        "block";
-
-
-    await listarRelatorios();
-
-
-    painelRelatorios.scrollIntoView({
-        behavior:"smooth"
-    });
-
-};
+);
 
 
 /* =========================================================
-   BASE64
+   BLOB PARA BASE64
 ========================================================= */
 
 function blobParaBase64(blob) {
 
     return new Promise(
-        (resolve,reject) => {
+        function (resolve, reject) {
 
             const reader =
                 new FileReader();
 
 
             reader.onload =
-                () =>
+                function () {
+
                     resolve(
                         reader.result
                     );
+
+                };
 
 
             reader.onerror =
@@ -1757,7 +2204,7 @@ function escapar(texto) {
 
 
 /* =========================================================
-   FOTOS RELATÓRIO
+   MONTAR FOTOS
 ========================================================= */
 
 async function montarFotos(
@@ -1770,16 +2217,29 @@ async function montarFotos(
     ) {
 
         return `
-            <h2>${titulo}</h2>
-            <p>Nenhuma foto registrada.</p>
+
+        <h2>
+        ${titulo}
+        </h2>
+
+        <p>
+        Nenhuma foto registrada.
+        </p>
+
         `;
 
     }
 
 
-    let html =
-        `<h2>${titulo}</h2>
-         <div class="photos">`;
+    let html = `
+
+    <h2>
+    ${titulo}
+    </h2>
+
+    <div class="photos">
+
+    `;
 
 
     for (
@@ -1798,25 +2258,27 @@ async function montarFotos(
             );
 
 
+        const legenda =
+            foto.legenda
+            ||
+            (
+                "Foto "
+                +
+                (i + 1)
+            );
+
+
         html += `
 
         <figure>
 
-        <img src="${src}">
+            <img
+            src="${src}"
+            alt="Foto ${i + 1}">
 
-        <figcaption>
-
-        ${
-            escapar(
-                foto.legenda
-                ||
-                "Foto "
-                +
-                (i+1)
-            )
-        }
-
-        </figcaption>
+            <figcaption>
+            ${escapar(legenda)}
+            </figcaption>
 
         </figure>
 
@@ -1835,7 +2297,7 @@ async function montarFotos(
 
 
 /* =========================================================
-   GERAR PDF / RELATÓRIO
+   GERAR PDF
 ========================================================= */
 
 async function gerarPDF() {
@@ -1849,173 +2311,216 @@ async function gerarPDF() {
     }
 
 
-    status.innerText =
+    statusApp.textContent =
         "Gerando relatório...";
 
 
-    const dados =
-        obterDados();
+    try {
+
+        const dados =
+            obterDados();
 
 
-    const antes =
-        await montarFotos(
-            fotosAntes,
-            "REGISTRO FOTOGRÁFICO — ANTES"
-        );
+        const antes =
+            await montarFotos(
+                fotosAntes,
+                "REGISTRO FOTOGRÁFICO — ANTES"
+            );
 
 
-    const depois =
-        await montarFotos(
-            fotosDepois,
-            "REGISTRO FOTOGRÁFICO — DEPOIS"
-        );
+        const depois =
+            await montarFotos(
+                fotosDepois,
+                "REGISTRO FOTOGRÁFICO — DEPOIS"
+            );
 
 
-    const documento = `
+        const dataHora =
+            new Date()
+            .toLocaleString(
+                "pt-BR"
+            );
+
+
+        const documento = `
 
 <!DOCTYPE html>
 
-<html>
+<html lang="pt-BR">
 
 <head>
 
 <meta charset="UTF-8">
 
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
 <title>
-Relatório de Atividade
+Relatório de Realização de Atividade
 </title>
 
 <style>
 
 @page {
 
-size:A4 portrait;
+    size: A4 portrait;
 
-margin:
-3cm
-2cm
-2cm
-3cm;
+    margin:
+        3cm
+        2cm
+        2cm
+        3cm;
 
+}
+
+* {
+    box-sizing: border-box;
 }
 
 body {
 
-font-family:
-Arial,
-Helvetica,
-sans-serif;
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
 
-color:#20242a;
+    color: #20242a;
 
-font-size:10.5pt;
+    font-size: 10.5pt;
 
 }
 
 h1 {
 
-text-align:center;
+    margin: 0 0 15px;
 
-color:#17365d;
+    text-align: center;
 
-font-size:19pt;
+    color: #17365d;
+
+    font-size: 19pt;
 
 }
 
 h2 {
 
-color:#17365d;
+    margin-top: 20px;
 
-border-bottom:
-2px solid #17365d;
+    padding-bottom: 4px;
 
-font-size:13pt;
+    color: #17365d;
 
-margin-top:20px;
+    font-size: 13pt;
+
+    border-bottom:
+        2px solid #17365d;
 
 }
 
 table {
 
-width:100%;
+    width: 100%;
 
-border-collapse:
-collapse;
+    border-collapse: collapse;
 
 }
 
 th,
 td {
 
-border:
-1px solid #ccd5df;
+    padding: 7px;
 
-padding:7px;
+    border:
+        1px solid #ccd5df;
 
-text-align:left;
+    text-align: left;
+
+    vertical-align: top;
 
 }
 
 th {
 
-width:27%;
+    width: 27%;
 
-background:#edf3f8;
+    background:
+        #edf3f8;
 
 }
 
 .descricao {
 
-border:
-1px solid #ccd5df;
+    min-height: 55px;
 
-padding:10px;
+    padding: 10px;
 
-white-space:
-pre-wrap;
+    border:
+        1px solid #ccd5df;
+
+    white-space:
+        pre-wrap;
 
 }
 
 .photos {
 
-display:grid;
+    display: grid;
 
-grid-template-columns:
-1fr 1fr;
+    grid-template-columns:
+        1fr 1fr;
 
-gap:8mm;
+    gap: 8mm;
 
 }
 
 figure {
 
-margin:0;
+    margin: 0;
 
-padding:5px;
+    padding: 5px;
 
-border:
-1px solid #ccd5df;
+    border:
+        1px solid #ccd5df;
 
-break-inside:
-avoid;
+    text-align: center;
+
+    break-inside: avoid;
+
+    page-break-inside: avoid;
 
 }
 
 figure img {
 
-width:100%;
+    display: block;
 
-height:90mm;
+    width: 100%;
 
-object-fit:contain;
+    height: 90mm;
+
+    object-fit: contain;
 
 }
 
 figcaption {
 
-text-align:center;
+    padding-top: 5px;
 
-padding-top:5px;
+    color: #4b5563;
+
+    font-size: 9pt;
+
+}
+
+.rodape-relatorio {
+
+    margin-top: 20px;
+
+    color: #667085;
+
+    font-size: 8pt;
+
+    text-align: center;
 
 }
 
@@ -2025,6 +2530,7 @@ padding-top:5px;
 
 <body>
 
+
 <h1>
 RELATÓRIO DE REALIZAÇÃO DE ATIVIDADE
 </h1>
@@ -2033,35 +2539,80 @@ RELATÓRIO DE REALIZAÇÃO DE ATIVIDADE
 <table>
 
 <tr>
-<th>Nome</th>
-<td>${escapar(dados.nome)}</td>
-</tr>
 
-<tr>
-<th>Área</th>
-<td>${escapar(dados.area)}</td>
-</tr>
+<th>
+Nome
+</th>
 
-<tr>
-<th>Atividade</th>
-<td>${escapar(dados.atividade)}</td>
-</tr>
-
-<tr>
-<th>Contato</th>
-<td>${escapar(dados.contato)}</td>
-</tr>
-
-<tr>
-<th>Empresa</th>
-<td>${escapar(dados.empresa)}</td>
-</tr>
-
-<tr>
-<th>Data/Hora</th>
 <td>
-${new Date().toLocaleString("pt-BR")}
+${escapar(dados.nome)}
 </td>
+
+</tr>
+
+
+<tr>
+
+<th>
+Área
+</th>
+
+<td>
+${escapar(dados.area)}
+</td>
+
+</tr>
+
+
+<tr>
+
+<th>
+Atividade
+</th>
+
+<td>
+${escapar(dados.atividade)}
+</td>
+
+</tr>
+
+
+<tr>
+
+<th>
+Contato
+</th>
+
+<td>
+${escapar(dados.contato || "—")}
+</td>
+
+</tr>
+
+
+<tr>
+
+<th>
+Empresa
+</th>
+
+<td>
+${escapar(dados.empresa)}
+</td>
+
+</tr>
+
+
+<tr>
+
+<th>
+Data/Hora
+</th>
+
+<td>
+${escapar(dataHora)}
+</td>
+
 </tr>
 
 </table>
@@ -2079,26 +2630,36 @@ ${escapar(dados.descricao)}
 
 ${antes}
 
+
 ${depois}
+
+
+<div class="rodape-relatorio">
+
+Documento gerado em
+${escapar(dataHora)}
+
+</div>
 
 
 <script>
 
 window.onload =
-function() {
+function () {
 
-setTimeout(
-function() {
+    setTimeout(
+        function () {
 
-window.print();
+            window.print();
 
-},
-500
-);
+        },
+        500
+    );
 
 };
 
 <\/script>
+
 
 </body>
 
@@ -2107,106 +2668,199 @@ window.print();
 `;
 
 
-    const blob =
-        new Blob(
-            [documento],
-            {
-                type:
-                "text/html;charset=utf-8"
-            }
-        );
+        const blob =
+            new Blob(
+                [documento],
+                {
+                    type:
+                        "text/html;charset=utf-8"
+                }
+            );
 
 
-    const url =
-        URL.createObjectURL(
-            blob
-        );
+        const url =
+            URL.createObjectURL(
+                blob
+            );
 
 
-    const janela =
-        window.open(
-            url,
-            "_blank"
-        );
+        const janela =
+            window.open(
+                url,
+                "_blank"
+            );
 
 
-    if (!janela) {
+        if (!janela) {
 
-        alert(
-            "O navegador bloqueou a abertura do relatório."
+            alert(
+                "O navegador bloqueou a abertura do relatório. Permita pop-ups para este aplicativo."
+            );
+
+
+            statusApp.textContent =
+                "Não foi possível abrir o relatório.";
+
+
+            URL.revokeObjectURL(
+                url
+            );
+
+
+            return;
+
+        }
+
+
+        statusApp.textContent =
+            "Relatório aberto. Escolha Salvar como PDF.";
+
+
+        setTimeout(
+            function () {
+
+                URL.revokeObjectURL(
+                    url
+                );
+
+            },
+            60000
         );
 
     }
+    catch (erro) {
+
+        console.error(
+            erro
+        );
 
 
-    setTimeout(
-        () =>
-            URL.revokeObjectURL(
-                url
-            ),
-        60000
-    );
+        statusApp.textContent =
+            "Erro ao gerar relatório.";
 
 
-    status.innerText =
-        "Relatório gerado.";
+        alert(
+            "Não foi possível gerar o relatório."
+        );
+
+    }
 
 }
 
 
-/* BOTÃO PDF */
-
-pdf.onclick =
-    gerarPDF;
+btnPdf.addEventListener(
+    "click",
+    gerarPDF
+);
 
 
 /* =========================================================
-   LIMPAR
+   LIMPAR FORMULÁRIO
 ========================================================= */
 
-limpar.onclick =
-function() {
+btnLimpar.addEventListener(
+    "click",
+    function () {
 
-    if (
-        !confirm(
-            "Deseja limpar o formulário atual?"
-        )
-    ) {
+        if (
+            !confirm(
+                "Deseja limpar o formulário atual? Relatórios já salvos não serão apagados."
+            )
+        ) {
 
-        return;
+            return;
+
+        }
+
+
+        formulario.reset();
+
+
+        fotosAntes =
+            [];
+
+
+        fotosDepois =
+            [];
+
+
+        relatorioAbertoId =
+            null;
+
+
+        renderizarGaleria(
+            fotosAntes,
+            "galeriaAntes",
+            "contadorAntes"
+        );
+
+
+        renderizarGaleria(
+            fotosDepois,
+            "galeriaDepois",
+            "contadorDepois"
+        );
+
+
+        statusApp.textContent =
+            "Novo relatório iniciado.";
+
+
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+
+    }
+);
+
+
+/* =========================================================
+   STATUS ONLINE / OFFLINE
+========================================================= */
+
+function atualizarStatusConexao() {
+
+    if (navigator.onLine) {
+
+        console.log(
+            "Aplicativo online."
+        );
+
+    }
+    else {
+
+        statusApp.textContent =
+            "Modo offline — o aplicativo continua disponível.";
 
     }
 
-
-    formulario.reset();
-
-
-    fotosAntes = [];
-
-    fotosDepois = [];
-
-    relatorioAbertoId =
-        null;
+}
 
 
-    renderizarGaleria(
-        fotosAntes,
-        "galeriaAntes",
-        "contadorAntes"
-    );
+window.addEventListener(
+    "online",
+    function () {
+
+        statusApp.textContent =
+            "Conexão restabelecida.";
+
+    }
+);
 
 
-    renderizarGaleria(
-        fotosDepois,
-        "galeriaDepois",
-        "contadorDepois"
-    );
+window.addEventListener(
+    "offline",
+    function () {
+
+        statusApp.textContent =
+            "Modo offline — o aplicativo continua disponível.";
+
+    }
+);
 
 
-    status.innerText =
-        "Novo relatório.";
-
-};
+atualizarStatusConexao();
 
 </script>
 
