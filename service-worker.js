@@ -1,32 +1,18 @@
-"use strict";
-
-/* =========================================================
-   RELATÓRIO DE REALIZAÇÃO DE ATIVIDADE
-   SERVICE WORKER
-   VERSÃO 6.0
-========================================================= */
-
-
-/* =========================================================
-   CONFIGURAÇÃO DO CACHE
-========================================================= */
-
 const CACHE_NAME =
-    "relatorio-atividade-v6";
+    "relatorio-atividade-v6-2";
 
-
-/*
- * Arquivos necessários para o aplicativo
- * funcionar offline.
- */
 
 const ARQUIVOS_OFFLINE = [
+
+    "./",
 
     "./index.html",
 
     "./manifest.json",
 
-    "./icons/icon.png"
+    "./icons/icon.png",
+
+    "./libs/jspdf.umd.min.js"
 
 ];
 
@@ -37,55 +23,28 @@ const ARQUIVOS_OFFLINE = [
 
 self.addEventListener(
     "install",
-    function (event) {
-
-        console.log(
-            "[Service Worker V6] Instalando..."
-        );
-
+    event => {
 
         event.waitUntil(
 
             caches
-                .open(
-                    CACHE_NAME
-                )
+                .open(CACHE_NAME)
 
-                .then(
-                    function (cache) {
+                .then(cache => {
 
-                        console.log(
-                            "[Service Worker V6] Salvando arquivos offline..."
-                        );
+                    return cache.addAll(
+                        ARQUIVOS_OFFLINE
+                    );
 
+                })
 
-                        return cache.addAll(
-                            ARQUIVOS_OFFLINE
-                        );
+                .then(() => {
 
-                    }
-                )
+                    return self.skipWaiting();
 
-                .then(
-                    function () {
-
-                        console.log(
-                            "[Service Worker V6] Arquivos armazenados."
-                        );
-
-                    }
-                )
+                })
 
         );
-
-
-        /*
-         * Faz a nova versão assumir o controle
-         * sem esperar o Service Worker antigo
-         * ser encerrado.
-         */
-
-        self.skipWaiting();
 
     }
 );
@@ -97,12 +56,7 @@ self.addEventListener(
 
 self.addEventListener(
     "activate",
-    function (event) {
-
-        console.log(
-            "[Service Worker V6] Ativando..."
-        );
-
+    event => {
 
         event.waitUntil(
 
@@ -110,37 +64,20 @@ self.addEventListener(
                 .keys()
 
                 .then(
-                    function (nomesCaches) {
+                    nomesCaches => {
 
                         return Promise.all(
 
                             nomesCaches.map(
-                                function (nomeCache) {
-
-                                    /*
-                                     * Apaga caches antigos:
-                                     *
-                                     * v1
-                                     * v2
-                                     * v3
-                                     * v4
-                                     * v5
-                                     * etc.
-                                     */
+                                nome => {
 
                                     if (
-                                        nomeCache !==
+                                        nome !==
                                         CACHE_NAME
                                     ) {
 
-                                        console.log(
-                                            "[Service Worker V6] Removendo cache antigo:",
-                                            nomeCache
-                                        );
-
-
                                         return caches.delete(
-                                            nomeCache
+                                            nome
                                         );
 
                                     }
@@ -153,18 +90,11 @@ self.addEventListener(
                     }
                 )
 
-                .then(
-                    function () {
+                .then(() => {
 
-                        /*
-                         * Faz o V6 assumir imediatamente
-                         * as páginas abertas.
-                         */
+                    return self.clients.claim();
 
-                        return self.clients.claim();
-
-                    }
-                )
+                })
 
         );
 
@@ -173,17 +103,12 @@ self.addEventListener(
 
 
 /* =========================================================
-   REQUISIÇÕES
+   FETCH
 ========================================================= */
 
 self.addEventListener(
     "fetch",
-    function (event) {
-
-        /*
-         * Não interferimos em POST,
-         * PUT, DELETE etc.
-         */
+    event => {
 
         if (
             event.request.method !==
@@ -195,19 +120,15 @@ self.addEventListener(
         }
 
 
-        /* =================================================
-           NAVEGAÇÃO / INDEX.HTML
+        /*
+        HTML / NAVEGAÇÃO
 
-           ESTRATÉGIA:
+        Tenta internet primeiro para receber
+        novas versões do aplicativo.
 
-           INTERNET PRIMEIRO
-                  ↓
-           Atualiza o cache
-                  ↓
-           Sem internet?
-                  ↓
-           Abre versão offline
-        ================================================= */
+        Se estiver offline, usa index.html
+        armazenado no cache.
+        */
 
         if (
             event.request.mode ===
@@ -219,62 +140,34 @@ self.addEventListener(
                 fetch(
                     event.request,
                     {
-
-                        /*
-                         * Evita receber uma cópia antiga
-                         * do HTML pelo cache HTTP.
-                         */
-
                         cache:
                             "no-store"
-
                     }
                 )
 
                 .then(
-                    function (response) {
+                    response => {
 
-                        /*
-                         * Só armazenamos respostas válidas.
-                         */
-
-                        if (
-                            response &&
-                            response.status === 200
-                        ) {
-
-                            const copia =
-                                response.clone();
+                        const copia =
+                            response.clone();
 
 
-                            caches
-                                .open(
-                                    CACHE_NAME
-                                )
+                        caches
+                            .open(
+                                CACHE_NAME
+                            )
 
-                                .then(
-                                    function (cache) {
+                            .then(
+                                cache => {
 
-                                        /*
-                                         * Atualiza a versão offline
-                                         * do index.html.
-                                         */
+                                    cache.put(
+                                        "./index.html",
+                                        copia
+                                    );
 
-                                        cache.put(
-                                            "./index.html",
-                                            copia
-                                        );
+                                }
+                            );
 
-                                    }
-                                );
-
-                        }
-
-
-                        /*
-                         * Mostra a versão recebida
-                         * pela internet.
-                         */
 
                         return response;
 
@@ -282,17 +175,7 @@ self.addEventListener(
                 )
 
                 .catch(
-                    function () {
-
-                        console.log(
-                            "[Service Worker V6] Sem internet. Abrindo versão offline."
-                        );
-
-
-                        /*
-                         * Se estiver offline,
-                         * abre o index.html salvo.
-                         */
+                    () => {
 
                         return caches.match(
                             "./index.html"
@@ -309,23 +192,16 @@ self.addEventListener(
         }
 
 
-        /* =================================================
-           ARQUIVOS ESTÁTICOS
+        /*
+        ARQUIVOS ESTÁTICOS
 
-           manifest.json
-           icon.png
-           etc.
+        Cache primeiro.
 
-           ESTRATÉGIA:
-
-           CACHE PRIMEIRO
-                  ↓
-           Se não existir
-                  ↓
-           INTERNET
-                  ↓
-           Salva no cache
-        ================================================= */
+        Isso inclui:
+        - manifest
+        - ícone
+        - jsPDF
+        */
 
         event.respondWith(
 
@@ -335,38 +211,21 @@ self.addEventListener(
                 )
 
                 .then(
-                    function (arquivoCache) {
+                    cached => {
 
-                        /*
-                         * Arquivo encontrado localmente.
-                         */
+                        if (cached) {
 
-                        if (
-                            arquivoCache
-                        ) {
-
-                            return arquivoCache;
+                            return cached;
 
                         }
 
-
-                        /*
-                         * Arquivo não encontrado.
-                         *
-                         * Tenta buscar na internet.
-                         */
 
                         return fetch(
                             event.request
                         )
 
                         .then(
-                            function (response) {
-
-                                /*
-                                 * Não armazenamos respostas
-                                 * inválidas.
-                                 */
+                            response => {
 
                                 if (
                                     !response ||
@@ -382,18 +241,13 @@ self.addEventListener(
                                     response.clone();
 
 
-                                /*
-                                 * Salva para uso futuro
-                                 * sem internet.
-                                 */
-
                                 caches
                                     .open(
                                         CACHE_NAME
                                     )
 
                                     .then(
-                                        function (cache) {
+                                        cache => {
 
                                             cache.put(
                                                 event.request,
@@ -405,33 +259,6 @@ self.addEventListener(
 
 
                                 return response;
-
-                            }
-                        )
-
-                        .catch(
-                            function (erro) {
-
-                                console.log(
-                                    "[Service Worker V6] Recurso indisponível offline:",
-                                    event.request.url
-                                );
-
-
-                                /*
-                                 * Para recursos não essenciais,
-                                 * deixamos a requisição falhar
-                                 * normalmente.
-                                 */
-
-                                return new Response(
-                                    "",
-                                    {
-                                        status: 503,
-                                        statusText:
-                                            "Offline"
-                                    }
-                                );
 
                             }
                         );
@@ -446,22 +273,15 @@ self.addEventListener(
 
 
 /* =========================================================
-   MENSAGENS
+   ATUALIZAÇÃO MANUAL
 ========================================================= */
-
-/*
- * Permite que futuramente o index.html
- * solicite uma atualização imediata
- * do Service Worker.
- */
 
 self.addEventListener(
     "message",
-    function (event) {
+    event => {
 
         if (
-            event.data &&
-            event.data.type ===
+            event.data ===
             "SKIP_WAITING"
         ) {
 
