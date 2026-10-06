@@ -1,271 +1,1098 @@
-const CACHE_NAME =
-    "relatorio-atividade-v6-2";
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+<meta name="theme-color" content="#17365d">
+
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Relatório">
+
+<title>Relatório de Realização de Atividade</title>
+
+<link rel="manifest" href="./manifest.json">
+<link rel="icon" type="image/png" href="./icons/icon.png">
+<link rel="apple-touch-icon" href="./icons/icon.png">
+
+<!-- GERADOR DE PDF LOCAL -->
+<script src="./libs/jspdf.umd.min.js"></script>
+
+<style>
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f3f6fa;
+    color: #1f2937;
+}
+
+.container {
+    max-width: 880px;
+    margin: auto;
+    padding: 15px;
+}
+
+/* CABEÇALHO */
+
+.cabecalho {
+    background: #17365d;
+    color: white;
+    padding: 20px;
+    border-radius: 14px;
+}
+
+.cabecalho h1 {
+    margin: 0 0 7px;
+    font-size: 21px;
+}
+
+.cabecalho p {
+    margin: 0 0 12px;
+}
+
+#status {
+    background: white;
+    color: #17365d;
+    padding: 10px;
+    border-radius: 8px;
+    font-size: 13px;
+}
+
+.versao {
+    margin-top: 10px;
+    font-size: 12px;
+    opacity: .85;
+}
+
+/* CARDS */
+
+.card {
+    background: white;
+    margin-top: 14px;
+    padding: 17px;
+    border-radius: 13px;
+    border: 1px solid #d8e0ea;
+}
+
+.card h2 {
+    margin-top: 0;
+    color: #17365d;
+    font-size: 17px;
+}
+
+/* CAMPOS */
+
+.campo {
+    display: block;
+    margin: 14px 0 5px;
+    font-weight: bold;
+}
+
+input[type="text"],
+input[type="tel"],
+textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #c7d0db;
+    border-radius: 8px;
+    font-size: 16px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+/* FOTOS */
+
+.acoes-fotos {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.botao-camera,
+.botao-galeria {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 48px;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    cursor: pointer;
+}
+
+.botao-camera {
+    background: #17365d;
+    color: white;
+}
+
+.botao-galeria {
+    background: #e6eef8;
+    color: #17365d;
+    border: 1px solid #c5d5e8;
+}
+
+.botao-camera input,
+.botao-galeria input {
+    display: none;
+}
+
+/* GALERIA */
+
+.galeria {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin-top: 12px;
+}
+
+.foto {
+    position: relative;
+    background: white;
+    border: 1px solid #d8e0ea;
+    border-radius: 9px;
+    overflow: hidden;
+    padding-bottom: 8px;
+}
+
+.foto img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+}
+
+.legenda {
+    width: calc(100% - 12px);
+    margin: 7px 6px 0;
+    padding: 8px;
+    border: 1px solid #c7d0db;
+    border-radius: 7px;
+    font-size: 13px;
+}
+
+.remover {
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    width: 34px;
+    height: 34px;
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+    background: #b42318;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.nota,
+.contador {
+    margin-top: 8px;
+    color: #667085;
+    font-size: 12px;
+    line-height: 1.4;
+}
+
+/* BOTÕES */
+
+.acoes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+button {
+    border: none;
+    border-radius: 8px;
+    padding: 12px 15px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#instalar {
+    display: none;
+    background: #7a4e00;
+    color: white;
+}
+
+#salvar {
+    background: #16794b;
+    color: white;
+}
+
+#relatorios {
+    background: #17365d;
+    color: white;
+}
+
+#baixarAtual {
+    background: #5b3f8c;
+    color: white;
+}
+
+#limpar {
+    background: #fee4e2;
+    color: #b42318;
+}
+
+/* RELATÓRIOS */
+
+#painelRelatorios {
+    display: none;
+}
+
+.relatorio-item {
+    border: 1px solid #d8e0ea;
+    border-radius: 10px;
+    padding: 12px;
+    margin-top: 10px;
+}
+
+.relatorio-item strong {
+    display: block;
+    color: #17365d;
+    font-size: 16px;
+}
+
+.relatorio-info,
+.relatorio-fotos {
+    font-size: 13px;
+    color: #667085;
+    margin-top: 5px;
+}
+
+.relatorio-botoes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 10px;
+}
+
+.btn-abrir {
+    background: #17365d;
+    color: white;
+}
+
+.btn-visualizar {
+    background: #e6eef8;
+    color: #17365d;
+}
+
+.btn-download {
+    background: #16794b;
+    color: white;
+}
+
+.btn-excluir {
+    background: #fee4e2;
+    color: #b42318;
+}
+
+/* VISUALIZAÇÃO */
+
+#visualizador {
+    display: none;
+}
+
+.visualizacao-cabecalho {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.visualizacao-dados {
+    margin-top: 15px;
+}
+
+.visualizacao-linha {
+    padding: 8px 0;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.visualizacao-linha strong {
+    color: #17365d;
+}
+
+.visualizacao-descricao {
+    white-space: pre-wrap;
+    line-height: 1.5;
+}
+
+.visualizacao-fotos {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.visualizacao-foto {
+    border: 1px solid #d8e0ea;
+    border-radius: 8px;
+    padding: 6px;
+}
+
+.visualizacao-foto img {
+    width: 100%;
+    max-height: 350px;
+    object-fit: contain;
+}
+
+.visualizacao-foto div {
+    padding: 6px;
+    font-size: 13px;
+    text-align: center;
+}
+
+/* RODAPÉ */
+
+.rodape {
+    text-align: center;
+    color: #667085;
+    font-size: 12px;
+    padding: 25px 10px 35px;
+}
+
+.rodape strong {
+    color: #17365d;
+}
+
+@media (min-width: 650px) {
+
+    .galeria {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+}
+
+@media (max-width: 500px) {
+
+    .acoes-fotos,
+    .visualizacao-fotos {
+        grid-template-columns: 1fr;
+    }
+
+    .relatorio-botoes button {
+        flex: 1 1 45%;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<main class="container">
+
+<section class="cabecalho">
+
+<h1>RELATÓRIO DE REALIZAÇÃO DE ATIVIDADE</h1>
+
+<p>Aplicativo offline para registro de atividades.</p>
+
+<div id="status">
+Aplicativo pronto.
+</div>
+
+<div class="versao">
+Versão 6.2
+</div>
+
+</section>
 
 
-const ARQUIVOS_OFFLINE = [
+<form id="formulario">
 
-    "./",
+<section class="card">
 
-    "./index.html",
+<h2>Informações</h2>
 
-    "./manifest.json",
+<label class="campo" for="nome">
+1. Insira seu nome *
+</label>
 
-    "./icons/icon.png",
+<input id="nome" type="text" required>
 
-    "./libs/jspdf.umd.min.js"
+<label class="campo" for="area">
+2. Insira a área de realização da atividade *
+</label>
 
-];
+<input id="area" type="text" required>
+
+<label class="campo" for="atividade">
+3. Insira a atividade realizada *
+</label>
+
+<input id="atividade" type="text" required>
+
+<label class="campo" for="contato">
+4. Insira nº de contato
+</label>
+
+<input id="contato" type="tel">
+
+<label class="campo" for="empresa">
+5. Empresa *
+</label>
+
+<input id="empresa" type="text" required>
+
+<label class="campo" for="descricao">
+8. Descrição da Atividade *
+</label>
+
+<textarea id="descricao" required></textarea>
+
+</section>
+
+
+<section class="card">
+
+<h2>6. Imagens ANTES</h2>
+
+<div class="acoes-fotos">
+
+<label class="botao-camera">
+📷 Tirar foto
+<input
+id="cameraAntes"
+type="file"
+accept="image/*"
+capture="environment">
+</label>
+
+<label class="botao-galeria">
+🖼️ Abrir galeria
+<input
+id="galeriaAntesInput"
+type="file"
+accept="image/*"
+multiple>
+</label>
+
+</div>
+
+<div class="nota">
+Você pode tirar novas fotos ou selecionar várias imagens existentes.
+</div>
+
+<div id="contadorAntes" class="contador">
+0 fotos
+</div>
+
+<div id="galeriaAntes" class="galeria"></div>
+
+</section>
+
+
+<section class="card">
+
+<h2>7. Imagens DEPOIS</h2>
+
+<div class="acoes-fotos">
+
+<label class="botao-camera">
+📷 Tirar foto
+<input
+id="cameraDepois"
+type="file"
+accept="image/*"
+capture="environment">
+</label>
+
+<label class="botao-galeria">
+🖼️ Abrir galeria
+<input
+id="galeriaDepoisInput"
+type="file"
+accept="image/*"
+multiple>
+</label>
+
+</div>
+
+<div class="nota">
+Você pode tirar novas fotos ou selecionar várias imagens existentes.
+</div>
+
+<div id="contadorDepois" class="contador">
+0 fotos
+</div>
+
+<div id="galeriaDepois" class="galeria"></div>
+
+</section>
+
+
+<section class="card">
+
+<h2>Ações</h2>
+
+<div class="acoes">
+
+<button id="instalar" type="button">
+📲 Instalar aplicativo
+</button>
+
+<button id="salvar" type="button">
+💾 Salvar Relatório
+</button>
+
+<button id="relatorios" type="button">
+📂 Relatórios Salvos
+</button>
+
+<button id="baixarAtual" type="button">
+⬇️ Baixar PDF
+</button>
+
+<button id="limpar" type="button">
+🗑️ Limpar formulário
+</button>
+
+</div>
+
+<div class="nota">
+Os relatórios salvos ficam armazenados neste dispositivo e podem ser acessados mesmo sem internet.
+</div>
+
+</section>
+
+</form>
+
+
+<section id="painelRelatorios" class="card">
+
+<h2>📂 Relatórios Salvos</h2>
+
+<div id="listaRelatorios"></div>
+
+</section>
+
+
+<section id="visualizador" class="card">
+
+<div class="visualizacao-cabecalho">
+
+<h2>👁️ Visualização do Relatório</h2>
+
+<button
+id="fecharVisualizacao"
+type="button"
+class="btn-excluir">
+✕ Fechar
+</button>
+
+</div>
+
+<div id="conteudoVisualizacao"></div>
+
+</section>
+
+
+<div class="rodape">
+
+Relatório de Realização de Atividade
+
+<br>
+
+<strong>Versão 6.2</strong>
+
+</div>
+
+</main>
+
+
+<script>
+
+"use strict";
+
+/* =========================================================
+   ELEMENTOS
+========================================================= */
+
+const el = id => document.getElementById(id);
+
+const formulario = el("formulario");
+const statusApp = el("status");
+
+const nome = el("nome");
+const area = el("area");
+const atividade = el("atividade");
+const contato = el("contato");
+const empresa = el("empresa");
+const descricao = el("descricao");
+
+const cameraAntes = el("cameraAntes");
+const galeriaAntesInput = el("galeriaAntesInput");
+
+const cameraDepois = el("cameraDepois");
+const galeriaDepoisInput = el("galeriaDepoisInput");
+
+const btnInstalar = el("instalar");
+const btnSalvar = el("salvar");
+const btnRelatorios = el("relatorios");
+const btnBaixarAtual = el("baixarAtual");
+const btnLimpar = el("limpar");
+
+const painelRelatorios = el("painelRelatorios");
+const listaRelatorios = el("listaRelatorios");
+
+const visualizador = el("visualizador");
+const conteudoVisualizacao = el("conteudoVisualizacao");
+const fecharVisualizacao = el("fecharVisualizacao");
+
+
+/* =========================================================
+   SERVICE WORKER
+========================================================= */
+
+if ("serviceWorker" in navigator) {
+
+    window.addEventListener("load", async () => {
+
+        try {
+
+            const registro =
+                await navigator.serviceWorker.register(
+                    "./service-worker.js",
+                    { updateViaCache: "none" }
+                );
+
+            await registro.update();
+
+        }
+        catch (erro) {
+
+            console.error(
+                "Erro no Service Worker:",
+                erro
+            );
+
+        }
+
+    });
+
+}
 
 
 /* =========================================================
    INSTALAÇÃO
 ========================================================= */
 
-self.addEventListener(
-    "install",
-    event => {
+let eventoInstalacao = null;
 
-        event.waitUntil(
+window.addEventListener(
+    "beforeinstallprompt",
+    evento => {
 
-            caches
-                .open(CACHE_NAME)
+        evento.preventDefault();
 
-                .then(cache => {
+        eventoInstalacao = evento;
 
-                    return cache.addAll(
-                        ARQUIVOS_OFFLINE
-                    );
-
-                })
-
-                .then(() => {
-
-                    return self.skipWaiting();
-
-                })
-
-        );
+        btnInstalar.style.display =
+            "inline-block";
 
     }
 );
 
+btnInstalar.addEventListener(
+    "click",
+    async () => {
 
-/* =========================================================
-   ATIVAÇÃO
-========================================================= */
+        if (!eventoInstalacao) {
 
-self.addEventListener(
-    "activate",
-    event => {
-
-        event.waitUntil(
-
-            caches
-                .keys()
-
-                .then(
-                    nomesCaches => {
-
-                        return Promise.all(
-
-                            nomesCaches.map(
-                                nome => {
-
-                                    if (
-                                        nome !==
-                                        CACHE_NAME
-                                    ) {
-
-                                        return caches.delete(
-                                            nome
-                                        );
-
-                                    }
-
-                                }
-                            )
-
-                        );
-
-                    }
-                )
-
-                .then(() => {
-
-                    return self.clients.claim();
-
-                })
-
-        );
-
-    }
-);
-
-
-/* =========================================================
-   FETCH
-========================================================= */
-
-self.addEventListener(
-    "fetch",
-    event => {
-
-        if (
-            event.request.method !==
-            "GET"
-        ) {
+            alert(
+                "Se o aplicativo ainda não estiver instalado, use o menu do navegador e escolha 'Instalar aplicativo' ou 'Adicionar à tela inicial'."
+            );
 
             return;
 
         }
 
+        eventoInstalacao.prompt();
 
-        /*
-        HTML / NAVEGAÇÃO
+        await eventoInstalacao.userChoice;
 
-        Tenta internet primeiro para receber
-        novas versões do aplicativo.
+        eventoInstalacao = null;
 
-        Se estiver offline, usa index.html
-        armazenado no cache.
-        */
+        btnInstalar.style.display =
+            "none";
 
-        if (
-            event.request.mode ===
-            "navigate"
-        ) {
+    }
+);
 
-            event.respondWith(
+window.addEventListener(
+    "appinstalled",
+    () => {
 
-                fetch(
-                    event.request,
-                    {
-                        cache:
-                            "no-store"
-                    }
-                )
+        eventoInstalacao = null;
 
-                .then(
-                    response => {
+        btnInstalar.style.display =
+            "none";
 
-                        const copia =
-                            response.clone();
+        statusApp.textContent =
+            "Aplicativo instalado.";
+
+    }
+);
 
 
-                        caches
-                            .open(
-                                CACHE_NAME
-                            )
+/* =========================================================
+   INDEXEDDB
+========================================================= */
 
-                            .then(
-                                cache => {
+const DB_NAME =
+    "RelatoriosAtividadeDB";
 
-                                    cache.put(
-                                        "./index.html",
-                                        copia
-                                    );
+const DB_VERSION =
+    1;
 
-                                }
+const STORE_NAME =
+    "relatorios";
+
+function abrirBanco() {
+
+    return new Promise(
+        (resolve, reject) => {
+
+            const request =
+                indexedDB.open(
+                    DB_NAME,
+                    DB_VERSION
+                );
+
+            request.onupgradeneeded =
+                event => {
+
+                    const db =
+                        event.target.result;
+
+                    if (
+                        !db.objectStoreNames.contains(
+                            STORE_NAME
+                        )
+                    ) {
+
+                        const store =
+                            db.createObjectStore(
+                                STORE_NAME,
+                                { keyPath: "id" }
                             );
 
-
-                        return response;
-
-                    }
-                )
-
-                .catch(
-                    () => {
-
-                        return caches.match(
-                            "./index.html"
+                        store.createIndex(
+                            "data",
+                            "data",
+                            { unique: false }
                         );
 
                     }
-                )
 
+                };
+
+            request.onsuccess =
+                () => resolve(
+                    request.result
+                );
+
+            request.onerror =
+                () => reject(
+                    request.error
+                );
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   VARIÁVEIS
+========================================================= */
+
+let fotosAntes = [];
+let fotosDepois = [];
+
+let relatorioAbertoId = null;
+
+
+/* =========================================================
+   ID
+========================================================= */
+
+function gerarId() {
+
+    if (
+        window.crypto &&
+        crypto.randomUUID
+    ) {
+
+        return crypto.randomUUID();
+
+    }
+
+    return (
+        Date.now()
+        +
+        "-"
+        +
+        Math.random()
+    );
+
+}
+
+
+/* =========================================================
+   FOTOS
+========================================================= */
+
+function adicionarFotos(
+    input,
+    lista,
+    galeriaId,
+    contadorId
+) {
+
+    const arquivos =
+        Array.from(
+            input.files || []
+        );
+
+    arquivos.forEach(
+        arquivo => {
+
+            if (
+                arquivo.type &&
+                arquivo.type.startsWith(
+                    "image/"
+                )
+            ) {
+
+                lista.push({
+
+                    id: gerarId(),
+
+                    blob: arquivo,
+
+                    legenda: ""
+
+                });
+
+            }
+
+        }
+    );
+
+    input.value = "";
+
+    renderizarGaleria(
+        lista,
+        galeriaId,
+        contadorId
+    );
+
+}
+
+
+function renderizarGaleria(
+    lista,
+    galeriaId,
+    contadorId
+) {
+
+    const galeria =
+        el(galeriaId);
+
+    galeria.innerHTML = "";
+
+    lista.forEach(
+        (foto, index) => {
+
+            const bloco =
+                document.createElement(
+                    "div"
+                );
+
+            bloco.className =
+                "foto";
+
+
+            const img =
+                document.createElement(
+                    "img"
+                );
+
+            const url =
+                URL.createObjectURL(
+                    foto.blob
+                );
+
+            img.src = url;
+
+            img.onload =
+                () => URL.revokeObjectURL(
+                    url
+                );
+
+
+            const legenda =
+                document.createElement(
+                    "input"
+                );
+
+            legenda.type =
+                "text";
+
+            legenda.className =
+                "legenda";
+
+            legenda.placeholder =
+                "Legenda opcional";
+
+            legenda.value =
+                foto.legenda || "";
+
+            legenda.addEventListener(
+                "input",
+                () => {
+
+                    foto.legenda =
+                        legenda.value;
+
+                }
             );
 
 
-            return;
+            const remover =
+                document.createElement(
+                    "button"
+                );
+
+            remover.type =
+                "button";
+
+            remover.className =
+                "remover";
+
+            remover.textContent =
+                "×";
+
+            remover.addEventListener(
+                "click",
+                () => {
+
+                    lista.splice(
+                        index,
+                        1
+                    );
+
+                    renderizarGaleria(
+                        lista,
+                        galeriaId,
+                        contadorId
+                    );
+
+                }
+            );
+
+
+            bloco.appendChild(img);
+            bloco.appendChild(remover);
+            bloco.appendChild(legenda);
+
+            galeria.appendChild(bloco);
 
         }
+    );
+
+    el(contadorId).textContent =
+        lista.length
+        +
+        (
+            lista.length === 1
+            ?
+            " foto"
+            :
+            " fotos"
+        );
+
+}
 
 
-        /*
-        ARQUIVOS ESTÁTICOS
+/* EVENTOS */
 
-        Cache primeiro.
+cameraAntes.addEventListener(
+    "change",
+    function () {
 
-        Isso inclui:
-        - manifest
-        - ícone
-        - jsPDF
-        */
+        adicionarFotos(
+            this,
+            fotosAntes,
+            "galeriaAntes",
+            "contadorAntes"
+        );
 
-        event.respondWith(
+    }
+);
 
-            caches
-                .match(
-                    event.request
-                )
+galeriaAntesInput.addEventListener(
+    "change",
+    function () {
 
-                .then(
-                    cached => {
+        adicionarFotos(
+            this,
+            fotosAntes,
+            "galeriaAntes",
+            "contadorAntes"
+        );
 
-                        if (cached) {
+    }
+);
 
-                            return cached;
+cameraDepois.addEventListener(
+    "change",
+    function () {
 
-                        }
+        adicionarFotos(
+            this,
+            fotosDepois,
+            "galeriaDepois",
+            "contadorDepois"
+        );
 
+    }
+);
 
-                        return fetch(
-                            event.request
-                        )
+galeriaDepoisInput.addEventListener(
+    "change",
+    function () {
 
-                        .then(
-                            response => {
-
-                                if (
-                                    !response ||
-                                    response.status !== 200
-                                ) {
-
-                                    return response;
-
-                                }
-
-
-                                const copia =
-                                    response.clone();
-
-
-                                caches
-                                    .open(
-                                        CACHE_NAME
-                                    )
-
-                                    .then(
-                                        cache => {
-
-                                            cache.put(
-                                                event.request,
-                                                copia
-                                            );
-
-                                        }
-                                    );
-
-
-                                return response;
-
-                            }
-                        );
-
-                    }
-                )
-
+        adicionarFotos(
+            this,
+            fotosDepois,
+            "galeriaDepois",
+            "contadorDepois"
         );
 
     }
@@ -273,21 +1100,1791 @@ self.addEventListener(
 
 
 /* =========================================================
-   ATUALIZAÇÃO MANUAL
+   DADOS
 ========================================================= */
 
-self.addEventListener(
-    "message",
-    event => {
+function obterDados() {
+
+    return {
+
+        nome:
+            nome.value.trim(),
+
+        area:
+            area.value.trim(),
+
+        atividade:
+            atividade.value.trim(),
+
+        contato:
+            contato.value.trim(),
+
+        empresa:
+            empresa.value.trim(),
+
+        descricao:
+            descricao.value.trim()
+
+    };
+
+}
+
+
+/* =========================================================
+   SALVAR
+========================================================= */
+
+btnSalvar.addEventListener(
+    "click",
+    async () => {
 
         if (
-            event.data ===
-            "SKIP_WAITING"
+            !formulario.reportValidity()
         ) {
 
-            self.skipWaiting();
+            return;
+
+        }
+
+        statusApp.textContent =
+            "Salvando relatório...";
+
+        try {
+
+            const db =
+                await abrirBanco();
+
+            const transaction =
+                db.transaction(
+                    STORE_NAME,
+                    "readwrite"
+                );
+
+            const store =
+                transaction.objectStore(
+                    STORE_NAME
+                );
+
+            const agora =
+                new Date();
+
+            const relatorio = {
+
+                id:
+                    relatorioAbertoId
+                    ||
+                    gerarId(),
+
+                data:
+                    agora.toISOString(),
+
+                dados:
+                    obterDados(),
+
+                fotosAntes:
+                    fotosAntes,
+
+                fotosDepois:
+                    fotosDepois
+
+            };
+
+            store.put(relatorio);
+
+            await new Promise(
+                (resolve, reject) => {
+
+                    transaction.oncomplete =
+                        resolve;
+
+                    transaction.onerror =
+                        () => reject(
+                            transaction.error
+                        );
+
+                    transaction.onabort =
+                        () => reject(
+                            transaction.error
+                        );
+
+                }
+            );
+
+            relatorioAbertoId =
+                relatorio.id;
+
+            statusApp.textContent =
+                "✓ Relatório salvo neste dispositivo.";
+
+            await listarRelatorios();
+
+        }
+        catch (erro) {
+
+            console.error(erro);
+
+            statusApp.textContent =
+                "Erro ao salvar relatório.";
+
+            alert(
+                "Não foi possível salvar o relatório."
+            );
 
         }
 
     }
 );
+
+
+/* =========================================================
+   BUSCAR RELATÓRIO
+========================================================= */
+
+async function buscarRelatorio(id) {
+
+    const db =
+        await abrirBanco();
+
+    return new Promise(
+        (resolve, reject) => {
+
+            const transaction =
+                db.transaction(
+                    STORE_NAME,
+                    "readonly"
+                );
+
+            const request =
+                transaction
+                .objectStore(
+                    STORE_NAME
+                )
+                .get(id);
+
+            request.onsuccess =
+                () => resolve(
+                    request.result
+                );
+
+            request.onerror =
+                () => reject(
+                    request.error
+                );
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   LISTAR RELATÓRIOS
+========================================================= */
+
+async function listarRelatorios() {
+
+    try {
+
+        const db =
+            await abrirBanco();
+
+        const transaction =
+            db.transaction(
+                STORE_NAME,
+                "readonly"
+            );
+
+        const request =
+            transaction
+                .objectStore(
+                    STORE_NAME
+                )
+                .getAll();
+
+        request.onsuccess =
+            () => {
+
+                const registros =
+                    request.result.sort(
+                        (a, b) =>
+                            new Date(b.data)
+                            -
+                            new Date(a.data)
+                    );
+
+                listaRelatorios.innerHTML =
+                    "";
+
+                if (
+                    registros.length === 0
+                ) {
+
+                    listaRelatorios.innerHTML =
+                        "<p>Nenhum relatório salvo neste dispositivo.</p>";
+
+                    return;
+
+                }
+
+                registros.forEach(
+                    relatorio => {
+
+                        const item =
+                            document.createElement(
+                                "div"
+                            );
+
+                        item.className =
+                            "relatorio-item";
+
+
+                        const titulo =
+                            document.createElement(
+                                "strong"
+                            );
+
+                        titulo.textContent =
+                            relatorio.dados.atividade
+                            ||
+                            "Relatório";
+
+
+                        const info =
+                            document.createElement(
+                                "div"
+                            );
+
+                        info.className =
+                            "relatorio-info";
+
+                        info.textContent =
+                            new Date(
+                                relatorio.data
+                            )
+                            .toLocaleString(
+                                "pt-BR"
+                            )
+                            +
+                            (
+                                relatorio.dados.empresa
+                                ?
+                                " • "
+                                +
+                                relatorio.dados.empresa
+                                :
+                                ""
+                            );
+
+
+                        const fotosInfo =
+                            document.createElement(
+                                "div"
+                            );
+
+                        fotosInfo.className =
+                            "relatorio-fotos";
+
+                        fotosInfo.textContent =
+                            "Antes: "
+                            +
+                            (
+                                relatorio.fotosAntes
+                                ||
+                                []
+                            ).length
+                            +
+                            " • Depois: "
+                            +
+                            (
+                                relatorio.fotosDepois
+                                ||
+                                []
+                            ).length;
+
+
+                        const botoes =
+                            document.createElement(
+                                "div"
+                            );
+
+                        botoes.className =
+                            "relatorio-botoes";
+
+
+                        /* ABRIR */
+
+                        const abrir =
+                            document.createElement(
+                                "button"
+                            );
+
+                        abrir.type =
+                            "button";
+
+                        abrir.className =
+                            "btn-abrir";
+
+                        abrir.textContent =
+                            "✏️ Abrir";
+
+                        abrir.addEventListener(
+                            "click",
+                            () => abrirRelatorio(
+                                relatorio.id
+                            )
+                        );
+
+
+                        /* VISUALIZAR */
+
+                        const visualizar =
+                            document.createElement(
+                                "button"
+                            );
+
+                        visualizar.type =
+                            "button";
+
+                        visualizar.className =
+                            "btn-visualizar";
+
+                        visualizar.textContent =
+                            "👁️ Visualizar";
+
+                        visualizar.addEventListener(
+                            "click",
+                            () => visualizarRelatorio(
+                                relatorio
+                            )
+                        );
+
+
+                        /* BAIXAR */
+
+                        const baixar =
+                            document.createElement(
+                                "button"
+                            );
+
+                        baixar.type =
+                            "button";
+
+                        baixar.className =
+                            "btn-download";
+
+                        baixar.textContent =
+                            "⬇️ Baixar PDF";
+
+                        baixar.addEventListener(
+                            "click",
+                            () => baixarPDF(
+                                relatorio
+                            )
+                        );
+
+
+                        /* EXCLUIR */
+
+                        const excluir =
+                            document.createElement(
+                                "button"
+                            );
+
+                        excluir.type =
+                            "button";
+
+                        excluir.className =
+                            "btn-excluir";
+
+                        excluir.textContent =
+                            "🗑️ Excluir";
+
+                        excluir.addEventListener(
+                            "click",
+                            () => excluirRelatorio(
+                                relatorio.id
+                            )
+                        );
+
+
+                        botoes.appendChild(abrir);
+                        botoes.appendChild(visualizar);
+                        botoes.appendChild(baixar);
+                        botoes.appendChild(excluir);
+
+                        item.appendChild(titulo);
+                        item.appendChild(info);
+                        item.appendChild(fotosInfo);
+                        item.appendChild(botoes);
+
+                        listaRelatorios.appendChild(
+                            item
+                        );
+
+                    }
+                );
+
+            };
+
+    }
+    catch (erro) {
+
+        console.error(erro);
+
+        listaRelatorios.innerHTML =
+            "<p>Erro ao carregar relatórios.</p>";
+
+    }
+
+}
+
+
+/* =========================================================
+   ABRIR PARA EDIÇÃO
+========================================================= */
+
+async function abrirRelatorio(id) {
+
+    try {
+
+        const relatorio =
+            await buscarRelatorio(id);
+
+        if (!relatorio) {
+
+            alert(
+                "Relatório não encontrado."
+            );
+
+            return;
+
+        }
+
+        relatorioAbertoId =
+            relatorio.id;
+
+        nome.value =
+            relatorio.dados.nome || "";
+
+        area.value =
+            relatorio.dados.area || "";
+
+        atividade.value =
+            relatorio.dados.atividade || "";
+
+        contato.value =
+            relatorio.dados.contato || "";
+
+        empresa.value =
+            relatorio.dados.empresa || "";
+
+        descricao.value =
+            relatorio.dados.descricao || "";
+
+        fotosAntes =
+            relatorio.fotosAntes || [];
+
+        fotosDepois =
+            relatorio.fotosDepois || [];
+
+        renderizarGaleria(
+            fotosAntes,
+            "galeriaAntes",
+            "contadorAntes"
+        );
+
+        renderizarGaleria(
+            fotosDepois,
+            "galeriaDepois",
+            "contadorDepois"
+        );
+
+        painelRelatorios.style.display =
+            "none";
+
+        visualizador.style.display =
+            "none";
+
+        statusApp.textContent =
+            "Relatório aberto para edição.";
+
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+
+    }
+    catch (erro) {
+
+        console.error(erro);
+
+        alert(
+            "Não foi possível abrir o relatório."
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   VISUALIZAR
+========================================================= */
+
+async function criarFotosVisualizacao(
+    fotos
+) {
+
+    const container =
+        document.createElement(
+            "div"
+        );
+
+    container.className =
+        "visualizacao-fotos";
+
+    for (
+        let i = 0;
+        i < fotos.length;
+        i++
+    ) {
+
+        const foto =
+            fotos[i];
+
+        const bloco =
+            document.createElement(
+                "div"
+            );
+
+        bloco.className =
+            "visualizacao-foto";
+
+        const img =
+            document.createElement(
+                "img"
+            );
+
+        const url =
+            URL.createObjectURL(
+                foto.blob
+            );
+
+        img.src = url;
+
+        img.onload =
+            () => URL.revokeObjectURL(
+                url
+            );
+
+        const legenda =
+            document.createElement(
+                "div"
+            );
+
+        legenda.textContent =
+            foto.legenda
+            ||
+            "Foto "
+            +
+            (i + 1);
+
+        bloco.appendChild(img);
+        bloco.appendChild(legenda);
+
+        container.appendChild(
+            bloco
+        );
+
+    }
+
+    return container;
+
+}
+
+
+async function visualizarRelatorio(
+    relatorio
+) {
+
+    conteudoVisualizacao.innerHTML =
+        "";
+
+    const dados =
+        relatorio.dados;
+
+
+    function adicionarLinha(
+        titulo,
+        valor
+    ) {
+
+        const linha =
+            document.createElement(
+                "div"
+            );
+
+        linha.className =
+            "visualizacao-linha";
+
+        const strong =
+            document.createElement(
+                "strong"
+            );
+
+        strong.textContent =
+            titulo + ": ";
+
+        linha.appendChild(
+            strong
+        );
+
+        linha.appendChild(
+            document.createTextNode(
+                valor || "—"
+            )
+        );
+
+        conteudoVisualizacao.appendChild(
+            linha
+        );
+
+    }
+
+
+    adicionarLinha(
+        "Nome",
+        dados.nome
+    );
+
+    adicionarLinha(
+        "Área",
+        dados.area
+    );
+
+    adicionarLinha(
+        "Atividade",
+        dados.atividade
+    );
+
+    adicionarLinha(
+        "Contato",
+        dados.contato
+    );
+
+    adicionarLinha(
+        "Empresa",
+        dados.empresa
+    );
+
+
+    const tituloDescricao =
+        document.createElement(
+            "h2"
+        );
+
+    tituloDescricao.textContent =
+        "Descrição da Atividade";
+
+    conteudoVisualizacao.appendChild(
+        tituloDescricao
+    );
+
+
+    const descricaoDiv =
+        document.createElement(
+            "div"
+        );
+
+    descricaoDiv.className =
+        "visualizacao-descricao";
+
+    descricaoDiv.textContent =
+        dados.descricao || "";
+
+    conteudoVisualizacao.appendChild(
+        descricaoDiv
+    );
+
+
+    const tituloAntes =
+        document.createElement(
+            "h2"
+        );
+
+    tituloAntes.textContent =
+        "Imagens Antes";
+
+    conteudoVisualizacao.appendChild(
+        tituloAntes
+    );
+
+    conteudoVisualizacao.appendChild(
+        await criarFotosVisualizacao(
+            relatorio.fotosAntes || []
+        )
+    );
+
+
+    const tituloDepois =
+        document.createElement(
+            "h2"
+        );
+
+    tituloDepois.textContent =
+        "Imagens Depois";
+
+    conteudoVisualizacao.appendChild(
+        tituloDepois
+    );
+
+    conteudoVisualizacao.appendChild(
+        await criarFotosVisualizacao(
+            relatorio.fotosDepois || []
+        )
+    );
+
+
+    visualizador.style.display =
+        "block";
+
+    visualizador.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+    });
+
+}
+
+
+fecharVisualizacao.addEventListener(
+    "click",
+    () => {
+
+        visualizador.style.display =
+            "none";
+
+    }
+);
+
+
+/* =========================================================
+   CONVERTER FOTO PARA DATA URL
+========================================================= */
+
+function blobParaDataURL(blob) {
+
+    return new Promise(
+        (resolve, reject) => {
+
+            const reader =
+                new FileReader();
+
+            reader.onload =
+                () => resolve(
+                    reader.result
+                );
+
+            reader.onerror =
+                reject;
+
+            reader.readAsDataURL(
+                blob
+            );
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   PREPARAR IMAGEM PARA PDF
+========================================================= */
+
+async function prepararImagemPDF(blob) {
+
+    const dataURL =
+        await blobParaDataURL(blob);
+
+    return new Promise(
+        (resolve, reject) => {
+
+            const img =
+                new Image();
+
+            img.onload =
+                () => {
+
+                    /*
+                    Redimensiona a foto antes de colocar no PDF.
+                    Isso evita PDFs gigantes no celular.
+                    */
+
+                    const max =
+                        1600;
+
+                    let largura =
+                        img.width;
+
+                    let altura =
+                        img.height;
+
+                    if (
+                        largura > max ||
+                        altura > max
+                    ) {
+
+                        const escala =
+                            Math.min(
+                                max / largura,
+                                max / altura
+                            );
+
+                        largura =
+                            Math.round(
+                                largura * escala
+                            );
+
+                        altura =
+                            Math.round(
+                                altura * escala
+                            );
+
+                    }
+
+                    const canvas =
+                        document.createElement(
+                            "canvas"
+                        );
+
+                    canvas.width =
+                        largura;
+
+                    canvas.height =
+                        altura;
+
+                    const ctx =
+                        canvas.getContext(
+                            "2d"
+                        );
+
+                    ctx.drawImage(
+                        img,
+                        0,
+                        0,
+                        largura,
+                        altura
+                    );
+
+                    resolve({
+
+                        data:
+                            canvas.toDataURL(
+                                "image/jpeg",
+                                0.82
+                            ),
+
+                        largura,
+
+                        altura
+
+                    });
+
+                };
+
+            img.onerror =
+                reject;
+
+            img.src =
+                dataURL;
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   NOME DO ARQUIVO
+========================================================= */
+
+function limparNomeArquivo(
+    texto
+) {
+
+    return String(
+        texto || "Relatorio"
+    )
+    .normalize("NFD")
+    .replace(
+        /[\u0300-\u036f]/g,
+        ""
+    )
+    .replace(
+        /[^a-zA-Z0-9_-]+/g,
+        "_"
+    )
+    .replace(
+        /_+/g,
+        "_"
+    )
+    .replace(
+        /^_|_$/g,
+        ""
+    );
+
+}
+
+
+/* =========================================================
+   GERAR PDF REAL
+========================================================= */
+
+async function baixarPDF(
+    relatorio
+) {
+
+    if (
+        !window.jspdf ||
+        !window.jspdf.jsPDF
+    ) {
+
+        alert(
+            "O gerador de PDF não foi carregado. Verifique se o arquivo libs/jspdf.umd.min.js está no repositório."
+        );
+
+        return;
+
+    }
+
+    statusApp.textContent =
+        "Gerando PDF...";
+
+    try {
+
+        const { jsPDF } =
+            window.jspdf;
+
+        const pdf =
+            new jsPDF({
+                orientation: "portrait",
+                unit: "mm",
+                format: "a4",
+                compress: true
+            });
+
+
+        const margemEsquerda =
+            20;
+
+        const margemDireita =
+            20;
+
+        const larguraPagina =
+            210;
+
+        const alturaPagina =
+            297;
+
+        const larguraUtil =
+            larguraPagina
+            -
+            margemEsquerda
+            -
+            margemDireita;
+
+        let y = 20;
+
+
+        /* FUNÇÕES */
+
+        function novaPaginaSeNecessario(
+            alturaNecessaria
+        ) {
+
+            if (
+                y + alturaNecessaria >
+                alturaPagina - 18
+            ) {
+
+                pdf.addPage();
+
+                y = 20;
+
+            }
+
+        }
+
+
+        function tituloSecao(
+            texto
+        ) {
+
+            novaPaginaSeNecessario(
+                15
+            );
+
+            pdf.setFont(
+                "helvetica",
+                "bold"
+            );
+
+            pdf.setFontSize(
+                13
+            );
+
+            pdf.text(
+                texto,
+                margemEsquerda,
+                y
+            );
+
+            y += 3;
+
+            pdf.line(
+                margemEsquerda,
+                y,
+                larguraPagina
+                -
+                margemDireita,
+                y
+            );
+
+            y += 8;
+
+        }
+
+
+        function campo(
+            titulo,
+            valor
+        ) {
+
+            novaPaginaSeNecessario(
+                12
+            );
+
+            pdf.setFont(
+                "helvetica",
+                "bold"
+            );
+
+            pdf.setFontSize(
+                10
+            );
+
+            pdf.text(
+                titulo + ":",
+                margemEsquerda,
+                y
+            );
+
+            pdf.setFont(
+                "helvetica",
+                "normal"
+            );
+
+            const linhas =
+                pdf.splitTextToSize(
+                    String(
+                        valor || "—"
+                    ),
+                    larguraUtil - 38
+                );
+
+            pdf.text(
+                linhas,
+                margemEsquerda + 38,
+                y
+            );
+
+            y +=
+                Math.max(
+                    7,
+                    linhas.length * 5
+                );
+
+        }
+
+
+        /* CABEÇALHO */
+
+        pdf.setFont(
+            "helvetica",
+            "bold"
+        );
+
+        pdf.setFontSize(
+            16
+        );
+
+        const titulo =
+            "RELATORIO DE REALIZACAO DE ATIVIDADE";
+
+        const tituloLinhas =
+            pdf.splitTextToSize(
+                titulo,
+                larguraUtil
+            );
+
+        pdf.text(
+            tituloLinhas,
+            larguraPagina / 2,
+            y,
+            {
+                align: "center"
+            }
+        );
+
+        y +=
+            tituloLinhas.length * 7
+            +
+            6;
+
+
+        /* DADOS */
+
+        campo(
+            "Nome",
+            relatorio.dados.nome
+        );
+
+        campo(
+            "Area",
+            relatorio.dados.area
+        );
+
+        campo(
+            "Atividade",
+            relatorio.dados.atividade
+        );
+
+        campo(
+            "Contato",
+            relatorio.dados.contato
+        );
+
+        campo(
+            "Empresa",
+            relatorio.dados.empresa
+        );
+
+        campo(
+            "Data",
+            new Date(
+                relatorio.data
+            ).toLocaleString(
+                "pt-BR"
+            )
+        );
+
+
+        /* DESCRIÇÃO */
+
+        tituloSecao(
+            "DESCRICAO DA ATIVIDADE"
+        );
+
+        pdf.setFont(
+            "helvetica",
+            "normal"
+        );
+
+        pdf.setFontSize(
+            10
+        );
+
+        const linhasDescricao =
+            pdf.splitTextToSize(
+                relatorio.dados.descricao
+                ||
+                "—",
+                larguraUtil
+            );
+
+        linhasDescricao.forEach(
+            linha => {
+
+                novaPaginaSeNecessario(
+                    6
+                );
+
+                pdf.text(
+                    linha,
+                    margemEsquerda,
+                    y
+                );
+
+                y += 5;
+
+            }
+        );
+
+        y += 5;
+
+
+        /* FOTOS */
+
+        async function adicionarGrupoFotos(
+            tituloGrupo,
+            fotos
+        ) {
+
+            tituloSecao(
+                tituloGrupo
+            );
+
+            if (
+                !fotos ||
+                fotos.length === 0
+            ) {
+
+                pdf.setFont(
+                    "helvetica",
+                    "normal"
+                );
+
+                pdf.setFontSize(
+                    10
+                );
+
+                pdf.text(
+                    "Nenhuma foto registrada.",
+                    margemEsquerda,
+                    y
+                );
+
+                y += 10;
+
+                return;
+
+            }
+
+
+            for (
+                let i = 0;
+                i < fotos.length;
+                i++
+            ) {
+
+                const foto =
+                    fotos[i];
+
+                statusApp.textContent =
+                    "Processando foto "
+                    +
+                    (i + 1)
+                    +
+                    " de "
+                    +
+                    fotos.length
+                    +
+                    "...";
+
+
+                const imagem =
+                    await prepararImagemPDF(
+                        foto.blob
+                    );
+
+
+                /*
+                Uma foto por bloco.
+                Altura máxima de 100 mm.
+                */
+
+                const larguraMax =
+                    larguraUtil;
+
+                const alturaMax =
+                    100;
+
+                const proporcao =
+                    Math.min(
+                        larguraMax
+                        /
+                        imagem.largura,
+
+                        alturaMax
+                        /
+                        imagem.altura
+                    );
+
+
+                const larguraFoto =
+                    imagem.largura
+                    *
+                    proporcao;
+
+                const alturaFoto =
+                    imagem.altura
+                    *
+                    proporcao;
+
+
+                const legenda =
+                    foto.legenda
+                    ||
+                    "Foto "
+                    +
+                    (i + 1);
+
+
+                const linhasLegenda =
+                    pdf.splitTextToSize(
+                        legenda,
+                        larguraUtil
+                    );
+
+
+                const alturaBloco =
+                    alturaFoto
+                    +
+                    linhasLegenda.length * 5
+                    +
+                    12;
+
+
+                novaPaginaSeNecessario(
+                    alturaBloco
+                );
+
+
+                const xFoto =
+                    margemEsquerda
+                    +
+                    (
+                        larguraUtil
+                        -
+                        larguraFoto
+                    )
+                    /
+                    2;
+
+
+                pdf.addImage(
+                    imagem.data,
+                    "JPEG",
+                    xFoto,
+                    y,
+                    larguraFoto,
+                    alturaFoto,
+                    undefined,
+                    "FAST"
+                );
+
+
+                y +=
+                    alturaFoto
+                    +
+                    5;
+
+
+                pdf.setFont(
+                    "helvetica",
+                    "italic"
+                );
+
+                pdf.setFontSize(
+                    9
+                );
+
+
+                pdf.text(
+                    linhasLegenda,
+                    larguraPagina / 2,
+                    y,
+                    {
+                        align: "center"
+                    }
+                );
+
+
+                y +=
+                    linhasLegenda.length * 5
+                    +
+                    8;
+
+            }
+
+        }
+
+
+        await adicionarGrupoFotos(
+            "REGISTRO FOTOGRAFICO - ANTES",
+            relatorio.fotosAntes || []
+        );
+
+
+        await adicionarGrupoFotos(
+            "REGISTRO FOTOGRAFICO - DEPOIS",
+            relatorio.fotosDepois || []
+        );
+
+
+        /* RODAPÉ DAS PÁGINAS */
+
+        const quantidadePaginas =
+            pdf.getNumberOfPages();
+
+
+        for (
+            let pagina = 1;
+            pagina <= quantidadePaginas;
+            pagina++
+        ) {
+
+            pdf.setPage(
+                pagina
+            );
+
+            pdf.setFont(
+                "helvetica",
+                "normal"
+            );
+
+            pdf.setFontSize(
+                8
+            );
+
+            pdf.text(
+                "Pagina "
+                +
+                pagina
+                +
+                " de "
+                +
+                quantidadePaginas,
+                larguraPagina / 2,
+                289,
+                {
+                    align: "center"
+                }
+            );
+
+        }
+
+
+        /* NOME */
+
+        const data =
+            new Date(
+                relatorio.data
+            );
+
+        const dia =
+            String(
+                data.getDate()
+            )
+            .padStart(
+                2,
+                "0"
+            );
+
+        const mes =
+            String(
+                data.getMonth() + 1
+            )
+            .padStart(
+                2,
+                "0"
+            );
+
+        const ano =
+            data.getFullYear();
+
+
+        const nomeArquivo =
+            "Relatorio_"
+            +
+            limparNomeArquivo(
+                relatorio.dados.atividade
+            )
+            +
+            "_"
+            +
+            dia
+            +
+            "-"
+            +
+            mes
+            +
+            "-"
+            +
+            ano
+            +
+            ".pdf";
+
+
+        /*
+        DOWNLOAD DIRETO.
+        Não chama window.print().
+        */
+
+        pdf.save(
+            nomeArquivo
+        );
+
+
+        statusApp.textContent =
+            "✓ PDF baixado: "
+            +
+            nomeArquivo;
+
+    }
+    catch (erro) {
+
+        console.error(
+            "Erro ao gerar PDF:",
+            erro
+        );
+
+        statusApp.textContent =
+            "Erro ao gerar PDF.";
+
+        alert(
+            "Não foi possível gerar o PDF."
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   BAIXAR RELATÓRIO ATUAL
+========================================================= */
+
+btnBaixarAtual.addEventListener(
+    "click",
+    async () => {
+
+        if (
+            !formulario.reportValidity()
+        ) {
+
+            return;
+
+        }
+
+        const relatorio = {
+
+            id:
+                relatorioAbertoId
+                ||
+                gerarId(),
+
+            data:
+                new Date()
+                .toISOString(),
+
+            dados:
+                obterDados(),
+
+            fotosAntes:
+                fotosAntes,
+
+            fotosDepois:
+                fotosDepois
+
+        };
+
+        await baixarPDF(
+            relatorio
+        );
+
+    }
+);
+
+
+/* =========================================================
+   EXCLUIR
+========================================================= */
+
+async function excluirRelatorio(
+    id
+) {
+
+    if (
+        !confirm(
+            "Deseja excluir permanentemente este relatório do dispositivo?"
+        )
+    ) {
+
+        return;
+
+    }
+
+    try {
+
+        const db =
+            await abrirBanco();
+
+        const transaction =
+            db.transaction(
+                STORE_NAME,
+                "readwrite"
+            );
+
+        transaction
+            .objectStore(
+                STORE_NAME
+            )
+            .delete(id);
+
+        transaction.oncomplete =
+            async () => {
+
+                if (
+                    relatorioAbertoId === id
+                ) {
+
+                    relatorioAbertoId =
+                        null;
+
+                }
+
+                statusApp.textContent =
+                    "Relatório excluído.";
+
+                await listarRelatorios();
+
+            };
+
+    }
+    catch (erro) {
+
+        console.error(erro);
+
+        alert(
+            "Não foi possível excluir o relatório."
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   MOSTRAR RELATÓRIOS
+========================================================= */
+
+btnRelatorios.addEventListener(
+    "click",
+    async () => {
+
+        if (
+            painelRelatorios.style.display
+            ===
+            "block"
+        ) {
+
+            painelRelatorios.style.display =
+                "none";
+
+            return;
+
+        }
+
+        painelRelatorios.style.display =
+            "block";
+
+        await listarRelatorios();
+
+        painelRelatorios.scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+        });
+
+    }
+);
+
+
+/* =========================================================
+   LIMPAR
+========================================================= */
+
+btnLimpar.addEventListener(
+    "click",
+    () => {
+
+        if (
+            !confirm(
+                "Deseja limpar o formulário atual? Os relatórios já salvos não serão apagados."
+            )
+        ) {
+
+            return;
+
+        }
+
+        formulario.reset();
+
+        fotosAntes = [];
+        fotosDepois = [];
+
+        relatorioAbertoId =
+            null;
+
+        renderizarGaleria(
+            fotosAntes,
+            "galeriaAntes",
+            "contadorAntes"
+        );
+
+        renderizarGaleria(
+            fotosDepois,
+            "galeriaDepois",
+            "contadorDepois"
+        );
+
+        visualizador.style.display =
+            "none";
+
+        statusApp.textContent =
+            "Novo relatório iniciado.";
+
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+
+    }
+);
+
+
+/* =========================================================
+   ONLINE / OFFLINE
+========================================================= */
+
+window.addEventListener(
+    "online",
+    () => {
+
+        statusApp.textContent =
+            "Conexão restabelecida.";
+
+    }
+);
+
+window.addEventListener(
+    "offline",
+    () => {
+
+        statusApp.textContent =
+            "Modo offline — o aplicativo continua disponível.";
+
+    }
+);
+
+if (!navigator.onLine) {
+
+    statusApp.textContent =
+        "Modo offline — o aplicativo continua disponível.";
+
+}
+
+</script>
+
+</body>
+</html>
