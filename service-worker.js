@@ -2,20 +2,18 @@
 
 
 /* =========================================================
-   VERSÃO DO CACHE
+   VERSÃO
 ========================================================= */
 
 const CACHE_NAME =
-    "relatorio-atividade-v3";
+    "relatorio-atividade-v5";
 
 
 /* =========================================================
-   ARQUIVOS DO APLICATIVO
+   ARQUIVOS ESSENCIAIS
 ========================================================= */
 
 const ARQUIVOS_OFFLINE = [
-
-    "./",
 
     "./index.html",
 
@@ -31,9 +29,7 @@ const ARQUIVOS_OFFLINE = [
 ========================================================= */
 
 self.addEventListener(
-
     "install",
-
     function (event) {
 
         event.waitUntil(
@@ -44,7 +40,6 @@ self.addEventListener(
                 )
 
                 .then(
-
                     function (cache) {
 
                         return cache.addAll(
@@ -52,16 +47,19 @@ self.addEventListener(
                         );
 
                     }
-
                 )
 
         );
 
 
+        /*
+         * Não espera o Service Worker antigo
+         * ser encerrado.
+         */
+
         self.skipWaiting();
 
     }
-
 );
 
 
@@ -70,9 +68,7 @@ self.addEventListener(
 ========================================================= */
 
 self.addEventListener(
-
     "activate",
-
     function (event) {
 
         event.waitUntil(
@@ -81,18 +77,15 @@ self.addEventListener(
                 .keys()
 
                 .then(
-
                     function (nomesCaches) {
 
                         return Promise.all(
 
                             nomesCaches.map(
-
                                 function (nomeCache) {
 
                                     if (
-                                        nomeCache
-                                        !==
+                                        nomeCache !==
                                         CACHE_NAME
                                     ) {
 
@@ -103,45 +96,42 @@ self.addEventListener(
                                     }
 
                                 }
-
                             )
 
                         );
 
                     }
-
                 )
 
                 .then(
-
                     function () {
+
+                        /*
+                         * Assume imediatamente o controle
+                         * das páginas abertas.
+                         */
 
                         return self.clients.claim();
 
                     }
-
                 )
 
         );
 
     }
-
 );
 
 
 /* =========================================================
-   ONLINE / OFFLINE
+   FETCH
 ========================================================= */
 
 self.addEventListener(
-
     "fetch",
-
     function (event) {
 
         if (
-            event.request.method
-            !==
+            event.request.method !==
             "GET"
         ) {
 
@@ -149,6 +139,96 @@ self.addEventListener(
 
         }
 
+
+        /*
+         * =============================================
+         * NAVEGAÇÃO / HTML
+         *
+         * INTERNET PRIMEIRO
+         * CACHE COMO RESERVA
+         * =============================================
+         */
+
+        if (
+            event.request.mode ===
+            "navigate"
+        ) {
+
+            event.respondWith(
+
+                fetch(
+                    event.request,
+                    {
+                        cache:
+                            "no-store"
+                    }
+                )
+
+                .then(
+                    function (resposta) {
+
+                        /*
+                         * Guarda a versão nova
+                         * do HTML no cache.
+                         */
+
+                        const copia =
+                            resposta.clone();
+
+
+                        caches
+                            .open(
+                                CACHE_NAME
+                            )
+
+                            .then(
+                                function (cache) {
+
+                                    cache.put(
+                                        "./index.html",
+                                        copia
+                                    );
+
+                                }
+                            );
+
+
+                        return resposta;
+
+                    }
+                )
+
+                .catch(
+                    function () {
+
+                        /*
+                         * Sem internet:
+                         * usa a última versão armazenada.
+                         */
+
+                        return caches.match(
+                            "./index.html"
+                        );
+
+                    }
+                )
+
+            );
+
+
+            return;
+
+        }
+
+
+        /*
+         * =============================================
+         * DEMAIS ARQUIVOS
+         *
+         * CACHE PRIMEIRO
+         * INTERNET COMO RESERVA
+         * =============================================
+         */
 
         event.respondWith(
 
@@ -158,7 +238,6 @@ self.addEventListener(
                 )
 
                 .then(
-
                     function (arquivoCache) {
 
                         if (
@@ -175,12 +254,10 @@ self.addEventListener(
                         )
 
                         .then(
-
                             function (resposta) {
 
                                 if (
-                                    !resposta
-                                    ||
+                                    !resposta ||
                                     resposta.status !== 200
                                 ) {
 
@@ -199,7 +276,6 @@ self.addEventListener(
                                     )
 
                                     .then(
-
                                         function (cache) {
 
                                             cache.put(
@@ -208,59 +284,18 @@ self.addEventListener(
                                             );
 
                                         }
-
                                     );
 
 
                                 return resposta;
 
                             }
-
-                        )
-
-                        .catch(
-
-                            function () {
-
-                                if (
-                                    event.request.mode
-                                    ===
-                                    "navigate"
-                                ) {
-
-                                    return caches.match(
-                                        "./index.html"
-                                    );
-
-                                }
-
-
-                                return new Response(
-
-                                    "Conteúdo indisponível offline.",
-
-                                    {
-
-                                        status:
-                                            503,
-
-                                        statusText:
-                                            "Offline"
-
-                                    }
-
-                                );
-
-                            }
-
                         );
 
                     }
-
                 )
 
         );
 
     }
-
 );
