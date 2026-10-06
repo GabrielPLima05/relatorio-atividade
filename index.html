@@ -20,7 +20,6 @@ content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <link rel="icon" type="image/png" href="./icons/icon.png">
 <link rel="apple-touch-icon" href="./icons/icon.png">
 
-<!-- GERADOR DE PDF LOCAL -->
 <script src="./libs/jspdf.umd.min.js"></script>
 
 <style>
@@ -254,7 +253,7 @@ button {
     color: #b42318;
 }
 
-/* RELATÓRIOS */
+/* RELATÓRIOS SALVOS */
 
 #painelRelatorios {
     display: none;
@@ -319,10 +318,6 @@ button {
     gap: 10px;
     align-items: center;
     flex-wrap: wrap;
-}
-
-.visualizacao-dados {
-    margin-top: 15px;
 }
 
 .visualizacao-linha {
@@ -632,36 +627,74 @@ Relatório de Realização de Atividade
    ELEMENTOS
 ========================================================= */
 
-const el = id => document.getElementById(id);
+const el = id =>
+    document.getElementById(id);
 
-const formulario = el("formulario");
-const statusApp = el("status");
+const formulario =
+    el("formulario");
 
-const nome = el("nome");
-const area = el("area");
-const atividade = el("atividade");
-const contato = el("contato");
-const empresa = el("empresa");
-const descricao = el("descricao");
+const statusApp =
+    el("status");
 
-const cameraAntes = el("cameraAntes");
-const galeriaAntesInput = el("galeriaAntesInput");
+const nome =
+    el("nome");
 
-const cameraDepois = el("cameraDepois");
-const galeriaDepoisInput = el("galeriaDepoisInput");
+const area =
+    el("area");
 
-const btnInstalar = el("instalar");
-const btnSalvar = el("salvar");
-const btnRelatorios = el("relatorios");
-const btnBaixarAtual = el("baixarAtual");
-const btnLimpar = el("limpar");
+const atividade =
+    el("atividade");
 
-const painelRelatorios = el("painelRelatorios");
-const listaRelatorios = el("listaRelatorios");
+const contato =
+    el("contato");
 
-const visualizador = el("visualizador");
-const conteudoVisualizacao = el("conteudoVisualizacao");
-const fecharVisualizacao = el("fecharVisualizacao");
+const empresa =
+    el("empresa");
+
+const descricao =
+    el("descricao");
+
+const cameraAntes =
+    el("cameraAntes");
+
+const galeriaAntesInput =
+    el("galeriaAntesInput");
+
+const cameraDepois =
+    el("cameraDepois");
+
+const galeriaDepoisInput =
+    el("galeriaDepoisInput");
+
+const btnInstalar =
+    el("instalar");
+
+const btnSalvar =
+    el("salvar");
+
+const btnRelatorios =
+    el("relatorios");
+
+const btnBaixarAtual =
+    el("baixarAtual");
+
+const btnLimpar =
+    el("limpar");
+
+const painelRelatorios =
+    el("painelRelatorios");
+
+const listaRelatorios =
+    el("listaRelatorios");
+
+const visualizador =
+    el("visualizador");
+
+const conteudoVisualizacao =
+    el("conteudoVisualizacao");
+
+const fecharVisualizacao =
+    el("fecharVisualizacao");
 
 
 /* =========================================================
@@ -670,29 +703,34 @@ const fecharVisualizacao = el("fecharVisualizacao");
 
 if ("serviceWorker" in navigator) {
 
-    window.addEventListener("load", async () => {
+    window.addEventListener(
+        "load",
+        async () => {
 
-        try {
+            try {
 
-            const registro =
-                await navigator.serviceWorker.register(
-                    "./service-worker.js",
-                    { updateViaCache: "none" }
+                const registro =
+                    await navigator.serviceWorker.register(
+                        "./service-worker.js",
+                        {
+                            updateViaCache: "none"
+                        }
+                    );
+
+                await registro.update();
+
+            }
+            catch (erro) {
+
+                console.error(
+                    "Erro no Service Worker:",
+                    erro
                 );
 
-            await registro.update();
+            }
 
         }
-        catch (erro) {
-
-            console.error(
-                "Erro no Service Worker:",
-                erro
-            );
-
-        }
-
-    });
+    );
 
 }
 
@@ -701,7 +739,8 @@ if ("serviceWorker" in navigator) {
    INSTALAÇÃO
 ========================================================= */
 
-let eventoInstalacao = null;
+let eventoInstalacao =
+    null;
 
 window.addEventListener(
     "beforeinstallprompt",
@@ -709,7 +748,8 @@ window.addEventListener(
 
         evento.preventDefault();
 
-        eventoInstalacao = evento;
+        eventoInstalacao =
+            evento;
 
         btnInstalar.style.display =
             "inline-block";
@@ -735,7 +775,8 @@ btnInstalar.addEventListener(
 
         await eventoInstalacao.userChoice;
 
-        eventoInstalacao = null;
+        eventoInstalacao =
+            null;
 
         btnInstalar.style.display =
             "none";
@@ -747,7 +788,8 @@ window.addEventListener(
     "appinstalled",
     () => {
 
-        eventoInstalacao = null;
+        eventoInstalacao =
+            null;
 
         btnInstalar.style.display =
             "none";
@@ -771,6 +813,7 @@ const DB_VERSION =
 
 const STORE_NAME =
     "relatorios";
+
 
 function abrirBanco() {
 
@@ -798,13 +841,17 @@ function abrirBanco() {
                         const store =
                             db.createObjectStore(
                                 STORE_NAME,
-                                { keyPath: "id" }
+                                {
+                                    keyPath: "id"
+                                }
                             );
 
                         store.createIndex(
                             "data",
                             "data",
-                            { unique: false }
+                            {
+                                unique: false
+                            }
                         );
 
                     }
@@ -812,14 +859,22 @@ function abrirBanco() {
                 };
 
             request.onsuccess =
-                () => resolve(
-                    request.result
-                );
+                () => {
+
+                    resolve(
+                        request.result
+                    );
+
+                };
 
             request.onerror =
-                () => reject(
-                    request.error
-                );
+                () => {
+
+                    reject(
+                        request.error
+                    );
+
+                };
 
         }
     );
@@ -831,10 +886,14 @@ function abrirBanco() {
    VARIÁVEIS
 ========================================================= */
 
-let fotosAntes = [];
-let fotosDepois = [];
+let fotosAntes =
+    [];
 
-let relatorioAbertoId = null;
+let fotosDepois =
+    [];
+
+let relatorioAbertoId =
+    null;
 
 
 /* =========================================================
@@ -891,11 +950,14 @@ function adicionarFotos(
 
                 lista.push({
 
-                    id: gerarId(),
+                    id:
+                        gerarId(),
 
-                    blob: arquivo,
+                    blob:
+                        arquivo,
 
-                    legenda: ""
+                    legenda:
+                        ""
 
                 });
 
@@ -904,7 +966,8 @@ function adicionarFotos(
         }
     );
 
-    input.value = "";
+    input.value =
+        "";
 
     renderizarGaleria(
         lista,
@@ -924,7 +987,8 @@ function renderizarGaleria(
     const galeria =
         el(galeriaId);
 
-    galeria.innerHTML = "";
+    galeria.innerHTML =
+        "";
 
     lista.forEach(
         (foto, index) => {
@@ -948,12 +1012,22 @@ function renderizarGaleria(
                     foto.blob
                 );
 
-            img.src = url;
+            img.src =
+                url;
+
+            img.alt =
+                "Foto "
+                +
+                (index + 1);
 
             img.onload =
-                () => URL.revokeObjectURL(
-                    url
-                );
+                () => {
+
+                    URL.revokeObjectURL(
+                        url
+                    );
+
+                };
 
 
             const legenda =
@@ -998,6 +1072,9 @@ function renderizarGaleria(
             remover.textContent =
                 "×";
 
+            remover.title =
+                "Remover foto";
+
             remover.addEventListener(
                 "click",
                 () => {
@@ -1017,18 +1094,32 @@ function renderizarGaleria(
             );
 
 
-            bloco.appendChild(img);
-            bloco.appendChild(remover);
-            bloco.appendChild(legenda);
+            bloco.appendChild(
+                img
+            );
 
-            galeria.appendChild(bloco);
+            bloco.appendChild(
+                remover
+            );
+
+            bloco.appendChild(
+                legenda
+            );
+
+            galeria.appendChild(
+                bloco
+            );
 
         }
     );
 
+
     el(contadorId).textContent =
+
         lista.length
+
         +
+
         (
             lista.length === 1
             ?
@@ -1040,7 +1131,9 @@ function renderizarGaleria(
 }
 
 
-/* EVENTOS */
+/* =========================================================
+   EVENTOS DE FOTO
+========================================================= */
 
 cameraAntes.addEventListener(
     "change",
@@ -1131,7 +1224,7 @@ function obterDados() {
 
 
 /* =========================================================
-   SALVAR
+   SALVAR RELATÓRIO
 ========================================================= */
 
 btnSalvar.addEventListener(
@@ -1189,7 +1282,9 @@ btnSalvar.addEventListener(
 
             };
 
-            store.put(relatorio);
+            store.put(
+                relatorio
+            );
 
             await new Promise(
                 (resolve, reject) => {
@@ -1198,14 +1293,22 @@ btnSalvar.addEventListener(
                         resolve;
 
                     transaction.onerror =
-                        () => reject(
-                            transaction.error
-                        );
+                        () => {
+
+                            reject(
+                                transaction.error
+                            );
+
+                        };
 
                     transaction.onabort =
-                        () => reject(
-                            transaction.error
-                        );
+                        () => {
+
+                            reject(
+                                transaction.error
+                            );
+
+                        };
 
                 }
             );
@@ -1221,7 +1324,9 @@ btnSalvar.addEventListener(
         }
         catch (erro) {
 
-            console.error(erro);
+            console.error(
+                erro
+            );
 
             statusApp.textContent =
                 "Erro ao salvar relatório.";
@@ -1240,7 +1345,9 @@ btnSalvar.addEventListener(
    BUSCAR RELATÓRIO
 ========================================================= */
 
-async function buscarRelatorio(id) {
+async function buscarRelatorio(
+    id
+) {
 
     const db =
         await abrirBanco();
@@ -1256,20 +1363,30 @@ async function buscarRelatorio(id) {
 
             const request =
                 transaction
-                .objectStore(
-                    STORE_NAME
-                )
-                .get(id);
+                    .objectStore(
+                        STORE_NAME
+                    )
+                    .get(
+                        id
+                    );
 
             request.onsuccess =
-                () => resolve(
-                    request.result
-                );
+                () => {
+
+                    resolve(
+                        request.result
+                    );
+
+                };
 
             request.onerror =
-                () => reject(
-                    request.error
-                );
+                () => {
+
+                    reject(
+                        request.error
+                    );
+
+                };
 
         }
     );
@@ -1306,10 +1423,15 @@ async function listarRelatorios() {
 
                 const registros =
                     request.result.sort(
-                        (a, b) =>
-                            new Date(b.data)
-                            -
-                            new Date(a.data)
+                        (a, b) => {
+
+                            return (
+                                new Date(b.data)
+                                -
+                                new Date(a.data)
+                            );
+
+                        }
                     );
 
                 listaRelatorios.innerHTML =
@@ -1358,13 +1480,16 @@ async function listarRelatorios() {
                             "relatorio-info";
 
                         info.textContent =
+
                             new Date(
                                 relatorio.data
                             )
                             .toLocaleString(
                                 "pt-BR"
                             )
+
                             +
+
                             (
                                 relatorio.dados.empresa
                                 ?
@@ -1385,16 +1510,23 @@ async function listarRelatorios() {
                             "relatorio-fotos";
 
                         fotosInfo.textContent =
+
                             "Antes: "
+
                             +
+
                             (
                                 relatorio.fotosAntes
                                 ||
                                 []
                             ).length
+
                             +
+
                             " • Depois: "
+
                             +
+
                             (
                                 relatorio.fotosDepois
                                 ||
@@ -1429,9 +1561,13 @@ async function listarRelatorios() {
 
                         abrir.addEventListener(
                             "click",
-                            () => abrirRelatorio(
-                                relatorio.id
-                            )
+                            () => {
+
+                                abrirRelatorio(
+                                    relatorio.id
+                                );
+
+                            }
                         );
 
 
@@ -1453,13 +1589,17 @@ async function listarRelatorios() {
 
                         visualizar.addEventListener(
                             "click",
-                            () => visualizarRelatorio(
-                                relatorio
-                            )
+                            () => {
+
+                                visualizarRelatorio(
+                                    relatorio
+                                );
+
+                            }
                         );
 
 
-                        /* BAIXAR */
+                        /* DOWNLOAD */
 
                         const baixar =
                             document.createElement(
@@ -1477,9 +1617,13 @@ async function listarRelatorios() {
 
                         baixar.addEventListener(
                             "click",
-                            () => baixarPDF(
-                                relatorio
-                            )
+                            () => {
+
+                                baixarPDF(
+                                    relatorio
+                                );
+
+                            }
                         );
 
 
@@ -1501,21 +1645,49 @@ async function listarRelatorios() {
 
                         excluir.addEventListener(
                             "click",
-                            () => excluirRelatorio(
-                                relatorio.id
-                            )
+                            () => {
+
+                                excluirRelatorio(
+                                    relatorio.id
+                                );
+
+                            }
                         );
 
 
-                        botoes.appendChild(abrir);
-                        botoes.appendChild(visualizar);
-                        botoes.appendChild(baixar);
-                        botoes.appendChild(excluir);
+                        botoes.appendChild(
+                            abrir
+                        );
 
-                        item.appendChild(titulo);
-                        item.appendChild(info);
-                        item.appendChild(fotosInfo);
-                        item.appendChild(botoes);
+                        botoes.appendChild(
+                            visualizar
+                        );
+
+                        botoes.appendChild(
+                            baixar
+                        );
+
+                        botoes.appendChild(
+                            excluir
+                        );
+
+
+                        item.appendChild(
+                            titulo
+                        );
+
+                        item.appendChild(
+                            info
+                        );
+
+                        item.appendChild(
+                            fotosInfo
+                        );
+
+                        item.appendChild(
+                            botoes
+                        );
+
 
                         listaRelatorios.appendChild(
                             item
@@ -1529,7 +1701,9 @@ async function listarRelatorios() {
     }
     catch (erro) {
 
-        console.error(erro);
+        console.error(
+            erro
+        );
 
         listaRelatorios.innerHTML =
             "<p>Erro ao carregar relatórios.</p>";
@@ -1543,12 +1717,16 @@ async function listarRelatorios() {
    ABRIR PARA EDIÇÃO
 ========================================================= */
 
-async function abrirRelatorio(id) {
+async function abrirRelatorio(
+    id
+) {
 
     try {
 
         const relatorio =
-            await buscarRelatorio(id);
+            await buscarRelatorio(
+                id
+            );
 
         if (!relatorio) {
 
@@ -1616,7 +1794,9 @@ async function abrirRelatorio(id) {
     }
     catch (erro) {
 
-        console.error(erro);
+        console.error(
+            erro
+        );
 
         alert(
             "Não foi possível abrir o relatório."
@@ -1628,7 +1808,7 @@ async function abrirRelatorio(id) {
 
 
 /* =========================================================
-   VISUALIZAR
+   VISUALIZAÇÃO
 ========================================================= */
 
 async function criarFotosVisualizacao(
@@ -1642,6 +1822,27 @@ async function criarFotosVisualizacao(
 
     container.className =
         "visualizacao-fotos";
+
+    if (
+        !fotos ||
+        fotos.length === 0
+    ) {
+
+        const vazio =
+            document.createElement(
+                "p"
+            );
+
+        vazio.textContent =
+            "Nenhuma foto registrada.";
+
+        container.appendChild(
+            vazio
+        );
+
+        return container;
+
+    }
 
     for (
         let i = 0;
@@ -1670,12 +1871,17 @@ async function criarFotosVisualizacao(
                 foto.blob
             );
 
-        img.src = url;
+        img.src =
+            url;
 
         img.onload =
-            () => URL.revokeObjectURL(
-                url
-            );
+            () => {
+
+                URL.revokeObjectURL(
+                    url
+                );
+
+            };
 
         const legenda =
             document.createElement(
@@ -1689,8 +1895,13 @@ async function criarFotosVisualizacao(
             +
             (i + 1);
 
-        bloco.appendChild(img);
-        bloco.appendChild(legenda);
+        bloco.appendChild(
+            img
+        );
+
+        bloco.appendChild(
+            legenda
+        );
 
         container.appendChild(
             bloco
@@ -1775,6 +1986,15 @@ async function visualizarRelatorio(
     adicionarLinha(
         "Empresa",
         dados.empresa
+    );
+
+    adicionarLinha(
+        "Data",
+        new Date(
+            relatorio.data
+        ).toLocaleString(
+            "pt-BR"
+        )
     );
 
 
@@ -1868,138 +2088,208 @@ fecharVisualizacao.addEventListener(
 
 
 /* =========================================================
-   CONVERTER FOTO PARA DATA URL
-========================================================= */
-
-function blobParaDataURL(blob) {
-
-    return new Promise(
-        (resolve, reject) => {
-
-            const reader =
-                new FileReader();
-
-            reader.onload =
-                () => resolve(
-                    reader.result
-                );
-
-            reader.onerror =
-                reject;
-
-            reader.readAsDataURL(
-                blob
-            );
-
-        }
-    );
-
-}
-
-
-/* =========================================================
    PREPARAR IMAGEM PARA PDF
 ========================================================= */
 
-async function prepararImagemPDF(blob) {
+async function prepararImagemPDF(
+    blob
+) {
 
-    const dataURL =
-        await blobParaDataURL(blob);
+    if (
+        !(blob instanceof Blob)
+    ) {
 
-    return new Promise(
-        (resolve, reject) => {
+        throw new Error(
+            "A imagem armazenada não é um arquivo válido."
+        );
 
-            const img =
-                new Image();
+    }
 
-            img.onload =
-                () => {
 
-                    /*
-                    Redimensiona a foto antes de colocar no PDF.
-                    Isso evita PDFs gigantes no celular.
-                    */
+    const urlImagem =
+        URL.createObjectURL(
+            blob
+        );
 
-                    const max =
-                        1600;
 
-                    let largura =
-                        img.width;
+    try {
 
-                    let altura =
-                        img.height;
+        const img =
+            await new Promise(
+                (resolve, reject) => {
 
-                    if (
-                        largura > max ||
-                        altura > max
-                    ) {
+                    const imagem =
+                        new Image();
 
-                        const escala =
-                            Math.min(
-                                max / largura,
-                                max / altura
-                            );
-
-                        largura =
-                            Math.round(
-                                largura * escala
-                            );
-
-                        altura =
-                            Math.round(
-                                altura * escala
-                            );
-
-                    }
-
-                    const canvas =
-                        document.createElement(
-                            "canvas"
+                    imagem.onload =
+                        () => resolve(
+                            imagem
                         );
 
-                    canvas.width =
-                        largura;
-
-                    canvas.height =
-                        altura;
-
-                    const ctx =
-                        canvas.getContext(
-                            "2d"
+                    imagem.onerror =
+                        () => reject(
+                            new Error(
+                                "O navegador não conseguiu abrir esta imagem."
+                            )
                         );
 
-                    ctx.drawImage(
-                        img,
-                        0,
-                        0,
-                        largura,
-                        altura
-                    );
+                    imagem.src =
+                        urlImagem;
 
-                    resolve({
+                }
+            );
 
-                        data:
-                            canvas.toDataURL(
-                                "image/jpeg",
-                                0.82
-                            ),
 
-                        largura,
+        const larguraOriginal =
+            img.naturalWidth
+            ||
+            img.width;
 
-                        altura
+        const alturaOriginal =
+            img.naturalHeight
+            ||
+            img.height;
 
-                    });
 
-                };
+        if (
+            !larguraOriginal ||
+            !alturaOriginal
+        ) {
 
-            img.onerror =
-                reject;
-
-            img.src =
-                dataURL;
+            throw new Error(
+                "A imagem possui dimensões inválidas."
+            );
 
         }
-    );
+
+
+        const TAMANHO_MAXIMO =
+            1280;
+
+
+        let largura =
+            larguraOriginal;
+
+        let altura =
+            alturaOriginal;
+
+
+        if (
+            largura > TAMANHO_MAXIMO ||
+            altura > TAMANHO_MAXIMO
+        ) {
+
+            const escala =
+                Math.min(
+                    TAMANHO_MAXIMO / largura,
+                    TAMANHO_MAXIMO / altura
+                );
+
+
+            largura =
+                Math.round(
+                    largura * escala
+                );
+
+
+            altura =
+                Math.round(
+                    altura * escala
+                );
+
+        }
+
+
+        const canvas =
+            document.createElement(
+                "canvas"
+            );
+
+
+        canvas.width =
+            largura;
+
+        canvas.height =
+            altura;
+
+
+        const ctx =
+            canvas.getContext(
+                "2d",
+                {
+                    alpha: false
+                }
+            );
+
+
+        if (!ctx) {
+
+            throw new Error(
+                "Não foi possível preparar a imagem."
+            );
+
+        }
+
+
+        ctx.fillStyle =
+            "#FFFFFF";
+
+        ctx.fillRect(
+            0,
+            0,
+            largura,
+            altura
+        );
+
+
+        ctx.drawImage(
+            img,
+            0,
+            0,
+            largura,
+            altura
+        );
+
+
+        const data =
+            canvas.toDataURL(
+                "image/jpeg",
+                0.72
+            );
+
+
+        if (
+            !data ||
+            !data.startsWith(
+                "data:image/jpeg"
+            )
+        ) {
+
+            throw new Error(
+                "Não foi possível converter a imagem para JPEG."
+            );
+
+        }
+
+
+        return {
+
+            data,
+
+            largura,
+
+            altura
+
+        };
+
+    }
+    finally {
+
+        URL.revokeObjectURL(
+            urlImagem
+        );
+
+    }
 
 }
 
@@ -2037,7 +2327,7 @@ function limparNomeArquivo(
 
 
 /* =========================================================
-   GERAR PDF REAL
+   GERAR E BAIXAR PDF
 ========================================================= */
 
 async function baixarPDF(
@@ -2050,29 +2340,47 @@ async function baixarPDF(
     ) {
 
         alert(
-            "O gerador de PDF não foi carregado. Verifique se o arquivo libs/jspdf.umd.min.js está no repositório."
+            "O gerador de PDF não foi carregado. Verifique o arquivo libs/jspdf.umd.min.js."
         );
 
         return;
 
     }
 
+
     statusApp.textContent =
         "Gerando PDF...";
+
 
     try {
 
         const { jsPDF } =
             window.jspdf;
 
+
         const pdf =
             new jsPDF({
-                orientation: "portrait",
-                unit: "mm",
-                format: "a4",
-                compress: true
+
+                orientation:
+                    "portrait",
+
+                unit:
+                    "mm",
+
+                format:
+                    "a4",
+
+                compress:
+                    true
+
             });
 
+
+        const larguraPagina =
+            210;
+
+        const alturaPagina =
+            297;
 
         const margemEsquerda =
             20;
@@ -2080,11 +2388,8 @@ async function baixarPDF(
         const margemDireita =
             20;
 
-        const larguraPagina =
-            210;
-
-        const alturaPagina =
-            297;
+        const margemInferior =
+            18;
 
         const larguraUtil =
             larguraPagina
@@ -2093,23 +2398,26 @@ async function baixarPDF(
             -
             margemDireita;
 
-        let y = 20;
+        let y =
+            20;
 
 
-        /* FUNÇÕES */
-
-        function novaPaginaSeNecessario(
+        function verificarPagina(
             alturaNecessaria
         ) {
 
             if (
-                y + alturaNecessaria >
-                alturaPagina - 18
+                y + alturaNecessaria
+                >
+                alturaPagina
+                -
+                margemInferior
             ) {
 
                 pdf.addPage();
 
-                y = 20;
+                y =
+                    20;
 
             }
 
@@ -2120,8 +2428,8 @@ async function baixarPDF(
             texto
         ) {
 
-            novaPaginaSeNecessario(
-                15
+            verificarPagina(
+                16
             );
 
             pdf.setFont(
@@ -2139,7 +2447,8 @@ async function baixarPDF(
                 y
             );
 
-            y += 3;
+            y +=
+                3;
 
             pdf.line(
                 margemEsquerda,
@@ -2150,18 +2459,19 @@ async function baixarPDF(
                 y
             );
 
-            y += 8;
+            y +=
+                8;
 
         }
 
 
-        function campo(
+        function adicionarCampo(
             titulo,
             valor
         ) {
 
-            novaPaginaSeNecessario(
-                12
+            verificarPagina(
+                14
             );
 
             pdf.setFont(
@@ -2184,11 +2494,14 @@ async function baixarPDF(
                 "normal"
             );
 
+            const texto =
+                String(
+                    valor || "—"
+                );
+
             const linhas =
                 pdf.splitTextToSize(
-                    String(
-                        valor || "—"
-                    ),
+                    texto,
                     larguraUtil - 38
                 );
 
@@ -2218,62 +2531,68 @@ async function baixarPDF(
             16
         );
 
-        const titulo =
+
+        const tituloPrincipal =
             "RELATORIO DE REALIZACAO DE ATIVIDADE";
 
-        const tituloLinhas =
+
+        const linhasTitulo =
             pdf.splitTextToSize(
-                titulo,
+                tituloPrincipal,
                 larguraUtil
             );
 
+
         pdf.text(
-            tituloLinhas,
+            linhasTitulo,
             larguraPagina / 2,
             y,
             {
-                align: "center"
+                align:
+                    "center"
             }
         );
 
+
         y +=
-            tituloLinhas.length * 7
+            linhasTitulo.length * 7
             +
-            6;
+            7;
 
 
-        /* DADOS */
+        /* INFORMAÇÕES */
 
-        campo(
+        adicionarCampo(
             "Nome",
             relatorio.dados.nome
         );
 
-        campo(
+        adicionarCampo(
             "Area",
             relatorio.dados.area
         );
 
-        campo(
+        adicionarCampo(
             "Atividade",
             relatorio.dados.atividade
         );
 
-        campo(
+        adicionarCampo(
             "Contato",
             relatorio.dados.contato
         );
 
-        campo(
+        adicionarCampo(
             "Empresa",
             relatorio.dados.empresa
         );
 
-        campo(
+        adicionarCampo(
             "Data",
             new Date(
                 relatorio.data
-            ).toLocaleString(
+            )
+            .toLocaleString(
                 "pt-BR"
             )
         );
@@ -2285,6 +2604,7 @@ async function baixarPDF(
             "DESCRICAO DA ATIVIDADE"
         );
 
+
         pdf.setFont(
             "helvetica",
             "normal"
@@ -2294,45 +2614,54 @@ async function baixarPDF(
             10
         );
 
+
         const linhasDescricao =
             pdf.splitTextToSize(
-                relatorio.dados.descricao
-                ||
-                "—",
+                String(
+                    relatorio.dados.descricao
+                    ||
+                    "—"
+                ),
                 larguraUtil
             );
 
-        linhasDescricao.forEach(
-            linha => {
 
-                novaPaginaSeNecessario(
-                    6
-                );
+        for (
+            const linha
+            of linhasDescricao
+        ) {
 
-                pdf.text(
-                    linha,
-                    margemEsquerda,
-                    y
-                );
+            verificarPagina(
+                6
+            );
 
-                y += 5;
+            pdf.text(
+                linha,
+                margemEsquerda,
+                y
+            );
 
-            }
-        );
+            y +=
+                5;
 
-        y += 5;
+        }
+
+
+        y +=
+            5;
 
 
         /* FOTOS */
 
         async function adicionarGrupoFotos(
-            tituloGrupo,
+            titulo,
             fotos
         ) {
 
             tituloSecao(
-                tituloGrupo
+                titulo
             );
+
 
             if (
                 !fotos ||
@@ -2354,7 +2683,8 @@ async function baixarPDF(
                     y
                 );
 
-                y += 10;
+                y +=
+                    10;
 
                 return;
 
@@ -2370,6 +2700,7 @@ async function baixarPDF(
                 const foto =
                     fotos[i];
 
+
                 statusApp.textContent =
                     "Processando foto "
                     +
@@ -2382,128 +2713,175 @@ async function baixarPDF(
                     "...";
 
 
-                const imagem =
-                    await prepararImagemPDF(
-                        foto.blob
-                    );
+                try {
+
+                    const imagem =
+                        await prepararImagemPDF(
+                            foto.blob
+                        );
 
 
-                /*
-                Uma foto por bloco.
-                Altura máxima de 100 mm.
-                */
+                    const larguraMax =
+                        larguraUtil;
 
-                const larguraMax =
-                    larguraUtil;
+                    const alturaMax =
+                        100;
 
-                const alturaMax =
-                    100;
 
-                const proporcao =
-                    Math.min(
-                        larguraMax
-                        /
-                        imagem.largura,
+                    const escala =
+                        Math.min(
+                            larguraMax
+                            /
+                            imagem.largura,
 
-                        alturaMax
-                        /
+                            alturaMax
+                            /
+                            imagem.altura
+                        );
+
+
+                    const larguraFoto =
+                        imagem.largura
+                        *
+                        escala;
+
+                    const alturaFoto =
                         imagem.altura
+                        *
+                        escala;
+
+
+                    const legenda =
+                        String(
+                            foto.legenda
+                            ||
+                            (
+                                "Foto "
+                                +
+                                (i + 1)
+                            )
+                        );
+
+
+                    const linhasLegenda =
+                        pdf.splitTextToSize(
+                            legenda,
+                            larguraUtil
+                        );
+
+
+                    const alturaLegenda =
+                        linhasLegenda.length
+                        *
+                        5;
+
+
+                    verificarPagina(
+                        alturaFoto
+                        +
+                        alturaLegenda
+                        +
+                        15
                     );
 
 
-                const larguraFoto =
-                    imagem.largura
-                    *
-                    proporcao;
-
-                const alturaFoto =
-                    imagem.altura
-                    *
-                    proporcao;
-
-
-                const legenda =
-                    foto.legenda
-                    ||
-                    "Foto "
-                    +
-                    (i + 1);
+                    const xFoto =
+                        margemEsquerda
+                        +
+                        (
+                            larguraUtil
+                            -
+                            larguraFoto
+                        )
+                        /
+                        2;
 
 
-                const linhasLegenda =
-                    pdf.splitTextToSize(
-                        legenda,
-                        larguraUtil
+                    pdf.addImage(
+                        imagem.data,
+                        "JPEG",
+                        xFoto,
+                        y,
+                        larguraFoto,
+                        alturaFoto
                     );
 
 
-                const alturaBloco =
-                    alturaFoto
-                    +
-                    linhasLegenda.length * 5
-                    +
-                    12;
+                    y +=
+                        alturaFoto
+                        +
+                        5;
 
 
-                novaPaginaSeNecessario(
-                    alturaBloco
-                );
+                    pdf.setFont(
+                        "helvetica",
+                        "italic"
+                    );
+
+                    pdf.setFontSize(
+                        9
+                    );
 
 
-                const xFoto =
-                    margemEsquerda
-                    +
-                    (
-                        larguraUtil
-                        -
-                        larguraFoto
-                    )
-                    /
-                    2;
+                    pdf.text(
+                        linhasLegenda,
+                        larguraPagina / 2,
+                        y,
+                        {
+                            align:
+                                "center"
+                        }
+                    );
 
 
-                pdf.addImage(
-                    imagem.data,
-                    "JPEG",
-                    xFoto,
-                    y,
-                    larguraFoto,
-                    alturaFoto,
-                    undefined,
-                    "FAST"
-                );
+                    y +=
+                        alturaLegenda
+                        +
+                        8;
+
+                }
+                catch (erroFoto) {
+
+                    console.error(
+                        "Erro na foto "
+                        +
+                        (i + 1)
+                        +
+                        ":",
+                        erroFoto
+                    );
 
 
-                y +=
-                    alturaFoto
-                    +
-                    5;
+                    verificarPagina(
+                        10
+                    );
 
 
-                pdf.setFont(
-                    "helvetica",
-                    "italic"
-                );
+                    pdf.setFont(
+                        "helvetica",
+                        "italic"
+                    );
 
-                pdf.setFontSize(
-                    9
-                );
-
-
-                pdf.text(
-                    linhasLegenda,
-                    larguraPagina / 2,
-                    y,
-                    {
-                        align: "center"
-                    }
-                );
+                    pdf.setFontSize(
+                        9
+                    );
 
 
-                y +=
-                    linhasLegenda.length * 5
-                    +
-                    8;
+                    pdf.text(
+                        "Foto "
+                        +
+                        (i + 1)
+                        +
+                        " nao pode ser processada.",
+                        margemEsquerda,
+                        y
+                    );
+
+
+                    y +=
+                        8;
+
+                }
 
             }
 
@@ -2522,15 +2900,15 @@ async function baixarPDF(
         );
 
 
-        /* RODAPÉ DAS PÁGINAS */
+        /* PAGINAÇÃO */
 
-        const quantidadePaginas =
+        const totalPaginas =
             pdf.getNumberOfPages();
 
 
         for (
             let pagina = 1;
-            pagina <= quantidadePaginas;
+            pagina <= totalPaginas;
             pagina++
         ) {
 
@@ -2554,23 +2932,25 @@ async function baixarPDF(
                 +
                 " de "
                 +
-                quantidadePaginas,
+                totalPaginas,
                 larguraPagina / 2,
                 289,
                 {
-                    align: "center"
+                    align:
+                        "center"
                 }
             );
 
         }
 
 
-        /* NOME */
+        /* NOME DO PDF */
 
         const data =
             new Date(
                 relatorio.data
             );
+
 
         const dia =
             String(
@@ -2581,6 +2961,7 @@ async function baixarPDF(
                 "0"
             );
 
+
         const mes =
             String(
                 data.getMonth() + 1
@@ -2590,16 +2971,23 @@ async function baixarPDF(
                 "0"
             );
 
+
         const ano =
             data.getFullYear();
+
+
+        const atividadeNome =
+            limparNomeArquivo(
+                relatorio.dados.atividade
+            )
+            ||
+            "Atividade";
 
 
         const nomeArquivo =
             "Relatorio_"
             +
-            limparNomeArquivo(
-                relatorio.dados.atividade
-            )
+            atividadeNome
             +
             "_"
             +
@@ -2616,18 +3004,81 @@ async function baixarPDF(
             ".pdf";
 
 
-        /*
-        DOWNLOAD DIRETO.
-        Não chama window.print().
-        */
+        /* GERAR BLOB */
 
-        pdf.save(
-            nomeArquivo
+        statusApp.textContent =
+            "Finalizando PDF...";
+
+
+        const blobPDF =
+            pdf.output(
+                "blob"
+            );
+
+
+        if (
+            !blobPDF ||
+            blobPDF.size === 0
+        ) {
+
+            throw new Error(
+                "O arquivo PDF gerado está vazio."
+            );
+
+        }
+
+
+        /* DOWNLOAD DIRETO */
+
+        const urlPDF =
+            URL.createObjectURL(
+                blobPDF
+            );
+
+
+        const link =
+            document.createElement(
+                "a"
+            );
+
+
+        link.href =
+            urlPDF;
+
+        link.download =
+            nomeArquivo;
+
+        link.style.display =
+            "none";
+
+
+        document.body.appendChild(
+            link
+        );
+
+
+        link.click();
+
+
+        document.body.removeChild(
+            link
+        );
+
+
+        setTimeout(
+            () => {
+
+                URL.revokeObjectURL(
+                    urlPDF
+                );
+
+            },
+            10000
         );
 
 
         statusApp.textContent =
-            "✓ PDF baixado: "
+            "✓ PDF gerado: "
             +
             nomeArquivo;
 
@@ -2635,15 +3086,32 @@ async function baixarPDF(
     catch (erro) {
 
         console.error(
-            "Erro ao gerar PDF:",
+            "ERRO COMPLETO DO PDF:",
             erro
         );
 
+
+        const mensagem =
+            erro &&
+            erro.message
+            ?
+            erro.message
+            :
+            String(erro);
+
+
         statusApp.textContent =
-            "Erro ao gerar PDF.";
+            "Erro ao gerar PDF: "
+            +
+            mensagem;
+
 
         alert(
-            "Não foi possível gerar o PDF."
+            "Não foi possível gerar o PDF.\n\n"
+            +
+            "Erro técnico:\n"
+            +
+            mensagem
         );
 
     }
@@ -2667,6 +3135,7 @@ btnBaixarAtual.addEventListener(
 
         }
 
+
         const relatorio = {
 
             id:
@@ -2688,6 +3157,7 @@ btnBaixarAtual.addEventListener(
                 fotosDepois
 
         };
+
 
         await baixarPDF(
             relatorio
@@ -2715,6 +3185,7 @@ async function excluirRelatorio(
 
     }
 
+
     try {
 
         const db =
@@ -2726,11 +3197,15 @@ async function excluirRelatorio(
                 "readwrite"
             );
 
+
         transaction
             .objectStore(
                 STORE_NAME
             )
-            .delete(id);
+            .delete(
+                id
+            );
+
 
         transaction.oncomplete =
             async () => {
@@ -2744,8 +3219,10 @@ async function excluirRelatorio(
 
                 }
 
+
                 statusApp.textContent =
                     "Relatório excluído.";
+
 
                 await listarRelatorios();
 
@@ -2754,7 +3231,9 @@ async function excluirRelatorio(
     }
     catch (erro) {
 
-        console.error(erro);
+        console.error(
+            erro
+        );
 
         alert(
             "Não foi possível excluir o relatório."
@@ -2766,7 +3245,7 @@ async function excluirRelatorio(
 
 
 /* =========================================================
-   MOSTRAR RELATÓRIOS
+   ABRIR PAINEL DE RELATÓRIOS
 ========================================================= */
 
 btnRelatorios.addEventListener(
@@ -2786,10 +3265,13 @@ btnRelatorios.addEventListener(
 
         }
 
+
         painelRelatorios.style.display =
             "block";
 
+
         await listarRelatorios();
+
 
         painelRelatorios.scrollIntoView({
             behavior: "smooth",
@@ -2801,7 +3283,7 @@ btnRelatorios.addEventListener(
 
 
 /* =========================================================
-   LIMPAR
+   LIMPAR FORMULÁRIO
 ========================================================= */
 
 btnLimpar.addEventListener(
@@ -2818,13 +3300,19 @@ btnLimpar.addEventListener(
 
         }
 
+
         formulario.reset();
 
-        fotosAntes = [];
-        fotosDepois = [];
+
+        fotosAntes =
+            [];
+
+        fotosDepois =
+            [];
 
         relatorioAbertoId =
             null;
+
 
         renderizarGaleria(
             fotosAntes,
@@ -2832,17 +3320,21 @@ btnLimpar.addEventListener(
             "contadorAntes"
         );
 
+
         renderizarGaleria(
             fotosDepois,
             "galeriaDepois",
             "contadorDepois"
         );
 
+
         visualizador.style.display =
             "none";
 
+
         statusApp.textContent =
             "Novo relatório iniciado.";
+
 
         window.scrollTo({
             top: 0,
@@ -2867,6 +3359,7 @@ window.addEventListener(
     }
 );
 
+
 window.addEventListener(
     "offline",
     () => {
@@ -2876,6 +3369,7 @@ window.addEventListener(
 
     }
 );
+
 
 if (!navigator.onLine) {
 
