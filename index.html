@@ -2,628 +2,676 @@
 <html lang="pt-BR">
 
 <head>
-    <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0, viewport-fit=cover"
-    >
-
-    <meta name="theme-color" content="#17365d">
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="default">
-    <meta name="apple-mobile-web-app-title" content="Relatório">
-
-    <title>Relatório de Realização de Atividade</title>
-
-    <link rel="manifest" href="./manifest.json">
-    <link rel="icon" type="image/png" href="./icons/icon.png">
-    <link rel="apple-touch-icon" href="./icons/icon.png">
-
-    <style>
-
-        * {
-            box-sizing: border-box;
-        }
-
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: Arial, Helvetica, sans-serif;
-            background: #f3f6fa;
-            color: #1f2937;
-        }
-
-        .container {
-            max-width: 880px;
-            margin: auto;
-            padding: 15px;
-        }
-
-        /* =====================================================
-           CABEÇALHO
-        ===================================================== */
-
-        .cabecalho {
-            background: #17365d;
-            color: white;
-            padding: 20px;
-            border-radius: 14px;
-        }
-
-        .cabecalho h1 {
-            margin: 0 0 7px 0;
-            font-size: 21px;
-        }
-
-        .cabecalho p {
-            margin: 0 0 12px 0;
-        }
-
-        #status {
-            background: white;
-            color: #17365d;
-            padding: 10px;
-            border-radius: 8px;
-            font-size: 13px;
-        }
-
-        .versao {
-            margin-top: 10px;
-            font-size: 12px;
-            opacity: 0.85;
-        }
-
-        /* =====================================================
-           CARDS
-        ===================================================== */
-
-        .card {
-            background: white;
-            margin-top: 14px;
-            padding: 17px;
-            border-radius: 13px;
-            border: 1px solid #d8e0ea;
-        }
-
-        .card h2 {
-            margin-top: 0;
-            color: #17365d;
-            font-size: 17px;
-        }
-
-        /* =====================================================
-           CAMPOS
-        ===================================================== */
-
-        .campo {
-            display: block;
-            margin: 14px 0 5px 0;
-            font-weight: bold;
-        }
-
-        input[type="text"],
-        input[type="tel"],
-        textarea {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #c7d0db;
-            border-radius: 8px;
-            font-size: 16px;
-            font-family: Arial, Helvetica, sans-serif;
-        }
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+<meta name="theme-color" content="#17365d">
+
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+
+<title>Relatório de Realização de Atividade</title>
+
+<link rel="manifest" href="./manifest.json">
+<link rel="icon" href="./icons/icon.png">
+<link rel="apple-touch-icon" href="./icons/icon.png">
+
+<style>
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f3f6fa;
+    color: #1f2937;
+}
+
+.container {
+    max-width: 880px;
+    margin: auto;
+    padding: 15px;
+}
+
+/* ==============================
+   CABEÇALHO
+============================== */
 
-        textarea {
-            min-height: 120px;
-            resize: vertical;
-        }
+.cabecalho {
+    background: #17365d;
+    color: white;
+    padding: 20px;
+    border-radius: 14px;
+}
 
-        /* =====================================================
-           FOTO
-        ===================================================== */
+.cabecalho h1 {
+    margin: 0 0 7px;
+    font-size: 21px;
+}
 
-        .acoes-fotos {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            margin-top: 10px;
-        }
+.cabecalho p {
+    margin: 0 0 12px;
+}
 
-        .botao-camera,
-        .botao-galeria {
-            display: flex;
-            align-items: center;
-            justify-content: center;
+#status {
+    background: white;
+    color: #17365d;
+    padding: 10px;
+    border-radius: 8px;
+    font-size: 13px;
+}
 
-            min-height: 48px;
+.versao {
+    margin-top: 10px;
+    font-size: 12px;
+    opacity: .85;
+}
 
-            padding: 12px;
+/* ==============================
+   CARDS
+============================== */
 
-            border-radius: 8px;
+.card {
+    background: white;
+    margin-top: 14px;
+    padding: 17px;
+    border-radius: 13px;
+    border: 1px solid #d8e0ea;
+}
 
-            font-size: 14px;
-            font-weight: bold;
+.card h2 {
+    margin-top: 0;
+    color: #17365d;
+    font-size: 17px;
+}
 
-            text-align: center;
+/* ==============================
+   CAMPOS
+============================== */
 
-            cursor: pointer;
-        }
+.campo {
+    display: block;
+    margin: 14px 0 5px;
+    font-weight: bold;
+}
 
-        .botao-camera {
-            background: #17365d;
-            color: white;
-        }
+input[type="text"],
+input[type="tel"],
+textarea {
 
-        .botao-galeria {
-            background: #e6eef8;
-            color: #17365d;
-            border: 1px solid #c5d5e8;
-        }
+    width: 100%;
 
-        .botao-camera input,
-        .botao-galeria input {
-            display: none;
-        }
+    padding: 12px;
 
-        /* =====================================================
-           GALERIA
-        ===================================================== */
+    border: 1px solid #c7d0db;
+    border-radius: 8px;
 
-        .galeria {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 10px;
-            margin-top: 12px;
-        }
+    font-size: 16px;
+    font-family: Arial, Helvetica, sans-serif;
+}
 
-        .foto {
-            position: relative;
+textarea {
+    min-height: 120px;
+    resize: vertical;
+}
 
-            background: white;
+/* ==============================
+   FOTOS
+============================== */
 
-            border: 1px solid #d8e0ea;
-            border-radius: 9px;
+.acoes-fotos {
 
-            overflow: hidden;
+    display: grid;
 
-            padding-bottom: 8px;
-        }
+    grid-template-columns:
+        1fr 1fr;
 
-        .foto img {
-            display: block;
+    gap: 10px;
 
-            width: 100%;
+    margin-top: 10px;
+}
 
-            aspect-ratio: 1;
+.botao-camera,
+.botao-galeria {
 
-            object-fit: cover;
-        }
+    display: flex;
 
-        .legenda {
-            width: calc(100% - 12px);
+    align-items: center;
+    justify-content: center;
 
-            margin: 7px 6px 0 6px;
+    min-height: 48px;
 
-            padding: 8px;
+    padding: 12px;
 
-            border: 1px solid #c7d0db;
-            border-radius: 7px;
+    border-radius: 8px;
 
-            font-size: 13px;
-        }
+    font-weight: bold;
 
-        .remover {
-            position: absolute;
+    cursor: pointer;
+}
 
-            right: 5px;
-            top: 5px;
+.botao-camera {
+    background: #17365d;
+    color: white;
+}
 
-            width: 34px;
-            height: 34px;
+.botao-galeria {
 
-            padding: 0;
+    background: #e6eef8;
 
-            border: none;
-            border-radius: 50%;
+    color: #17365d;
 
-            background: #b42318;
-            color: white;
+    border: 1px solid #c5d5e8;
+}
 
-            font-size: 20px;
+.botao-camera input,
+.botao-galeria input {
+    display: none;
+}
 
-            cursor: pointer;
-        }
+/* ==============================
+   GALERIA
+============================== */
 
-        .nota,
-        .contador {
-            margin-top: 8px;
-            color: #667085;
-            font-size: 12px;
-            line-height: 1.4;
-        }
+.galeria {
 
-        /* =====================================================
-           BOTÕES
-        ===================================================== */
+    display: grid;
 
-        .acoes {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-        }
+    grid-template-columns:
+        repeat(2,1fr);
 
-        button {
-            border: none;
-            border-radius: 8px;
-            padding: 12px 15px;
-            font-size: 14px;
-            font-weight: bold;
-            cursor: pointer;
-        }
+    gap: 10px;
 
-        #instalar {
-            display: none;
-            background: #7a4e00;
-            color: white;
-        }
+    margin-top: 12px;
+}
 
-        #pdf {
-            background: #17365d;
-            color: white;
-        }
+.foto {
 
-        #baixar {
-            background: #16794b;
-            color: white;
-        }
+    position: relative;
 
-        #salvar {
-            background: #e6eef8;
-            color: #17365d;
-        }
+    background: white;
 
-        #limpar {
-            background: #fee4e2;
-            color: #b42318;
-        }
+    border: 1px solid #d8e0ea;
 
-        /* =====================================================
-           RODAPÉ
-        ===================================================== */
+    border-radius: 9px;
 
-        .rodape-app {
-            text-align: center;
-            color: #667085;
-            font-size: 12px;
-            padding: 25px 10px 35px 10px;
-        }
+    overflow: hidden;
 
-        .rodape-app strong {
-            color: #17365d;
-        }
+    padding-bottom: 8px;
+}
 
-        /* =====================================================
-           RESPONSIVIDADE
-        ===================================================== */
+.foto img {
 
-        @media (min-width: 650px) {
+    width: 100%;
 
-            .galeria {
-                grid-template-columns: repeat(3, 1fr);
-            }
+    aspect-ratio: 1;
 
-        }
+    object-fit: cover;
+}
 
-        @media (max-width: 400px) {
+.legenda {
 
-            .acoes-fotos {
-                grid-template-columns: 1fr;
-            }
+    width: calc(100% - 12px);
 
-        }
+    margin: 7px 6px 0;
 
-    </style>
+    padding: 8px;
+
+    border: 1px solid #c7d0db;
+
+    border-radius: 7px;
+}
+
+.remover {
+
+    position: absolute;
+
+    right: 5px;
+    top: 5px;
+
+    width: 34px;
+    height: 34px;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background: #b42318;
+
+    color: white;
+
+    font-size: 20px;
+
+    cursor: pointer;
+}
+
+.nota,
+.contador {
+
+    margin-top: 8px;
+
+    color: #667085;
+
+    font-size: 12px;
+}
+
+/* ==============================
+   BOTÕES
+============================== */
+
+.acoes {
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 8px;
+}
+
+button {
+
+    border: none;
+
+    border-radius: 8px;
+
+    padding: 12px 15px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+#salvar {
+    background: #16794b;
+    color: white;
+}
+
+#relatorios {
+    background: #17365d;
+    color: white;
+}
+
+#pdf {
+    background: #5b3f8c;
+    color: white;
+}
+
+#limpar {
+    background: #fee4e2;
+    color: #b42318;
+}
+
+/* ==============================
+   RELATÓRIOS SALVOS
+============================== */
+
+#painelRelatorios {
+    display: none;
+}
+
+.relatorio-item {
+
+    border: 1px solid #d8e0ea;
+
+    border-radius: 10px;
+
+    padding: 12px;
+
+    margin-top: 10px;
+}
+
+.relatorio-item strong {
+
+    display: block;
+
+    color: #17365d;
+
+    font-size: 16px;
+}
+
+.relatorio-info {
+
+    font-size: 13px;
+
+    color: #667085;
+
+    margin-top: 4px;
+}
+
+.relatorio-botoes {
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 6px;
+
+    margin-top: 10px;
+}
+
+.btn-abrir {
+    background: #17365d;
+    color: white;
+}
+
+.btn-pdf {
+    background: #5b3f8c;
+    color: white;
+}
+
+.btn-excluir {
+    background: #fee4e2;
+    color: #b42318;
+}
+
+/* ==============================
+   RODAPÉ
+============================== */
+
+.rodape {
+
+    text-align: center;
+
+    color: #667085;
+
+    font-size: 12px;
+
+    padding: 25px;
+}
+
+@media(min-width:650px) {
+
+    .galeria {
+        grid-template-columns:
+            repeat(3,1fr);
+    }
+
+}
+
+@media(max-width:400px) {
+
+    .acoes-fotos {
+        grid-template-columns:1fr;
+    }
+
+}
+
+</style>
 
 </head>
+
 
 <body>
 
 <main class="container">
 
-    <!-- =====================================================
-         CABEÇALHO
-    ====================================================== -->
+<section class="cabecalho">
 
-    <section class="cabecalho">
+<h1>
+RELATÓRIO DE REALIZAÇÃO DE ATIVIDADE
+</h1>
 
-        <h1>
-            RELATÓRIO DE REALIZAÇÃO DE ATIVIDADE
-        </h1>
+<p>
+Aplicativo offline para registro de atividades.
+</p>
 
-        <p>
-            Formulário offline com registro fotográfico.
-        </p>
+<div id="status">
+Aplicativo pronto.
+</div>
 
-        <div id="status">
-            Pronto para preenchimento.
-        </div>
+<div class="versao">
+Versão 6.0
+</div>
 
-        <div class="versao">
-            Versão 5.0
-        </div>
+</section>
 
-    </section>
 
+<form id="formulario">
 
-    <form id="formulario">
+<section class="card">
 
-        <!-- =================================================
-             INFORMAÇÕES
-        ================================================== -->
+<h2>Informações</h2>
 
-        <section class="card">
+<label class="campo">
+1. Insira seu nome *
+</label>
 
-            <h2>Informações</h2>
+<input id="nome"
+       type="text"
+       required>
 
-            <label class="campo" for="nome">
-                1. Insira seu nome *
-            </label>
 
-            <input
-                id="nome"
-                type="text"
-                required
-            >
+<label class="campo">
+2. Insira a área de realização da atividade *
+</label>
 
+<input id="area"
+       type="text"
+       required>
 
-            <label class="campo" for="area">
-                2. Insira a área de realização da atividade *
-            </label>
 
-            <input
-                id="area"
-                type="text"
-                required
-            >
+<label class="campo">
+3. Insira a atividade realizada *
+</label>
 
+<input id="atividade"
+       type="text"
+       required>
 
-            <label class="campo" for="atividade">
-                3. Insira a atividade realizada *
-            </label>
 
-            <input
-                id="atividade"
-                type="text"
-                required
-            >
+<label class="campo">
+4. Insira nº de contato
+</label>
 
+<input id="contato"
+       type="tel">
 
-            <label class="campo" for="contato">
-                4. Insira nº de contato
-            </label>
 
-            <input
-                id="contato"
-                type="tel"
-            >
+<label class="campo">
+5. Empresa *
+</label>
 
+<input id="empresa"
+       type="text"
+       required>
 
-            <label class="campo" for="empresa">
-                5. Empresa *
-            </label>
 
-            <input
-                id="empresa"
-                type="text"
-                required
-            >
+<label class="campo">
+8. Descrição da Atividade *
+</label>
 
+<textarea id="descricao"
+          required></textarea>
 
-            <label class="campo" for="descricao">
-                8. Descrição da Atividade *
-            </label>
+</section>
 
-            <textarea
-                id="descricao"
-                required
-            ></textarea>
 
-        </section>
+<!-- ==========================
+     ANTES
+=========================== -->
 
+<section class="card">
 
-        <!-- =================================================
-             IMAGENS ANTES
-        ================================================== -->
+<h2>
+6. Imagens ANTES
+</h2>
 
-        <section class="card">
+<div class="acoes-fotos">
 
-            <h2>
-                6. Imagens ANTES
-            </h2>
+<label class="botao-camera">
 
-            <div class="acoes-fotos">
+📷 Tirar foto
 
-                <label class="botao-camera">
+<input
+id="cameraAntes"
+type="file"
+accept="image/*"
+capture="environment">
 
-                    📷 Tirar foto
+</label>
 
-                    <input
-                        id="cameraAntes"
-                        type="file"
-                        accept="image/*"
-                        capture="environment"
-                    >
 
-                </label>
+<label class="botao-galeria">
 
+🖼️ Abrir galeria
 
-                <label class="botao-galeria">
+<input
+id="galeriaAntesInput"
+type="file"
+accept="image/*"
+multiple>
 
-                    🖼️ Abrir galeria
+</label>
 
-                    <input
-                        id="galeriaInputAntes"
-                        type="file"
-                        accept="image/*"
-                        multiple
-                    >
+</div>
 
-                </label>
+<div id="contadorAntes"
+     class="contador">
+0 fotos
+</div>
 
-            </div>
+<div id="galeriaAntes"
+     class="galeria">
+</div>
 
-            <div class="nota">
-                Use a câmera para tirar uma nova foto ou
-                abra a galeria para selecionar imagens existentes.
-            </div>
+</section>
 
-            <div
-                id="contadorAntes"
-                class="contador"
-            >
-                0 fotos
-            </div>
 
-            <div
-                id="galeriaAntes"
-                class="galeria"
-            ></div>
+<!-- ==========================
+     DEPOIS
+=========================== -->
 
-        </section>
+<section class="card">
 
+<h2>
+7. Imagens DEPOIS
+</h2>
 
-        <!-- =================================================
-             IMAGENS DEPOIS
-        ================================================== -->
+<div class="acoes-fotos">
 
-        <section class="card">
+<label class="botao-camera">
 
-            <h2>
-                7. Imagens DEPOIS
-            </h2>
+📷 Tirar foto
 
-            <div class="acoes-fotos">
+<input
+id="cameraDepois"
+type="file"
+accept="image/*"
+capture="environment">
 
-                <label class="botao-camera">
+</label>
 
-                    📷 Tirar foto
 
-                    <input
-                        id="cameraDepois"
-                        type="file"
-                        accept="image/*"
-                        capture="environment"
-                    >
+<label class="botao-galeria">
 
-                </label>
+🖼️ Abrir galeria
 
+<input
+id="galeriaDepoisInput"
+type="file"
+accept="image/*"
+multiple>
 
-                <label class="botao-galeria">
+</label>
 
-                    🖼️ Abrir galeria
+</div>
 
-                    <input
-                        id="galeriaInputDepois"
-                        type="file"
-                        accept="image/*"
-                        multiple
-                    >
+<div id="contadorDepois"
+     class="contador">
+0 fotos
+</div>
 
-                </label>
+<div id="galeriaDepois"
+     class="galeria">
+</div>
 
-            </div>
+</section>
 
-            <div class="nota">
-                Use a câmera para tirar uma nova foto ou
-                abra a galeria para selecionar imagens existentes.
-            </div>
 
-            <div
-                id="contadorDepois"
-                class="contador"
-            >
-                0 fotos
-            </div>
+<!-- ==========================
+     AÇÕES
+=========================== -->
 
-            <div
-                id="galeriaDepois"
-                class="galeria"
-            ></div>
+<section class="card">
 
-        </section>
+<div class="acoes">
 
+<button
+id="salvar"
+type="button">
 
-        <!-- =================================================
-             AÇÕES
-        ================================================== -->
+💾 Salvar Relatório
 
-        <section class="card">
+</button>
 
-            <div class="acoes">
 
-                <button
-                    id="instalar"
-                    type="button"
-                >
-                    📲 Instalar aplicativo
-                </button>
+<button
+id="relatorios"
+type="button">
 
-                <button
-                    id="pdf"
-                    type="button"
-                >
-                    📄 Abrir / Salvar como PDF
-                </button>
+📂 Relatórios Salvos
 
-                <button
-                    id="baixar"
-                    type="button"
-                >
-                    ⬇️ Baixar relatório
-                </button>
+</button>
 
-                <button
-                    id="salvar"
-                    type="button"
-                >
-                    💾 Salvar dados
-                </button>
 
-                <button
-                    id="limpar"
-                    type="button"
-                >
-                    🗑️ Limpar
-                </button>
+<button
+id="pdf"
+type="button">
 
-            </div>
+📄 Gerar / Salvar PDF
 
-            <div class="nota">
+</button>
 
-                Relatório A4 retrato.<br>
 
-                Superior: 3 cm |
-                Esquerda: 3 cm |
-                Inferior: 2 cm |
-                Direita: 2 cm
+<button
+id="limpar"
+type="button">
 
-            </div>
+🗑️ Limpar formulário
 
-        </section>
+</button>
 
-    </form>
+</div>
 
+</section>
 
-    <div class="rodape-app">
+</form>
 
-        Relatório de Realização de Atividade<br>
 
-        <strong>
-            Versão 5.0
-        </strong>
+<!-- ==========================
+     RELATÓRIOS SALVOS
+=========================== -->
 
-    </div>
+<section
+id="painelRelatorios"
+class="card">
+
+<h2>
+📂 Relatórios Salvos
+</h2>
+
+<div id="listaRelatorios">
+</div>
+
+</section>
+
+
+<div class="rodape">
+
+Relatório de Realização de Atividade
+
+<br>
+
+<strong>
+Versão 6.0
+</strong>
+
+</div>
 
 </main>
 
@@ -634,21 +682,6 @@
 
 
 /* =========================================================
-   CONFIGURAÇÃO
-========================================================= */
-
-const APP_VERSION =
-    "5.0";
-
-
-function elemento(id) {
-
-    return document.getElementById(id);
-
-}
-
-
-/* =========================================================
    SERVICE WORKER
 ========================================================= */
 
@@ -656,34 +689,26 @@ if ("serviceWorker" in navigator) {
 
     window.addEventListener(
         "load",
-        async function () {
+        async () => {
 
             try {
 
                 const registro =
                     await navigator.serviceWorker.register(
-                        "./service-worker.js"
+                        "./service-worker.js",
+                        {
+                            updateViaCache:
+                                "none"
+                        }
                     );
 
-
-                /*
-                 * Solicita imediatamente ao navegador
-                 * uma verificação por uma versão nova
-                 * do Service Worker.
-                 */
-
-                registro.update();
-
-
-                console.log(
-                    "Service Worker V5 registrado."
-                );
+                await registro.update();
 
             }
-            catch (erro) {
+            catch(erro) {
 
                 console.error(
-                    "Erro ao registrar Service Worker:",
+                    "Erro Service Worker:",
                     erro
                 );
 
@@ -696,94 +721,110 @@ if ("serviceWorker" in navigator) {
 
 
 /* =========================================================
-   INSTALAÇÃO
+   BANCO INDEXEDDB
 ========================================================= */
 
-let eventoInstalacao =
-    null;
+const DB_NAME =
+    "RelatoriosAtividadeDB";
+
+const DB_VERSION =
+    1;
+
+const STORE_NAME =
+    "relatorios";
 
 
-window.addEventListener(
-    "beforeinstallprompt",
-    function (evento) {
+function abrirBanco() {
 
-        evento.preventDefault();
+    return new Promise(
+        (resolve,reject) => {
 
-        eventoInstalacao =
-            evento;
-
-
-        elemento("instalar")
-            .style
-            .display =
-            "inline-block";
-
-    }
-);
-
-
-elemento("instalar")
-    .addEventListener(
-        "click",
-        async function () {
-
-            if (!eventoInstalacao) {
-
-                alert(
-                    "Use o menu do navegador e escolha Instalar aplicativo ou Adicionar à tela inicial."
+            const request =
+                indexedDB.open(
+                    DB_NAME,
+                    DB_VERSION
                 );
 
-                return;
 
-            }
+            request.onupgradeneeded =
+                event => {
 
-
-            eventoInstalacao.prompt();
-
-
-            await eventoInstalacao.userChoice;
+                    const db =
+                        event.target.result;
 
 
-            eventoInstalacao =
-                null;
+                    if (
+                        !db.objectStoreNames.contains(
+                            STORE_NAME
+                        )
+                    ) {
+
+                        const store =
+                            db.createObjectStore(
+                                STORE_NAME,
+                                {
+                                    keyPath:"id"
+                                }
+                            );
 
 
-            elemento("instalar")
-                .style
-                .display =
-                "none";
+                        store.createIndex(
+                            "data",
+                            "data",
+                            {
+                                unique:false
+                            }
+                        );
+
+                    }
+
+                };
+
+
+            request.onsuccess =
+                () =>
+                    resolve(
+                        request.result
+                    );
+
+
+            request.onerror =
+                () =>
+                    reject(
+                        request.error
+                    );
 
         }
     );
 
+}
+
 
 /* =========================================================
-   FOTOS
+   VARIÁVEIS
 ========================================================= */
 
-let fotosAntes =
-    [];
+let fotosAntes = [];
 
+let fotosDepois = [];
 
-let fotosDepois =
-    [];
+let relatorioAbertoId = null;
 
 
 /* =========================================================
-   GERAR ID
+   ID
 ========================================================= */
 
 function gerarId() {
 
     if (
-        window.crypto &&
+        crypto &&
         crypto.randomUUID
     ) {
 
         return crypto.randomUUID();
 
     }
-
 
     return (
         Date.now()
@@ -797,25 +838,83 @@ function gerarId() {
 
 
 /* =========================================================
-   RENDERIZAR GALERIA
+   ADICIONAR FOTO
+========================================================= */
+
+function adicionarFotos(
+    input,
+    lista,
+    galeria,
+    contador
+) {
+
+    const arquivos =
+        Array.from(
+            input.files || []
+        );
+
+
+    arquivos.forEach(
+        arquivo => {
+
+            if (
+                arquivo.type.startsWith(
+                    "image/"
+                )
+            ) {
+
+                lista.push({
+
+                    id:
+                        gerarId(),
+
+                    blob:
+                        arquivo,
+
+                    legenda:
+                        ""
+
+                });
+
+            }
+
+        }
+    );
+
+
+    input.value = "";
+
+
+    renderizarGaleria(
+        lista,
+        galeria,
+        contador
+    );
+
+}
+
+
+/* =========================================================
+   GALERIA
 ========================================================= */
 
 function renderizarGaleria(
     lista,
-    idGaleria,
-    idContador
+    galeriaId,
+    contadorId
 ) {
 
     const galeria =
-        elemento(idGaleria);
+        document.getElementById(
+            galeriaId
+        );
 
 
-    galeria.innerHTML =
-        "";
+    galeria.innerHTML = "";
 
 
     lista.forEach(
-        function (item, indice) {
+        (foto,index) => {
 
             const bloco =
                 document.createElement(
@@ -827,9 +926,7 @@ function renderizarGaleria(
                 "foto";
 
 
-            /* IMAGEM */
-
-            const imagem =
+            const img =
                 document.createElement(
                     "img"
                 );
@@ -837,40 +934,24 @@ function renderizarGaleria(
 
             const url =
                 URL.createObjectURL(
-                    item.file
+                    foto.blob
                 );
 
 
-            imagem.src =
-                url;
+            img.src = url;
 
 
-            imagem.alt =
-                "Foto "
-                +
-                (indice + 1);
-
-
-            imagem.onload =
-                function () {
-
+            img.onload =
+                () =>
                     URL.revokeObjectURL(
                         url
                     );
 
-                };
-
-
-            /* LEGENDA */
 
             const legenda =
                 document.createElement(
                     "input"
                 );
-
-
-            legenda.type =
-                "text";
 
 
             legenda.className =
@@ -882,21 +963,17 @@ function renderizarGaleria(
 
 
             legenda.value =
-                item.legenda || "";
+                foto.legenda || "";
 
 
-            legenda.addEventListener(
-                "input",
-                function () {
+            legenda.oninput =
+                () => {
 
-                    item.legenda =
+                    foto.legenda =
                         legenda.value;
 
-                }
-            );
+                };
 
-
-            /* REMOVER */
 
             const remover =
                 document.createElement(
@@ -912,36 +989,30 @@ function renderizarGaleria(
                 "remover";
 
 
-            remover.textContent =
+            remover.innerText =
                 "×";
 
 
-            remover.title =
-                "Remover foto";
-
-
-            remover.addEventListener(
-                "click",
-                function () {
+            remover.onclick =
+                () => {
 
                     lista.splice(
-                        indice,
+                        index,
                         1
                     );
 
 
                     renderizarGaleria(
                         lista,
-                        idGaleria,
-                        idContador
+                        galeriaId,
+                        contadorId
                     );
 
-                }
-            );
+                };
 
 
             bloco.appendChild(
-                imagem
+                img
             );
 
 
@@ -963,8 +1034,9 @@ function renderizarGaleria(
     );
 
 
-    elemento(idContador)
-        .textContent =
+    document.getElementById(
+        contadorId
+    ).innerText =
 
         lista.length
         +
@@ -980,130 +1052,59 @@ function renderizarGaleria(
 
 
 /* =========================================================
-   ADICIONAR FOTO
-========================================================= */
-
-function adicionarFotos(
-    input,
-    lista,
-    idGaleria,
-    idContador
-) {
-
-    const arquivos =
-        Array.from(
-            input.files || []
-        );
-
-
-    arquivos.forEach(
-        function (arquivo) {
-
-            if (
-                arquivo.type &&
-                arquivo.type.startsWith(
-                    "image/"
-                )
-            ) {
-
-                lista.push({
-
-                    id:
-                        gerarId(),
-
-                    file:
-                        arquivo,
-
-                    legenda:
-                        ""
-
-                });
-
-            }
-
-        }
-    );
-
-
-    input.value =
-        "";
-
-
-    renderizarGaleria(
-        lista,
-        idGaleria,
-        idContador
-    );
-
-}
-
-
-/* =========================================================
    EVENTOS DAS FOTOS
 ========================================================= */
 
-elemento("cameraAntes")
-    .addEventListener(
-        "change",
-        function () {
+cameraAntes.onchange =
+    function() {
 
-            adicionarFotos(
-                this,
-                fotosAntes,
-                "galeriaAntes",
-                "contadorAntes"
-            );
+        adicionarFotos(
+            this,
+            fotosAntes,
+            "galeriaAntes",
+            "contadorAntes"
+        );
 
-        }
-    );
+    };
 
 
-elemento("galeriaInputAntes")
-    .addEventListener(
-        "change",
-        function () {
+galeriaAntesInput.onchange =
+    function() {
 
-            adicionarFotos(
-                this,
-                fotosAntes,
-                "galeriaAntes",
-                "contadorAntes"
-            );
+        adicionarFotos(
+            this,
+            fotosAntes,
+            "galeriaAntes",
+            "contadorAntes"
+        );
 
-        }
-    );
+    };
 
 
-elemento("cameraDepois")
-    .addEventListener(
-        "change",
-        function () {
+cameraDepois.onchange =
+    function() {
 
-            adicionarFotos(
-                this,
-                fotosDepois,
-                "galeriaDepois",
-                "contadorDepois"
-            );
+        adicionarFotos(
+            this,
+            fotosDepois,
+            "galeriaDepois",
+            "contadorDepois"
+        );
 
-        }
-    );
+    };
 
 
-elemento("galeriaInputDepois")
-    .addEventListener(
-        "change",
-        function () {
+galeriaDepoisInput.onchange =
+    function() {
 
-            adicionarFotos(
-                this,
-                fotosDepois,
-                "galeriaDepois",
-                "contadorDepois"
-            );
+        adicionarFotos(
+            this,
+            fotosDepois,
+            "galeriaDepois",
+            "contadorDepois"
+        );
 
-        }
-    );
+    };
 
 
 /* =========================================================
@@ -1115,34 +1116,22 @@ function obterDados() {
     return {
 
         nome:
-            elemento("nome")
-                .value
-                .trim(),
+            nome.value.trim(),
 
         area:
-            elemento("area")
-                .value
-                .trim(),
+            area.value.trim(),
 
         atividade:
-            elemento("atividade")
-                .value
-                .trim(),
+            atividade.value.trim(),
 
         contato:
-            elemento("contato")
-                .value
-                .trim(),
+            contato.value.trim(),
 
         empresa:
-            elemento("empresa")
-                .value
-                .trim(),
+            empresa.value.trim(),
 
         descricao:
-            elemento("descricao")
-                .value
-                .trim()
+            descricao.value.trim()
 
     };
 
@@ -1150,32 +1139,469 @@ function obterDados() {
 
 
 /* =========================================================
-   ESCAPAR HTML
+   SALVAR RELATÓRIO
 ========================================================= */
 
-function escaparHTML(texto) {
+salvar.onclick =
+async function() {
 
-    return String(
-        texto ?? ""
-    )
-    .replace(
-        /[&<>"']/g,
-        function (caractere) {
+    if (
+        !formulario.reportValidity()
+    ) {
 
-            const mapa = {
+        return;
 
-                "&": "&amp;",
-                "<": "&lt;",
-                ">": "&gt;",
-                '"': "&quot;",
-                "'": "&#39;"
-
-            };
+    }
 
 
-            return mapa[
-                caractere
-            ];
+    status.innerText =
+        "Salvando relatório...";
+
+
+    try {
+
+        const db =
+            await abrirBanco();
+
+
+        const transaction =
+            db.transaction(
+                STORE_NAME,
+                "readwrite"
+            );
+
+
+        const store =
+            transaction.objectStore(
+                STORE_NAME
+            );
+
+
+        const agora =
+            new Date();
+
+
+        const relatorio = {
+
+            id:
+                relatorioAbertoId
+                ||
+                gerarId(),
+
+            data:
+                agora.toISOString(),
+
+            dados:
+                obterDados(),
+
+            fotosAntes:
+                fotosAntes,
+
+            fotosDepois:
+                fotosDepois
+
+        };
+
+
+        store.put(
+            relatorio
+        );
+
+
+        await new Promise(
+            (resolve,reject) => {
+
+                transaction.oncomplete =
+                    resolve;
+
+                transaction.onerror =
+                    () =>
+                        reject(
+                            transaction.error
+                        );
+
+            }
+        );
+
+
+        relatorioAbertoId =
+            relatorio.id;
+
+
+        status.innerText =
+            "Relatório salvo neste dispositivo.";
+
+
+        await listarRelatorios();
+
+    }
+    catch(erro) {
+
+        console.error(
+            erro
+        );
+
+
+        status.innerText =
+            "Erro ao salvar relatório.";
+
+
+        alert(
+            "Não foi possível salvar o relatório."
+        );
+
+    }
+
+};
+
+
+/* =========================================================
+   LISTAR RELATÓRIOS
+========================================================= */
+
+async function listarRelatorios() {
+
+    const db =
+        await abrirBanco();
+
+
+    const transaction =
+        db.transaction(
+            STORE_NAME,
+            "readonly"
+        );
+
+
+    const store =
+        transaction.objectStore(
+            STORE_NAME
+        );
+
+
+    const request =
+        store.getAll();
+
+
+    request.onsuccess =
+        () => {
+
+            const registros =
+                request.result
+                .sort(
+                    (a,b) =>
+                        new Date(b.data)
+                        -
+                        new Date(a.data)
+                );
+
+
+            listaRelatorios.innerHTML =
+                "";
+
+
+            if (
+                registros.length === 0
+            ) {
+
+                listaRelatorios.innerHTML =
+                    "<p>Nenhum relatório salvo.</p>";
+
+                return;
+
+            }
+
+
+            registros.forEach(
+                relatorio => {
+
+                    const item =
+                        document.createElement(
+                            "div"
+                        );
+
+
+                    item.className =
+                        "relatorio-item";
+
+
+                    const titulo =
+                        document.createElement(
+                            "strong"
+                        );
+
+
+                    titulo.innerText =
+                        relatorio.dados.atividade
+                        ||
+                        "Relatório";
+
+
+                    const info =
+                        document.createElement(
+                            "div"
+                        );
+
+
+                    info.className =
+                        "relatorio-info";
+
+
+                    info.innerText =
+
+                        new Date(
+                            relatorio.data
+                        )
+                        .toLocaleString(
+                            "pt-BR"
+                        )
+
+                        +
+
+                        " • "
+
+                        +
+
+                        (
+                            relatorio.dados.empresa
+                            ||
+                            ""
+                        );
+
+
+                    const botoes =
+                        document.createElement(
+                            "div"
+                        );
+
+
+                    botoes.className =
+                        "relatorio-botoes";
+
+
+                    /* ABRIR */
+
+                    const abrir =
+                        document.createElement(
+                            "button"
+                        );
+
+
+                    abrir.innerText =
+                        "✏️ Abrir";
+
+
+                    abrir.className =
+                        "btn-abrir";
+
+
+                    abrir.onclick =
+                        () =>
+                            abrirRelatorio(
+                                relatorio.id
+                            );
+
+
+                    /* PDF */
+
+                    const pdfBtn =
+                        document.createElement(
+                            "button"
+                        );
+
+
+                    pdfBtn.innerText =
+                        "📄 PDF";
+
+
+                    pdfBtn.className =
+                        "btn-pdf";
+
+
+                    pdfBtn.onclick =
+                        async () => {
+
+                            await abrirRelatorio(
+                                relatorio.id
+                            );
+
+                            await gerarPDF();
+
+                        };
+
+
+                    /* EXCLUIR */
+
+                    const excluir =
+                        document.createElement(
+                            "button"
+                        );
+
+
+                    excluir.innerText =
+                        "🗑️ Excluir";
+
+
+                    excluir.className =
+                        "btn-excluir";
+
+
+                    excluir.onclick =
+                        () =>
+                            excluirRelatorio(
+                                relatorio.id
+                            );
+
+
+                    botoes.append(
+                        abrir,
+                        pdfBtn,
+                        excluir
+                    );
+
+
+                    item.append(
+                        titulo,
+                        info,
+                        botoes
+                    );
+
+
+                    listaRelatorios.appendChild(
+                        item
+                    );
+
+                }
+            );
+
+        };
+
+}
+
+
+/* =========================================================
+   ABRIR RELATÓRIO
+========================================================= */
+
+async function abrirRelatorio(id) {
+
+    const db =
+        await abrirBanco();
+
+
+    const transaction =
+        db.transaction(
+            STORE_NAME,
+            "readonly"
+        );
+
+
+    const store =
+        transaction.objectStore(
+            STORE_NAME
+        );
+
+
+    const request =
+        store.get(
+            id
+        );
+
+
+    return new Promise(
+        (resolve,reject) => {
+
+            request.onsuccess =
+                () => {
+
+                    const relatorio =
+                        request.result;
+
+
+                    if (!relatorio) {
+
+                        reject(
+                            new Error(
+                                "Relatório não encontrado."
+                            )
+                        );
+
+                        return;
+
+                    }
+
+
+                    relatorioAbertoId =
+                        relatorio.id;
+
+
+                    nome.value =
+                        relatorio.dados.nome || "";
+
+
+                    area.value =
+                        relatorio.dados.area || "";
+
+
+                    atividade.value =
+                        relatorio.dados.atividade || "";
+
+
+                    contato.value =
+                        relatorio.dados.contato || "";
+
+
+                    empresa.value =
+                        relatorio.dados.empresa || "";
+
+
+                    descricao.value =
+                        relatorio.dados.descricao || "";
+
+
+                    fotosAntes =
+                        relatorio.fotosAntes || [];
+
+
+                    fotosDepois =
+                        relatorio.fotosDepois || [];
+
+
+                    renderizarGaleria(
+                        fotosAntes,
+                        "galeriaAntes",
+                        "contadorAntes"
+                    );
+
+
+                    renderizarGaleria(
+                        fotosDepois,
+                        "galeriaDepois",
+                        "contadorDepois"
+                    );
+
+
+                    status.innerText =
+                        "Relatório carregado.";
+
+
+                    window.scrollTo({
+                        top:0,
+                        behavior:"smooth"
+                    });
+
+
+                    resolve(
+                        relatorio
+                    );
+
+                };
+
+
+            request.onerror =
+                () =>
+                    reject(
+                        request.error
+                    );
 
         }
     );
@@ -1184,39 +1610,123 @@ function escaparHTML(texto) {
 
 
 /* =========================================================
+   EXCLUIR
+========================================================= */
+
+async function excluirRelatorio(id) {
+
+    if (
+        !confirm(
+            "Deseja excluir este relatório?"
+        )
+    ) {
+
+        return;
+
+    }
+
+
+    const db =
+        await abrirBanco();
+
+
+    const transaction =
+        db.transaction(
+            STORE_NAME,
+            "readwrite"
+        );
+
+
+    transaction
+        .objectStore(
+            STORE_NAME
+        )
+        .delete(
+            id
+        );
+
+
+    transaction.oncomplete =
+        () => {
+
+            if (
+                relatorioAbertoId === id
+            ) {
+
+                relatorioAbertoId =
+                    null;
+
+            }
+
+
+            listarRelatorios();
+
+        };
+
+}
+
+
+/* =========================================================
+   PAINEL RELATÓRIOS
+========================================================= */
+
+relatorios.onclick =
+async function() {
+
+    if (
+        painelRelatorios.style.display
+        ===
+        "block"
+    ) {
+
+        painelRelatorios.style.display =
+            "none";
+
+        return;
+
+    }
+
+
+    painelRelatorios.style.display =
+        "block";
+
+
+    await listarRelatorios();
+
+
+    painelRelatorios.scrollIntoView({
+        behavior:"smooth"
+    });
+
+};
+
+
+/* =========================================================
    BASE64
 ========================================================= */
 
-function arquivoParaBase64(
-    arquivo
-) {
+function blobParaBase64(blob) {
 
     return new Promise(
-        function (
-            resolver,
-            rejeitar
-        ) {
+        (resolve,reject) => {
 
-            const leitor =
+            const reader =
                 new FileReader();
 
 
-            leitor.onload =
-                function () {
-
-                    resolver(
-                        leitor.result
+            reader.onload =
+                () =>
+                    resolve(
+                        reader.result
                     );
 
-                };
+
+            reader.onerror =
+                reject;
 
 
-            leitor.onerror =
-                rejeitar;
-
-
-            leitor.readAsDataURL(
-                arquivo
+            reader.readAsDataURL(
+                blob
             );
 
         }
@@ -1226,76 +1736,31 @@ function arquivoParaBase64(
 
 
 /* =========================================================
-   DATA/HORA
+   ESCAPAR HTML
 ========================================================= */
 
-function dataHoraAtual() {
+function escapar(texto) {
 
-    return new Intl.DateTimeFormat(
-        "pt-BR",
-        {
+    const div =
+        document.createElement(
+            "div"
+        );
 
-            dateStyle:
-                "short",
 
-            timeStyle:
-                "short"
+    div.textContent =
+        texto || "";
 
-        }
-    )
-    .format(
-        new Date()
-    );
+
+    return div.innerHTML;
 
 }
 
 
 /* =========================================================
-   NOME DE ARQUIVO
+   FOTOS RELATÓRIO
 ========================================================= */
 
-function nomeArquivo(texto) {
-
-    return String(
-        texto || "relatorio"
-    )
-
-    .normalize(
-        "NFD"
-    )
-
-    .replace(
-        /[\u0300-\u036f]/g,
-        ""
-    )
-
-    .replace(
-        /[^a-zA-Z0-9_-]+/g,
-        "_"
-    )
-
-    .replace(
-        /^_+|_+$/g,
-        ""
-    )
-
-    .slice(
-        0,
-        50
-    )
-
-    ||
-
-    "relatorio";
-
-}
-
-
-/* =========================================================
-   FOTOS DO RELATÓRIO
-========================================================= */
-
-function gerarFotosRelatorio(
+async function montarFotos(
     lista,
     titulo
 ) {
@@ -1305,466 +1770,252 @@ function gerarFotosRelatorio(
     ) {
 
         return `
+            <h2>${titulo}</h2>
+            <p>Nenhuma foto registrada.</p>
+        `;
 
-            <h2>
-                ${titulo}
-            </h2>
+    }
 
-            <p>
-                Nenhuma foto registrada.
-            </p>
+
+    let html =
+        `<h2>${titulo}</h2>
+         <div class="photos">`;
+
+
+    for (
+        let i = 0;
+        i < lista.length;
+        i++
+    ) {
+
+        const foto =
+            lista[i];
+
+
+        const src =
+            await blobParaBase64(
+                foto.blob
+            );
+
+
+        html += `
+
+        <figure>
+
+        <img src="${src}">
+
+        <figcaption>
+
+        ${
+            escapar(
+                foto.legenda
+                ||
+                "Foto "
+                +
+                (i+1)
+            )
+        }
+
+        </figcaption>
+
+        </figure>
 
         `;
 
     }
 
 
-    const imagens =
-        lista.map(
-            function (
-                item,
-                indice
-            ) {
-
-                const textoLegenda =
-
-                    item.legenda
-
-                    ?
-
-                    escaparHTML(
-                        item.legenda
-                    )
-
-                    :
-
-                    "Foto "
-                    +
-                    (indice + 1);
+    html +=
+        "</div>";
 
 
-                return `
-
-                    <figure>
-
-                        <img
-                            src="${item.src}"
-                            alt="Foto ${indice + 1}"
-                        >
-
-                        <figcaption>
-                            ${textoLegenda}
-                        </figcaption>
-
-                    </figure>
-
-                `;
-
-            }
-        )
-        .join("");
-
-
-    return `
-
-        <h2>
-            ${titulo}
-        </h2>
-
-        <div class="photos">
-            ${imagens}
-        </div>
-
-    `;
+    return html;
 
 }
 
 
 /* =========================================================
-   MONTAR RELATÓRIO
+   GERAR PDF / RELATÓRIO
 ========================================================= */
 
-async function montarRelatorio() {
+async function gerarPDF() {
+
+    if (
+        !formulario.reportValidity()
+    ) {
+
+        return;
+
+    }
+
+
+    status.innerText =
+        "Gerando relatório...";
+
 
     const dados =
         obterDados();
 
 
     const antes =
-        await Promise.all(
-
-            fotosAntes.map(
-                async function (item) {
-
-                    return {
-
-                        src:
-                            await arquivoParaBase64(
-                                item.file
-                            ),
-
-                        legenda:
-                            item.legenda || ""
-
-                    };
-
-                }
-            )
-
-        );
-
-
-    const depois =
-        await Promise.all(
-
-            fotosDepois.map(
-                async function (item) {
-
-                    return {
-
-                        src:
-                            await arquivoParaBase64(
-                                item.file
-                            ),
-
-                        legenda:
-                            item.legenda || ""
-
-                    };
-
-                }
-            )
-
-        );
-
-
-    const blocoAntes =
-        gerarFotosRelatorio(
-            antes,
+        await montarFotos(
+            fotosAntes,
             "REGISTRO FOTOGRÁFICO — ANTES"
         );
 
 
-    const blocoDepois =
-        gerarFotosRelatorio(
-            depois,
+    const depois =
+        await montarFotos(
+            fotosDepois,
             "REGISTRO FOTOGRÁFICO — DEPOIS"
         );
 
 
-    return `
+    const documento = `
 
 <!DOCTYPE html>
 
-<html lang="pt-BR">
+<html>
 
 <head>
 
 <meta charset="UTF-8">
 
-<meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
->
-
 <title>
-Relatório de Realização de Atividade
+Relatório de Atividade
 </title>
 
 <style>
 
 @page {
 
-    size:
-        A4 portrait;
+size:A4 portrait;
 
-    margin:
-        3cm
-        2cm
-        2cm
-        3cm;
+margin:
+3cm
+2cm
+2cm
+3cm;
 
 }
-
-
-* {
-    box-sizing:
-        border-box;
-}
-
-
-html {
-    background:
-        #d9dde3;
-}
-
 
 body {
 
-    width:
-        210mm;
+font-family:
+Arial,
+Helvetica,
+sans-serif;
 
-    min-height:
-        297mm;
+color:#20242a;
 
-    margin:
-        20px auto;
-
-    padding:
-        3cm
-        2cm
-        2cm
-        3cm;
-
-    background:
-        white;
-
-    font-family:
-        Arial,
-        Helvetica,
-        sans-serif;
-
-    color:
-        #20242a;
-
-    font-size:
-        10.5pt;
+font-size:10.5pt;
 
 }
-
 
 h1 {
 
-    margin:
-        0 0 15px 0;
+text-align:center;
 
-    text-align:
-        center;
+color:#17365d;
 
-    color:
-        #17365d;
-
-    font-size:
-        19pt;
+font-size:19pt;
 
 }
-
 
 h2 {
 
-    margin-top:
-        20px;
+color:#17365d;
 
-    padding-bottom:
-        4px;
+border-bottom:
+2px solid #17365d;
 
-    color:
-        #17365d;
+font-size:13pt;
 
-    font-size:
-        13pt;
-
-    border-bottom:
-        2px solid #17365d;
+margin-top:20px;
 
 }
-
 
 table {
 
-    width:
-        100%;
+width:100%;
 
-    border-collapse:
-        collapse;
+border-collapse:
+collapse;
 
 }
-
 
 th,
 td {
 
-    padding:
-        7px;
+border:
+1px solid #ccd5df;
 
-    border:
-        1px solid #ccd5df;
+padding:7px;
 
-    text-align:
-        left;
-
-    vertical-align:
-        top;
+text-align:left;
 
 }
-
 
 th {
 
-    width:
-        27%;
+width:27%;
 
-    background:
-        #edf3f8;
+background:#edf3f8;
 
 }
-
 
 .descricao {
 
-    min-height:
-        55px;
+border:
+1px solid #ccd5df;
 
-    padding:
-        10px;
+padding:10px;
 
-    border:
-        1px solid #ccd5df;
-
-    white-space:
-        pre-wrap;
+white-space:
+pre-wrap;
 
 }
-
 
 .photos {
 
-    display:
-        grid;
+display:grid;
 
-    grid-template-columns:
-        1fr 1fr;
+grid-template-columns:
+1fr 1fr;
 
-    gap:
-        8mm;
+gap:8mm;
 
 }
-
 
 figure {
 
-    margin:
-        0;
+margin:0;
 
-    padding:
-        5px;
+padding:5px;
 
-    border:
-        1px solid #ccd5df;
+border:
+1px solid #ccd5df;
 
-    text-align:
-        center;
-
-    break-inside:
-        avoid;
-
-    page-break-inside:
-        avoid;
+break-inside:
+avoid;
 
 }
-
 
 figure img {
 
-    display:
-        block;
+width:100%;
 
-    width:
-        100%;
+height:90mm;
 
-    height:
-        90mm;
-
-    object-fit:
-        contain;
+object-fit:contain;
 
 }
-
 
 figcaption {
 
-    padding-top:
-        5px;
+text-align:center;
 
-    color:
-        #4b5563;
-
-    font-size:
-        9pt;
-
-}
-
-
-.rodape {
-
-    margin-top:
-        20px;
-
-    color:
-        #667085;
-
-    font-size:
-        8pt;
-
-    text-align:
-        center;
-
-}
-
-
-@media print {
-
-    html {
-        background:
-            white;
-    }
-
-
-    body {
-
-        width:
-            auto;
-
-        min-height:
-            auto;
-
-        margin:
-            0;
-
-        padding:
-            0;
-
-        box-shadow:
-            none;
-
-    }
-
-}
-
-
-@media screen and (max-width: 220mm) {
-
-    html {
-        background:
-            white;
-    }
-
-
-    body {
-
-        width:
-            100%;
-
-        min-height:
-            100vh;
-
-        margin:
-            0;
-
-        padding:
-            25px 20px;
-
-    }
+padding-top:5px;
 
 }
 
@@ -1774,323 +2025,76 @@ figcaption {
 
 <body>
 
-
 <h1>
-    RELATÓRIO DE REALIZAÇÃO DE ATIVIDADE
+RELATÓRIO DE REALIZAÇÃO DE ATIVIDADE
 </h1>
 
 
 <table>
 
-    <tr>
+<tr>
+<th>Nome</th>
+<td>${escapar(dados.nome)}</td>
+</tr>
 
-        <th>Nome</th>
+<tr>
+<th>Área</th>
+<td>${escapar(dados.area)}</td>
+</tr>
 
-        <td>
-            ${escaparHTML(dados.nome)}
-        </td>
+<tr>
+<th>Atividade</th>
+<td>${escapar(dados.atividade)}</td>
+</tr>
 
-    </tr>
+<tr>
+<th>Contato</th>
+<td>${escapar(dados.contato)}</td>
+</tr>
 
+<tr>
+<th>Empresa</th>
+<td>${escapar(dados.empresa)}</td>
+</tr>
 
-    <tr>
-
-        <th>Área</th>
-
-        <td>
-            ${escaparHTML(dados.area)}
-        </td>
-
-    </tr>
-
-
-    <tr>
-
-        <th>Atividade</th>
-
-        <td>
-            ${escaparHTML(dados.atividade)}
-        </td>
-
-    </tr>
-
-
-    <tr>
-
-        <th>Contato</th>
-
-        <td>
-            ${escaparHTML(
-                dados.contato || "—"
-            )}
-        </td>
-
-    </tr>
-
-
-    <tr>
-
-        <th>Empresa</th>
-
-        <td>
-            ${escaparHTML(dados.empresa)}
-        </td>
-
-    </tr>
-
-
-    <tr>
-
-        <th>Data/Hora</th>
-
-        <td>
-            ${escaparHTML(
-                dataHoraAtual()
-            )}
-        </td>
-
-    </tr>
+<tr>
+<th>Data/Hora</th>
+<td>
+${new Date().toLocaleString("pt-BR")}
+</td>
+</tr>
 
 </table>
 
 
 <h2>
-    DESCRIÇÃO DA ATIVIDADE
+DESCRIÇÃO DA ATIVIDADE
 </h2>
 
 
 <div class="descricao">
-${escaparHTML(dados.descricao)}
+${escapar(dados.descricao)}
 </div>
 
 
-${blocoAntes}
+${antes}
 
+${depois}
 
-${blocoDepois}
-
-
-<div class="rodape">
-
-    Documento gerado em
-    ${escaparHTML(
-        dataHoraAtual()
-    )}
-
-</div>
-
-
-</body>
-
-</html>
-
-`;
-
-}
-
-
-/* =========================================================
-   SALVAR DADOS
-========================================================= */
-
-elemento("salvar")
-    .addEventListener(
-        "click",
-        function () {
-
-            localStorage.setItem(
-
-                "relatorioAtividade",
-
-                JSON.stringify(
-                    obterDados()
-                )
-
-            );
-
-
-            elemento("status")
-                .textContent =
-                "Dados textuais salvos neste dispositivo.";
-
-        }
-    );
-
-
-/* =========================================================
-   RESTAURAR DADOS
-========================================================= */
-
-try {
-
-    const dadosSalvos =
-        JSON.parse(
-
-            localStorage.getItem(
-                "relatorioAtividade"
-            )
-
-            ||
-
-            "null"
-
-        );
-
-
-    if (dadosSalvos) {
-
-        Object.keys(
-            dadosSalvos
-        )
-        .forEach(
-            function (campo) {
-
-                if (
-                    elemento(campo)
-                ) {
-
-                    elemento(campo)
-                        .value =
-                        dadosSalvos[campo]
-                        ||
-                        "";
-
-                }
-
-            }
-        );
-
-    }
-
-}
-catch (erro) {
-
-    console.error(
-        "Erro ao restaurar dados:",
-        erro
-    );
-
-}
-
-
-/* =========================================================
-   LIMPAR
-========================================================= */
-
-elemento("limpar")
-    .addEventListener(
-        "click",
-        function () {
-
-            const confirmar =
-                confirm(
-                    "Deseja limpar os dados, fotos e legendas?"
-                );
-
-
-            if (!confirmar) {
-
-                return;
-
-            }
-
-
-            elemento("formulario")
-                .reset();
-
-
-            fotosAntes =
-                [];
-
-
-            fotosDepois =
-                [];
-
-
-            renderizarGaleria(
-                fotosAntes,
-                "galeriaAntes",
-                "contadorAntes"
-            );
-
-
-            renderizarGaleria(
-                fotosDepois,
-                "galeriaDepois",
-                "contadorDepois"
-            );
-
-
-            localStorage.removeItem(
-                "relatorioAtividade"
-            );
-
-
-            elemento("status")
-                .textContent =
-                "Formulário limpo.";
-
-        }
-    );
-
-
-/* =========================================================
-   PDF
-========================================================= */
-
-elemento("pdf")
-    .addEventListener(
-        "click",
-        async function () {
-
-            const formulario =
-                elemento(
-                    "formulario"
-                );
-
-
-            if (
-                !formulario.reportValidity()
-            ) {
-
-                return;
-
-            }
-
-
-            elemento("status")
-                .textContent =
-                "Montando relatório...";
-
-
-            try {
-
-                const documento =
-                    await montarRelatorio();
-
-
-                const documentoImpressao =
-                    documento.replace(
-
-                        "</body>",
-
-                        `
 
 <script>
 
-window.onload = function () {
+window.onload =
+function() {
 
-    setTimeout(
+setTimeout(
+function() {
 
-        function () {
+window.print();
 
-            window.print();
-
-        },
-
-        500
-
-    );
+},
+500
+);
 
 };
 
@@ -2098,242 +2102,111 @@ window.onload = function () {
 
 </body>
 
-`
+</html>
 
-                    );
-
-
-                const blob =
-                    new Blob(
-
-                        [
-                            documentoImpressao
-                        ],
-
-                        {
-                            type:
-                                "text/html;charset=utf-8"
-                        }
-
-                    );
+`;
 
 
-                const url =
-                    URL.createObjectURL(
-                        blob
-                    );
-
-
-                const janela =
-                    window.open(
-                        url,
-                        "_blank"
-                    );
-
-
-                if (!janela) {
-
-                    alert(
-                        "O navegador bloqueou a abertura do relatório. Permita pop-ups para este aplicativo."
-                    );
-
-
-                    elemento("status")
-                        .textContent =
-                        "Não foi possível abrir o relatório.";
-
-                }
-                else {
-
-                    elemento("status")
-                        .textContent =
-                        "Relatório aberto. Escolha Salvar como PDF.";
-
-                }
-
-
-                setTimeout(
-                    function () {
-
-                        URL.revokeObjectURL(
-                            url
-                        );
-
-                    },
-
-                    60000
-                );
-
+    const blob =
+        new Blob(
+            [documento],
+            {
+                type:
+                "text/html;charset=utf-8"
             }
-            catch (erro) {
-
-                console.error(
-                    erro
-                );
+        );
 
 
-                elemento("status")
-                    .textContent =
-                    "Erro ao gerar relatório.";
+    const url =
+        URL.createObjectURL(
+            blob
+        );
 
 
-                alert(
-                    "Não foi possível gerar o relatório."
-                );
+    const janela =
+        window.open(
+            url,
+            "_blank"
+        );
 
-            }
 
-        }
+    if (!janela) {
+
+        alert(
+            "O navegador bloqueou a abertura do relatório."
+        );
+
+    }
+
+
+    setTimeout(
+        () =>
+            URL.revokeObjectURL(
+                url
+            ),
+        60000
     );
+
+
+    status.innerText =
+        "Relatório gerado.";
+
+}
+
+
+/* BOTÃO PDF */
+
+pdf.onclick =
+    gerarPDF;
 
 
 /* =========================================================
-   DOWNLOAD
+   LIMPAR
 ========================================================= */
 
-elemento("baixar")
-    .addEventListener(
-        "click",
-        async function () {
+limpar.onclick =
+function() {
 
-            const formulario =
-                elemento(
-                    "formulario"
-                );
+    if (
+        !confirm(
+            "Deseja limpar o formulário atual?"
+        )
+    ) {
 
+        return;
 
-            if (
-                !formulario.reportValidity()
-            ) {
-
-                return;
-
-            }
+    }
 
 
-            elemento("status")
-                .textContent =
-                "Preparando relatório...";
+    formulario.reset();
 
 
-            try {
+    fotosAntes = [];
 
-                const documento =
-                    await montarRelatorio();
+    fotosDepois = [];
 
-
-                const blob =
-                    new Blob(
-
-                        [
-                            documento
-                        ],
-
-                        {
-                            type:
-                                "text/html;charset=utf-8"
-                        }
-
-                    );
+    relatorioAbertoId =
+        null;
 
 
-                const url =
-                    URL.createObjectURL(
-                        blob
-                    );
-
-
-                const link =
-                    document.createElement(
-                        "a"
-                    );
-
-
-                const dados =
-                    obterDados();
-
-
-                const data =
-                    new Date()
-                    .toISOString()
-                    .slice(
-                        0,
-                        10
-                    );
-
-
-                link.href =
-                    url;
-
-
-                link.download =
-
-                    "Relatorio_"
-
-                    +
-
-                    nomeArquivo(
-                        dados.atividade
-                    )
-
-                    +
-
-                    "_"
-
-                    +
-
-                    data
-
-                    +
-
-                    ".html";
-
-
-                document.body
-                    .appendChild(
-                        link
-                    );
-
-
-                link.click();
-
-
-                link.remove();
-
-
-                setTimeout(
-                    function () {
-
-                        URL.revokeObjectURL(
-                            url
-                        );
-
-                    },
-
-                    5000
-                );
-
-
-                elemento("status")
-                    .textContent =
-                    "Relatório baixado.";
-
-            }
-            catch (erro) {
-
-                console.error(
-                    erro
-                );
-
-
-                elemento("status")
-                    .textContent =
-                    "Erro ao baixar relatório.";
-
-            }
-
-        }
+    renderizarGaleria(
+        fotosAntes,
+        "galeriaAntes",
+        "contadorAntes"
     );
+
+
+    renderizarGaleria(
+        fotosDepois,
+        "galeriaDepois",
+        "contadorDepois"
+    );
+
+
+    status.innerText =
+        "Novo relatório.";
+
+};
 
 </script>
 
