@@ -1,5 +1,5 @@
 const CACHE_NAME =
-    "relatorio-atividade-v6-2";
+    "relatorio-atividade-v6-2-pdf-fix";
 
 
 const ARQUIVOS_OFFLINE = [
@@ -28,21 +28,27 @@ self.addEventListener(
         event.waitUntil(
 
             caches
-                .open(CACHE_NAME)
+                .open(
+                    CACHE_NAME
+                )
 
-                .then(cache => {
+                .then(
+                    cache => {
 
-                    return cache.addAll(
-                        ARQUIVOS_OFFLINE
-                    );
+                        return cache.addAll(
+                            ARQUIVOS_OFFLINE
+                        );
 
-                })
+                    }
+                )
 
-                .then(() => {
+                .then(
+                    () => {
 
-                    return self.skipWaiting();
+                        return self.skipWaiting();
 
-                })
+                    }
+                )
 
         );
 
@@ -90,11 +96,13 @@ self.addEventListener(
                     }
                 )
 
-                .then(() => {
+                .then(
+                    () => {
 
-                    return self.clients.claim();
+                        return self.clients.claim();
 
-                })
+                    }
+                )
 
         );
 
@@ -121,13 +129,11 @@ self.addEventListener(
 
 
         /*
-        HTML / NAVEGAÇÃO
+        NAVEGAÇÃO / INDEX.HTML
 
-        Tenta internet primeiro para receber
-        novas versões do aplicativo.
-
-        Se estiver offline, usa index.html
-        armazenado no cache.
+        Rede primeiro.
+        Se não houver internet,
+        usa o index salvo.
         */
 
         if (
@@ -196,11 +202,6 @@ self.addEventListener(
         ARQUIVOS ESTÁTICOS
 
         Cache primeiro.
-
-        Isso inclui:
-        - manifest
-        - ícone
-        - jsPDF
         */
 
         event.respondWith(
