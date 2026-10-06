@@ -42,7 +42,9 @@ body {
     padding: 15px;
 }
 
-/* CABEÇALHO */
+/* =========================================================
+   CABEÇALHO
+========================================================= */
 
 .cabecalho {
     background: #17365d;
@@ -68,13 +70,33 @@ body {
     font-size: 13px;
 }
 
+#modoRelatorio {
+    margin-top: 10px;
+    padding: 9px 12px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+#modoRelatorio.novo {
+    background: #e8f5ee;
+    color: #146c43;
+}
+
+#modoRelatorio.edicao {
+    background: #fff3cd;
+    color: #7a4e00;
+}
+
 .versao {
     margin-top: 10px;
     font-size: 12px;
     opacity: .85;
 }
 
-/* CARDS */
+/* =========================================================
+   CARDS
+========================================================= */
 
 .card {
     background: white;
@@ -90,7 +112,9 @@ body {
     font-size: 17px;
 }
 
-/* CAMPOS */
+/* =========================================================
+   CAMPOS
+========================================================= */
 
 .campo {
     display: block;
@@ -114,7 +138,9 @@ textarea {
     resize: vertical;
 }
 
-/* FOTOS */
+/* =========================================================
+   FOTOS
+========================================================= */
 
 .acoes-fotos {
     display: grid;
@@ -128,11 +154,15 @@ textarea {
     display: flex;
     align-items: center;
     justify-content: center;
+
     min-height: 48px;
     padding: 12px;
+
     border-radius: 8px;
+
     font-size: 14px;
     font-weight: bold;
+
     text-align: center;
     cursor: pointer;
 }
@@ -153,7 +183,9 @@ textarea {
     display: none;
 }
 
-/* GALERIA */
+/* =========================================================
+   GALERIA
+========================================================= */
 
 .galeria {
     display: grid;
@@ -191,14 +223,20 @@ textarea {
     position: absolute;
     right: 5px;
     top: 5px;
+
     width: 34px;
     height: 34px;
+
     padding: 0;
+
     border: none;
     border-radius: 50%;
+
     background: #b42318;
     color: white;
+
     font-size: 20px;
+
     cursor: pointer;
 }
 
@@ -210,7 +248,9 @@ textarea {
     line-height: 1.4;
 }
 
-/* BOTÕES */
+/* =========================================================
+   BOTÕES
+========================================================= */
 
 .acoes {
     display: flex;
@@ -221,9 +261,12 @@ textarea {
 button {
     border: none;
     border-radius: 8px;
+
     padding: 12px 15px;
+
     font-size: 14px;
     font-weight: bold;
+
     cursor: pointer;
 }
 
@@ -253,7 +296,9 @@ button {
     color: #b42318;
 }
 
-/* RELATÓRIOS SALVOS */
+/* =========================================================
+   RELATÓRIOS
+========================================================= */
 
 #painelRelatorios {
     display: none;
@@ -262,6 +307,7 @@ button {
 .relatorio-item {
     border: 1px solid #d8e0ea;
     border-radius: 10px;
+
     padding: 12px;
     margin-top: 10px;
 }
@@ -306,7 +352,9 @@ button {
     color: #b42318;
 }
 
-/* VISUALIZAÇÃO */
+/* =========================================================
+   VISUALIZAÇÃO
+========================================================= */
 
 #visualizador {
     display: none;
@@ -359,7 +407,9 @@ button {
     text-align: center;
 }
 
-/* RODAPÉ */
+/* =========================================================
+   RODAPÉ
+========================================================= */
 
 .rodape {
     text-align: center;
@@ -371,6 +421,10 @@ button {
 .rodape strong {
     color: #17365d;
 }
+
+/* =========================================================
+   RESPONSIVO
+========================================================= */
 
 @media (min-width: 650px) {
 
@@ -394,6 +448,7 @@ button {
 }
 
 </style>
+
 </head>
 
 <body>
@@ -402,16 +457,26 @@ button {
 
 <section class="cabecalho">
 
-<h1>RELATÓRIO DE REALIZAÇÃO DE ATIVIDADE</h1>
+<h1>
+RELATÓRIO DE REALIZAÇÃO DE ATIVIDADE
+</h1>
 
-<p>Aplicativo offline para registro de atividades.</p>
+<p>
+Aplicativo offline para registro de atividades.
+</p>
 
 <div id="status">
 Aplicativo pronto.
 </div>
 
+<div
+id="modoRelatorio"
+class="novo">
+📝 Novo relatório
+</div>
+
 <div class="versao">
-Versão 6.2
+Versão 6.3
 </div>
 
 </section>
@@ -421,69 +486,101 @@ Versão 6.2
 
 <section class="card">
 
-<h2>Informações</h2>
+<h2>
+Informações
+</h2>
 
 <label class="campo" for="nome">
 1. Insira seu nome *
 </label>
 
-<input id="nome" type="text" required>
+<input
+id="nome"
+type="text"
+required>
+
 
 <label class="campo" for="area">
 2. Insira a área de realização da atividade *
 </label>
 
-<input id="area" type="text" required>
+<input
+id="area"
+type="text"
+required>
+
 
 <label class="campo" for="atividade">
 3. Insira a atividade realizada *
 </label>
 
-<input id="atividade" type="text" required>
+<input
+id="atividade"
+type="text"
+required>
+
 
 <label class="campo" for="contato">
 4. Insira nº de contato
 </label>
 
-<input id="contato" type="tel">
+<input
+id="contato"
+type="tel">
+
 
 <label class="campo" for="empresa">
 5. Empresa *
 </label>
 
-<input id="empresa" type="text" required>
+<input
+id="empresa"
+type="text"
+required>
+
 
 <label class="campo" for="descricao">
 8. Descrição da Atividade *
 </label>
 
-<textarea id="descricao" required></textarea>
+<textarea
+id="descricao"
+required></textarea>
 
 </section>
 
 
 <section class="card">
 
-<h2>6. Imagens ANTES</h2>
+<h2>
+6. Imagens ANTES
+</h2>
 
 <div class="acoes-fotos">
 
 <label class="botao-camera">
+
 📷 Tirar foto
+
 <input
 id="cameraAntes"
 type="file"
 accept="image/*"
 capture="environment">
+
 </label>
 
+
 <label class="botao-galeria">
+
 🖼️ Abrir galeria
+
 <input
 id="galeriaAntesInput"
 type="file"
 accept="image/*"
 multiple>
+
 </label>
 
 </div>
@@ -492,37 +589,51 @@ multiple>
 Você pode tirar novas fotos ou selecionar várias imagens existentes.
 </div>
 
-<div id="contadorAntes" class="contador">
+<div
+id="contadorAntes"
+class="contador">
 0 fotos
 </div>
 
-<div id="galeriaAntes" class="galeria"></div>
+<div
+id="galeriaAntes"
+class="galeria">
+</div>
 
 </section>
 
 
 <section class="card">
 
-<h2>7. Imagens DEPOIS</h2>
+<h2>
+7. Imagens DEPOIS
+</h2>
 
 <div class="acoes-fotos">
 
 <label class="botao-camera">
+
 📷 Tirar foto
+
 <input
 id="cameraDepois"
 type="file"
 accept="image/*"
 capture="environment">
+
 </label>
 
+
 <label class="botao-galeria">
+
 🖼️ Abrir galeria
+
 <input
 id="galeriaDepoisInput"
 type="file"
 accept="image/*"
 multiple>
+
 </label>
 
 </div>
@@ -531,38 +642,59 @@ multiple>
 Você pode tirar novas fotos ou selecionar várias imagens existentes.
 </div>
 
-<div id="contadorDepois" class="contador">
+<div
+id="contadorDepois"
+class="contador">
 0 fotos
 </div>
 
-<div id="galeriaDepois" class="galeria"></div>
+<div
+id="galeriaDepois"
+class="galeria">
+</div>
 
 </section>
 
 
 <section class="card">
 
-<h2>Ações</h2>
+<h2>
+Ações
+</h2>
 
 <div class="acoes">
 
-<button id="instalar" type="button">
+<button
+id="instalar"
+type="button">
 📲 Instalar aplicativo
 </button>
 
-<button id="salvar" type="button">
+
+<button
+id="salvar"
+type="button">
 💾 Salvar Relatório
 </button>
 
-<button id="relatorios" type="button">
+
+<button
+id="relatorios"
+type="button">
 📂 Relatórios Salvos
 </button>
 
-<button id="baixarAtual" type="button">
+
+<button
+id="baixarAtual"
+type="button">
 ⬇️ Baixar PDF
 </button>
 
-<button id="limpar" type="button">
+
+<button
+id="limpar"
+type="button">
 🗑️ Limpar formulário
 </button>
 
@@ -577,20 +709,29 @@ Os relatórios salvos ficam armazenados neste dispositivo e podem ser acessados 
 </form>
 
 
-<section id="painelRelatorios" class="card">
+<section
+id="painelRelatorios"
+class="card">
 
-<h2>📂 Relatórios Salvos</h2>
+<h2>
+📂 Relatórios Salvos
+</h2>
 
-<div id="listaRelatorios"></div>
+<div id="listaRelatorios">
+</div>
 
 </section>
 
 
-<section id="visualizador" class="card">
+<section
+id="visualizador"
+class="card">
 
 <div class="visualizacao-cabecalho">
 
-<h2>👁️ Visualização do Relatório</h2>
+<h2>
+👁️ Visualização do Relatório
+</h2>
 
 <button
 id="fecharVisualizacao"
@@ -601,7 +742,8 @@ class="btn-excluir">
 
 </div>
 
-<div id="conteudoVisualizacao"></div>
+<div id="conteudoVisualizacao">
+</div>
 
 </section>
 
@@ -612,7 +754,9 @@ Relatório de Realização de Atividade
 
 <br>
 
-<strong>Versão 6.2</strong>
+<strong>
+Versão 6.3
+</strong>
 
 </div>
 
@@ -623,18 +767,25 @@ Relatório de Realização de Atividade
 
 "use strict";
 
+
 /* =========================================================
    ELEMENTOS
 ========================================================= */
 
-const el = id =>
-    document.getElementById(id);
+const el =
+    id =>
+        document.getElementById(id);
+
 
 const formulario =
     el("formulario");
 
 const statusApp =
     el("status");
+
+const modoRelatorioEl =
+    el("modoRelatorio");
+
 
 const nome =
     el("nome");
@@ -654,6 +805,7 @@ const empresa =
 const descricao =
     el("descricao");
 
+
 const cameraAntes =
     el("cameraAntes");
 
@@ -665,6 +817,7 @@ const cameraDepois =
 
 const galeriaDepoisInput =
     el("galeriaDepoisInput");
+
 
 const btnInstalar =
     el("instalar");
@@ -681,11 +834,13 @@ const btnBaixarAtual =
 const btnLimpar =
     el("limpar");
 
+
 const painelRelatorios =
     el("painelRelatorios");
 
 const listaRelatorios =
     el("listaRelatorios");
+
 
 const visualizador =
     el("visualizador");
@@ -698,10 +853,187 @@ const fecharVisualizacao =
 
 
 /* =========================================================
+   ESTADO DO FORMULÁRIO
+========================================================= */
+
+let fotosAntes =
+    [];
+
+let fotosDepois =
+    [];
+
+
+/*
+true =
+um relatório salvo foi aberto para edição.
+
+false =
+formulário representa um novo relatório.
+*/
+
+let modoEdicao =
+    false;
+
+
+let relatorioAbertoId =
+    null;
+
+
+/*
+Usado para impedir que o mesmo formulário
+seja salvo duas vezes sem nenhuma alteração.
+*/
+
+let assinaturaUltimoSalvamento =
+    null;
+
+
+/* =========================================================
+   MODO NOVO / EDIÇÃO
+========================================================= */
+
+function atualizarIndicadorModo() {
+
+    if (
+        modoEdicao &&
+        relatorioAbertoId
+    ) {
+
+        modoRelatorioEl.className =
+            "edicao";
+
+        modoRelatorioEl.textContent =
+            "✏️ Editando relatório salvo";
+
+    }
+    else {
+
+        modoRelatorioEl.className =
+            "novo";
+
+        modoRelatorioEl.textContent =
+            "📝 Novo relatório";
+
+    }
+
+}
+
+
+function entrarModoNovo() {
+
+    modoEdicao =
+        false;
+
+    relatorioAbertoId =
+        null;
+
+    atualizarIndicadorModo();
+
+}
+
+
+function entrarModoEdicao(
+    id
+) {
+
+    modoEdicao =
+        true;
+
+    relatorioAbertoId =
+        id;
+
+    atualizarIndicadorModo();
+
+}
+
+
+/* =========================================================
+   ASSINATURA DO FORMULÁRIO
+========================================================= */
+
+function criarAssinaturaAtual() {
+
+    const resumoFotosAntes =
+        fotosAntes.map(
+            foto => ({
+
+                id:
+                    foto.id || "",
+
+                legenda:
+                    foto.legenda || "",
+
+                tamanho:
+                    foto.blob
+                    ?
+                    foto.blob.size
+                    :
+                    0,
+
+                tipo:
+                    foto.blob
+                    ?
+                    foto.blob.type
+                    :
+                    ""
+
+            })
+        );
+
+
+    const resumoFotosDepois =
+        fotosDepois.map(
+            foto => ({
+
+                id:
+                    foto.id || "",
+
+                legenda:
+                    foto.legenda || "",
+
+                tamanho:
+                    foto.blob
+                    ?
+                    foto.blob.size
+                    :
+                    0,
+
+                tipo:
+                    foto.blob
+                    ?
+                    foto.blob.type
+                    :
+                    ""
+
+            })
+        );
+
+
+    return JSON.stringify({
+
+        dados:
+            obterDados(),
+
+        fotosAntes:
+            resumoFotosAntes,
+
+        fotosDepois:
+            resumoFotosDepois
+
+    });
+
+}
+
+
+/* =========================================================
    SERVICE WORKER
 ========================================================= */
 
-if ("serviceWorker" in navigator) {
+if (
+    "serviceWorker"
+    in
+    navigator
+) {
 
     window.addEventListener(
         "load",
@@ -713,9 +1045,11 @@ if ("serviceWorker" in navigator) {
                     await navigator.serviceWorker.register(
                         "./service-worker.js",
                         {
-                            updateViaCache: "none"
+                            updateViaCache:
+                                "none"
                         }
                     );
+
 
                 await registro.update();
 
@@ -742,6 +1076,7 @@ if ("serviceWorker" in navigator) {
 let eventoInstalacao =
     null;
 
+
 window.addEventListener(
     "beforeinstallprompt",
     evento => {
@@ -757,11 +1092,14 @@ window.addEventListener(
     }
 );
 
+
 btnInstalar.addEventListener(
     "click",
     async () => {
 
-        if (!eventoInstalacao) {
+        if (
+            !eventoInstalacao
+        ) {
 
             alert(
                 "Se o aplicativo ainda não estiver instalado, use o menu do navegador e escolha 'Instalar aplicativo' ou 'Adicionar à tela inicial'."
@@ -771,18 +1109,23 @@ btnInstalar.addEventListener(
 
         }
 
+
         eventoInstalacao.prompt();
+
 
         await eventoInstalacao.userChoice;
 
+
         eventoInstalacao =
             null;
+
 
         btnInstalar.style.display =
             "none";
 
     }
 );
+
 
 window.addEventListener(
     "appinstalled",
@@ -826,11 +1169,13 @@ function abrirBanco() {
                     DB_VERSION
                 );
 
+
             request.onupgradeneeded =
                 event => {
 
                     const db =
                         event.target.result;
+
 
                     if (
                         !db.objectStoreNames.contains(
@@ -842,21 +1187,25 @@ function abrirBanco() {
                             db.createObjectStore(
                                 STORE_NAME,
                                 {
-                                    keyPath: "id"
+                                    keyPath:
+                                        "id"
                                 }
                             );
+
 
                         store.createIndex(
                             "data",
                             "data",
                             {
-                                unique: false
+                                unique:
+                                    false
                             }
                         );
 
                     }
 
                 };
+
 
             request.onsuccess =
                 () => {
@@ -866,6 +1215,7 @@ function abrirBanco() {
                     );
 
                 };
+
 
             request.onerror =
                 () => {
@@ -883,21 +1233,7 @@ function abrirBanco() {
 
 
 /* =========================================================
-   VARIÁVEIS
-========================================================= */
-
-let fotosAntes =
-    [];
-
-let fotosDepois =
-    [];
-
-let relatorioAbertoId =
-    null;
-
-
-/* =========================================================
-   ID
+   GERAR ID
 ========================================================= */
 
 function gerarId() {
@@ -910,6 +1246,7 @@ function gerarId() {
         return crypto.randomUUID();
 
     }
+
 
     return (
         Date.now()
@@ -937,6 +1274,7 @@ function adicionarFotos(
         Array.from(
             input.files || []
         );
+
 
     arquivos.forEach(
         arquivo => {
@@ -966,8 +1304,10 @@ function adicionarFotos(
         }
     );
 
+
     input.value =
         "";
+
 
     renderizarGaleria(
         lista,
@@ -978,6 +1318,10 @@ function adicionarFotos(
 }
 
 
+/* =========================================================
+   RENDERIZAR GALERIA
+========================================================= */
+
 function renderizarGaleria(
     lista,
     galeriaId,
@@ -987,8 +1331,10 @@ function renderizarGaleria(
     const galeria =
         el(galeriaId);
 
+
     galeria.innerHTML =
         "";
+
 
     lista.forEach(
         (foto, index) => {
@@ -997,6 +1343,7 @@ function renderizarGaleria(
                 document.createElement(
                     "div"
                 );
+
 
             bloco.className =
                 "foto";
@@ -1007,18 +1354,22 @@ function renderizarGaleria(
                     "img"
                 );
 
+
             const url =
                 URL.createObjectURL(
                     foto.blob
                 );
 
+
             img.src =
                 url;
+
 
             img.alt =
                 "Foto "
                 +
                 (index + 1);
+
 
             img.onload =
                 () => {
@@ -1035,17 +1386,22 @@ function renderizarGaleria(
                     "input"
                 );
 
+
             legenda.type =
                 "text";
+
 
             legenda.className =
                 "legenda";
 
+
             legenda.placeholder =
                 "Legenda opcional";
 
+
             legenda.value =
                 foto.legenda || "";
+
 
             legenda.addEventListener(
                 "input",
@@ -1063,17 +1419,22 @@ function renderizarGaleria(
                     "button"
                 );
 
+
             remover.type =
                 "button";
+
 
             remover.className =
                 "remover";
 
+
             remover.textContent =
                 "×";
 
+
             remover.title =
                 "Remover foto";
+
 
             remover.addEventListener(
                 "click",
@@ -1083,6 +1444,7 @@ function renderizarGaleria(
                         index,
                         1
                     );
+
 
                     renderizarGaleria(
                         lista,
@@ -1098,13 +1460,16 @@ function renderizarGaleria(
                 img
             );
 
+
             bloco.appendChild(
                 remover
             );
 
+
             bloco.appendChild(
                 legenda
             );
+
 
             galeria.appendChild(
                 bloco
@@ -1132,7 +1497,7 @@ function renderizarGaleria(
 
 
 /* =========================================================
-   EVENTOS DE FOTO
+   EVENTOS DAS FOTOS
 ========================================================= */
 
 cameraAntes.addEventListener(
@@ -1149,6 +1514,7 @@ cameraAntes.addEventListener(
     }
 );
 
+
 galeriaAntesInput.addEventListener(
     "change",
     function () {
@@ -1163,6 +1529,7 @@ galeriaAntesInput.addEventListener(
     }
 );
 
+
 cameraDepois.addEventListener(
     "change",
     function () {
@@ -1176,6 +1543,7 @@ cameraDepois.addEventListener(
 
     }
 );
+
 
 galeriaDepoisInput.addEventListener(
     "change",
@@ -1193,7 +1561,7 @@ galeriaDepoisInput.addEventListener(
 
 
 /* =========================================================
-   DADOS
+   OBTER DADOS
 ========================================================= */
 
 function obterDados() {
@@ -1239,13 +1607,44 @@ btnSalvar.addEventListener(
 
         }
 
+
+        const assinaturaAtual =
+            criarAssinaturaAtual();
+
+
+        /*
+        Impede salvar exatamente a mesma coisa
+        duas vezes seguidas.
+        */
+
+        if (
+            assinaturaUltimoSalvamento
+            ===
+            assinaturaAtual
+        ) {
+
+            alert(
+                "Nenhuma alteração foi feita desde o último salvamento."
+            );
+
+            return;
+
+        }
+
+
         statusApp.textContent =
-            "Salvando relatório...";
+            modoEdicao
+            ?
+            "Atualizando relatório..."
+            :
+            "Salvando novo relatório...";
+
 
         try {
 
             const db =
                 await abrirBanco();
+
 
             const transaction =
                 db.transaction(
@@ -1253,20 +1652,41 @@ btnSalvar.addEventListener(
                     "readwrite"
                 );
 
+
             const store =
                 transaction.objectStore(
                     STORE_NAME
                 );
 
+
             const agora =
                 new Date();
+
+
+            /*
+            SOMENTE em modo edição usamos
+            o ID já existente.
+
+            Em modo novo sempre geramos
+            outro ID.
+            */
+
+            const idSalvar =
+                (
+                    modoEdicao
+                    &&
+                    relatorioAbertoId
+                )
+                ?
+                relatorioAbertoId
+                :
+                gerarId();
+
 
             const relatorio = {
 
                 id:
-                    relatorioAbertoId
-                    ||
-                    gerarId(),
+                    idSalvar,
 
                 data:
                     agora.toISOString(),
@@ -1282,15 +1702,18 @@ btnSalvar.addEventListener(
 
             };
 
+
             store.put(
                 relatorio
             );
+
 
             await new Promise(
                 (resolve, reject) => {
 
                     transaction.oncomplete =
                         resolve;
+
 
                     transaction.onerror =
                         () => {
@@ -1300,6 +1723,7 @@ btnSalvar.addEventListener(
                             );
 
                         };
+
 
                     transaction.onabort =
                         () => {
@@ -1313,11 +1737,51 @@ btnSalvar.addEventListener(
                 }
             );
 
-            relatorioAbertoId =
-                relatorio.id;
 
-            statusApp.textContent =
-                "✓ Relatório salvo neste dispositivo.";
+            assinaturaUltimoSalvamento =
+                assinaturaAtual;
+
+
+            if (
+                modoEdicao
+            ) {
+
+                /*
+                Continua editando o relatório
+                que foi aberto.
+                */
+
+                relatorioAbertoId =
+                    idSalvar;
+
+
+                atualizarIndicadorModo();
+
+
+                statusApp.textContent =
+                    "✓ Relatório atualizado.";
+
+            }
+            else {
+
+                /*
+                Após salvar um NOVO relatório,
+                não mantemos o ID associado
+                ao formulário.
+
+                Portanto, se o usuário alterar
+                os dados e salvar novamente,
+                será criado outro relatório.
+                */
+
+                entrarModoNovo();
+
+
+                statusApp.textContent =
+                    "✓ Novo relatório salvo.";
+
+            }
+
 
             await listarRelatorios();
 
@@ -1328,8 +1792,10 @@ btnSalvar.addEventListener(
                 erro
             );
 
+
             statusApp.textContent =
                 "Erro ao salvar relatório.";
+
 
             alert(
                 "Não foi possível salvar o relatório."
@@ -1352,6 +1818,7 @@ async function buscarRelatorio(
     const db =
         await abrirBanco();
 
+
     return new Promise(
         (resolve, reject) => {
 
@@ -1360,6 +1827,7 @@ async function buscarRelatorio(
                     STORE_NAME,
                     "readonly"
                 );
+
 
             const request =
                 transaction
@@ -1370,6 +1838,7 @@ async function buscarRelatorio(
                         id
                     );
 
+
             request.onsuccess =
                 () => {
 
@@ -1378,6 +1847,7 @@ async function buscarRelatorio(
                     );
 
                 };
+
 
             request.onerror =
                 () => {
@@ -1405,11 +1875,13 @@ async function listarRelatorios() {
         const db =
             await abrirBanco();
 
+
         const transaction =
             db.transaction(
                 STORE_NAME,
                 "readonly"
             );
+
 
         const request =
             transaction
@@ -1417,6 +1889,7 @@ async function listarRelatorios() {
                     STORE_NAME
                 )
                 .getAll();
+
 
         request.onsuccess =
             () => {
@@ -1434,8 +1907,10 @@ async function listarRelatorios() {
                         }
                     );
 
+
                 listaRelatorios.innerHTML =
                     "";
+
 
                 if (
                     registros.length === 0
@@ -1444,9 +1919,11 @@ async function listarRelatorios() {
                     listaRelatorios.innerHTML =
                         "<p>Nenhum relatório salvo neste dispositivo.</p>";
 
+
                     return;
 
                 }
+
 
                 registros.forEach(
                     relatorio => {
@@ -1456,6 +1933,7 @@ async function listarRelatorios() {
                                 "div"
                             );
 
+
                         item.className =
                             "relatorio-item";
 
@@ -1464,6 +1942,7 @@ async function listarRelatorios() {
                             document.createElement(
                                 "strong"
                             );
+
 
                         titulo.textContent =
                             relatorio.dados.atividade
@@ -1476,8 +1955,10 @@ async function listarRelatorios() {
                                 "div"
                             );
 
+
                         info.className =
                             "relatorio-info";
+
 
                         info.textContent =
 
@@ -1492,11 +1973,15 @@ async function listarRelatorios() {
 
                             (
                                 relatorio.dados.empresa
+
                                 ?
+
                                 " • "
                                 +
                                 relatorio.dados.empresa
+
                                 :
+
                                 ""
                             );
 
@@ -1506,8 +1991,10 @@ async function listarRelatorios() {
                                 "div"
                             );
 
+
                         fotosInfo.className =
                             "relatorio-fotos";
+
 
                         fotosInfo.textContent =
 
@@ -1539,6 +2026,7 @@ async function listarRelatorios() {
                                 "div"
                             );
 
+
                         botoes.className =
                             "relatorio-botoes";
 
@@ -1550,14 +2038,18 @@ async function listarRelatorios() {
                                 "button"
                             );
 
+
                         abrir.type =
                             "button";
+
 
                         abrir.className =
                             "btn-abrir";
 
+
                         abrir.textContent =
                             "✏️ Abrir";
+
 
                         abrir.addEventListener(
                             "click",
@@ -1578,14 +2070,18 @@ async function listarRelatorios() {
                                 "button"
                             );
 
+
                         visualizar.type =
                             "button";
+
 
                         visualizar.className =
                             "btn-visualizar";
 
+
                         visualizar.textContent =
                             "👁️ Visualizar";
+
 
                         visualizar.addEventListener(
                             "click",
@@ -1599,21 +2095,25 @@ async function listarRelatorios() {
                         );
 
 
-                        /* DOWNLOAD */
+                        /* BAIXAR */
 
                         const baixar =
                             document.createElement(
                                 "button"
                             );
 
+
                         baixar.type =
                             "button";
+
 
                         baixar.className =
                             "btn-download";
 
+
                         baixar.textContent =
                             "⬇️ Baixar PDF";
+
 
                         baixar.addEventListener(
                             "click",
@@ -1634,14 +2134,18 @@ async function listarRelatorios() {
                                 "button"
                             );
 
+
                         excluir.type =
                             "button";
+
 
                         excluir.className =
                             "btn-excluir";
 
+
                         excluir.textContent =
                             "🗑️ Excluir";
+
 
                         excluir.addEventListener(
                             "click",
@@ -1705,6 +2209,7 @@ async function listarRelatorios() {
             erro
         );
 
+
         listaRelatorios.innerHTML =
             "<p>Erro ao carregar relatórios.</p>";
 
@@ -1728,42 +2233,52 @@ async function abrirRelatorio(
                 id
             );
 
-        if (!relatorio) {
+
+        if (
+            !relatorio
+        ) {
 
             alert(
                 "Relatório não encontrado."
             );
 
+
             return;
 
         }
 
-        relatorioAbertoId =
-            relatorio.id;
 
         nome.value =
             relatorio.dados.nome || "";
 
+
         area.value =
             relatorio.dados.area || "";
+
 
         atividade.value =
             relatorio.dados.atividade || "";
 
+
         contato.value =
             relatorio.dados.contato || "";
+
 
         empresa.value =
             relatorio.dados.empresa || "";
 
+
         descricao.value =
             relatorio.dados.descricao || "";
+
 
         fotosAntes =
             relatorio.fotosAntes || [];
 
+
         fotosDepois =
             relatorio.fotosDepois || [];
+
 
         renderizarGaleria(
             fotosAntes,
@@ -1771,24 +2286,51 @@ async function abrirRelatorio(
             "contadorAntes"
         );
 
+
         renderizarGaleria(
             fotosDepois,
             "galeriaDepois",
             "contadorDepois"
         );
 
+
+        /*
+        SOMENTE abrir um relatório salvo
+        ativa modo de edição.
+        */
+
+        entrarModoEdicao(
+            relatorio.id
+        );
+
+
+        /*
+        Estado original carregado.
+        Se salvar sem alterar, não faz nada.
+        */
+
+        assinaturaUltimoSalvamento =
+            criarAssinaturaAtual();
+
+
         painelRelatorios.style.display =
             "none";
+
 
         visualizador.style.display =
             "none";
 
+
         statusApp.textContent =
             "Relatório aberto para edição.";
 
+
         window.scrollTo({
-            top: 0,
-            behavior: "smooth"
+            top:
+                0,
+
+            behavior:
+                "smooth"
         });
 
     }
@@ -1797,6 +2339,7 @@ async function abrirRelatorio(
         console.error(
             erro
         );
+
 
         alert(
             "Não foi possível abrir o relatório."
@@ -1820,8 +2363,10 @@ async function criarFotosVisualizacao(
             "div"
         );
 
+
     container.className =
         "visualizacao-fotos";
+
 
     if (
         !fotos ||
@@ -1833,16 +2378,20 @@ async function criarFotosVisualizacao(
                 "p"
             );
 
+
         vazio.textContent =
             "Nenhuma foto registrada.";
+
 
         container.appendChild(
             vazio
         );
 
+
         return container;
 
     }
+
 
     for (
         let i = 0;
@@ -1853,26 +2402,32 @@ async function criarFotosVisualizacao(
         const foto =
             fotos[i];
 
+
         const bloco =
             document.createElement(
                 "div"
             );
 
+
         bloco.className =
             "visualizacao-foto";
+
 
         const img =
             document.createElement(
                 "img"
             );
 
+
         const url =
             URL.createObjectURL(
                 foto.blob
             );
 
+
         img.src =
             url;
+
 
         img.onload =
             () => {
@@ -1883,10 +2438,12 @@ async function criarFotosVisualizacao(
 
             };
 
+
         const legenda =
             document.createElement(
                 "div"
             );
+
 
         legenda.textContent =
             foto.legenda
@@ -1895,13 +2452,16 @@ async function criarFotosVisualizacao(
             +
             (i + 1);
 
+
         bloco.appendChild(
             img
         );
 
+
         bloco.appendChild(
             legenda
         );
+
 
         container.appendChild(
             bloco
@@ -1909,10 +2469,15 @@ async function criarFotosVisualizacao(
 
     }
 
+
     return container;
 
 }
 
+
+/* =========================================================
+   VISUALIZAR RELATÓRIO
+========================================================= */
 
 async function visualizarRelatorio(
     relatorio
@@ -1920,6 +2485,7 @@ async function visualizarRelatorio(
 
     conteudoVisualizacao.innerHTML =
         "";
+
 
     const dados =
         relatorio.dados;
@@ -1935,26 +2501,32 @@ async function visualizarRelatorio(
                 "div"
             );
 
+
         linha.className =
             "visualizacao-linha";
+
 
         const strong =
             document.createElement(
                 "strong"
             );
 
+
         strong.textContent =
             titulo + ": ";
+
 
         linha.appendChild(
             strong
         );
+
 
         linha.appendChild(
             document.createTextNode(
                 valor || "—"
             )
         );
+
 
         conteudoVisualizacao.appendChild(
             linha
@@ -1968,31 +2540,37 @@ async function visualizarRelatorio(
         dados.nome
     );
 
+
     adicionarLinha(
         "Área",
         dados.area
     );
+
 
     adicionarLinha(
         "Atividade",
         dados.atividade
     );
 
+
     adicionarLinha(
         "Contato",
         dados.contato
     );
+
 
     adicionarLinha(
         "Empresa",
         dados.empresa
     );
 
+
     adicionarLinha(
         "Data",
         new Date(
             relatorio.data
-        ).toLocaleString(
+        )
+        .toLocaleString(
             "pt-BR"
         )
     );
@@ -2003,8 +2581,10 @@ async function visualizarRelatorio(
             "h2"
         );
 
+
     tituloDescricao.textContent =
         "Descrição da Atividade";
+
 
     conteudoVisualizacao.appendChild(
         tituloDescricao
@@ -2016,11 +2596,14 @@ async function visualizarRelatorio(
             "div"
         );
 
+
     descricaoDiv.className =
         "visualizacao-descricao";
 
+
     descricaoDiv.textContent =
         dados.descricao || "";
+
 
     conteudoVisualizacao.appendChild(
         descricaoDiv
@@ -2032,12 +2615,15 @@ async function visualizarRelatorio(
             "h2"
         );
 
+
     tituloAntes.textContent =
         "Imagens Antes";
+
 
     conteudoVisualizacao.appendChild(
         tituloAntes
     );
+
 
     conteudoVisualizacao.appendChild(
         await criarFotosVisualizacao(
@@ -2051,12 +2637,15 @@ async function visualizarRelatorio(
             "h2"
         );
 
+
     tituloDepois.textContent =
         "Imagens Depois";
+
 
     conteudoVisualizacao.appendChild(
         tituloDepois
     );
+
 
     conteudoVisualizacao.appendChild(
         await criarFotosVisualizacao(
@@ -2068,9 +2657,13 @@ async function visualizarRelatorio(
     visualizador.style.display =
         "block";
 
+
     visualizador.scrollIntoView({
-        behavior: "smooth",
-        block: "start"
+        behavior:
+            "smooth",
+
+        block:
+            "start"
     });
 
 }
@@ -2121,17 +2714,28 @@ async function prepararImagemPDF(
                     const imagem =
                         new Image();
 
+
                     imagem.onload =
-                        () => resolve(
-                            imagem
-                        );
+                        () => {
+
+                            resolve(
+                                imagem
+                            );
+
+                        };
+
 
                     imagem.onerror =
-                        () => reject(
-                            new Error(
-                                "O navegador não conseguiu abrir esta imagem."
-                            )
-                        );
+                        () => {
+
+                            reject(
+                                new Error(
+                                    "O navegador não conseguiu abrir esta imagem."
+                                )
+                            );
+
+                        };
+
 
                     imagem.src =
                         urlImagem;
@@ -2144,6 +2748,7 @@ async function prepararImagemPDF(
             img.naturalWidth
             ||
             img.width;
+
 
         const alturaOriginal =
             img.naturalHeight
@@ -2169,6 +2774,7 @@ async function prepararImagemPDF(
 
         let largura =
             larguraOriginal;
+
 
         let altura =
             alturaOriginal;
@@ -2209,6 +2815,7 @@ async function prepararImagemPDF(
         canvas.width =
             largura;
 
+
         canvas.height =
             altura;
 
@@ -2217,12 +2824,15 @@ async function prepararImagemPDF(
             canvas.getContext(
                 "2d",
                 {
-                    alpha: false
+                    alpha:
+                        false
                 }
             );
 
 
-        if (!ctx) {
+        if (
+            !ctx
+        ) {
 
             throw new Error(
                 "Não foi possível preparar a imagem."
@@ -2233,6 +2843,7 @@ async function prepararImagemPDF(
 
         ctx.fillStyle =
             "#FFFFFF";
+
 
         ctx.fillRect(
             0,
@@ -2305,7 +2916,9 @@ function limparNomeArquivo(
     return String(
         texto || "Relatorio"
     )
-    .normalize("NFD")
+    .normalize(
+        "NFD"
+    )
     .replace(
         /[\u0300-\u036f]/g,
         ""
@@ -2343,6 +2956,7 @@ async function baixarPDF(
             "O gerador de PDF não foi carregado. Verifique o arquivo libs/jspdf.umd.min.js."
         );
 
+
         return;
 
     }
@@ -2354,8 +2968,10 @@ async function baixarPDF(
 
     try {
 
-        const { jsPDF } =
-            window.jspdf;
+        const {
+            jsPDF
+        } =
+        window.jspdf;
 
 
         const pdf =
@@ -2379,17 +2995,22 @@ async function baixarPDF(
         const larguraPagina =
             210;
 
+
         const alturaPagina =
             297;
+
 
         const margemEsquerda =
             20;
 
+
         const margemDireita =
             20;
 
+
         const margemInferior =
             18;
+
 
         const larguraUtil =
             larguraPagina
@@ -2397,6 +3018,7 @@ async function baixarPDF(
             margemEsquerda
             -
             margemDireita;
+
 
         let y =
             20;
@@ -2409,9 +3031,7 @@ async function baixarPDF(
             if (
                 y + alturaNecessaria
                 >
-                alturaPagina
-                -
-                margemInferior
+                alturaPagina - margemInferior
             ) {
 
                 pdf.addPage();
@@ -2432,14 +3052,17 @@ async function baixarPDF(
                 16
             );
 
+
             pdf.setFont(
                 "helvetica",
                 "bold"
             );
 
+
             pdf.setFontSize(
                 13
             );
+
 
             pdf.text(
                 texto,
@@ -2447,8 +3070,10 @@ async function baixarPDF(
                 y
             );
 
+
             y +=
                 3;
+
 
             pdf.line(
                 margemEsquerda,
@@ -2458,6 +3083,7 @@ async function baixarPDF(
                 margemDireita,
                 y
             );
+
 
             y +=
                 8;
@@ -2474,14 +3100,17 @@ async function baixarPDF(
                 14
             );
 
+
             pdf.setFont(
                 "helvetica",
                 "bold"
             );
 
+
             pdf.setFontSize(
                 10
             );
+
 
             pdf.text(
                 titulo + ":",
@@ -2489,15 +3118,18 @@ async function baixarPDF(
                 y
             );
 
+
             pdf.setFont(
                 "helvetica",
                 "normal"
             );
 
+
             const texto =
                 String(
                     valor || "—"
                 );
+
 
             const linhas =
                 pdf.splitTextToSize(
@@ -2505,11 +3137,13 @@ async function baixarPDF(
                     larguraUtil - 38
                 );
 
+
             pdf.text(
                 linhas,
                 margemEsquerda + 38,
                 y
             );
+
 
             y +=
                 Math.max(
@@ -2526,6 +3160,7 @@ async function baixarPDF(
             "helvetica",
             "bold"
         );
+
 
         pdf.setFontSize(
             16
@@ -2560,32 +3195,37 @@ async function baixarPDF(
             7;
 
 
-        /* INFORMAÇÕES */
+        /* DADOS */
 
         adicionarCampo(
             "Nome",
             relatorio.dados.nome
         );
 
+
         adicionarCampo(
             "Area",
             relatorio.dados.area
         );
+
 
         adicionarCampo(
             "Atividade",
             relatorio.dados.atividade
         );
 
+
         adicionarCampo(
             "Contato",
             relatorio.dados.contato
         );
 
+
         adicionarCampo(
             "Empresa",
             relatorio.dados.empresa
         );
+
 
         adicionarCampo(
             "Data",
@@ -2609,6 +3249,7 @@ async function baixarPDF(
             "helvetica",
             "normal"
         );
+
 
         pdf.setFontSize(
             10
@@ -2635,11 +3276,13 @@ async function baixarPDF(
                 6
             );
 
+
             pdf.text(
                 linha,
                 margemEsquerda,
                 y
             );
+
 
             y +=
                 5;
@@ -2673,9 +3316,11 @@ async function baixarPDF(
                     "normal"
                 );
 
+
                 pdf.setFontSize(
                     10
                 );
+
 
                 pdf.text(
                     "Nenhuma foto registrada.",
@@ -2683,8 +3328,10 @@ async function baixarPDF(
                     y
                 );
 
+
                 y +=
                     10;
+
 
                 return;
 
@@ -2702,14 +3349,23 @@ async function baixarPDF(
 
 
                 statusApp.textContent =
+
                     "Processando foto "
+
                     +
+
                     (i + 1)
+
                     +
+
                     " de "
+
                     +
+
                     fotos.length
+
                     +
+
                     "...";
 
 
@@ -2724,19 +3380,15 @@ async function baixarPDF(
                     const larguraMax =
                         larguraUtil;
 
+
                     const alturaMax =
                         100;
 
 
                     const escala =
                         Math.min(
-                            larguraMax
-                            /
-                            imagem.largura,
-
-                            alturaMax
-                            /
-                            imagem.altura
+                            larguraMax / imagem.largura,
+                            alturaMax / imagem.altura
                         );
 
 
@@ -2744,6 +3396,7 @@ async function baixarPDF(
                         imagem.largura
                         *
                         escala;
+
 
                     const alturaFoto =
                         imagem.altura
@@ -2818,6 +3471,7 @@ async function baixarPDF(
                         "italic"
                     );
 
+
                     pdf.setFontSize(
                         9
                     );
@@ -2845,9 +3499,7 @@ async function baixarPDF(
                     console.error(
                         "Erro na foto "
                         +
-                        (i + 1)
-                        +
-                        ":",
+                        (i + 1),
                         erroFoto
                     );
 
@@ -2861,6 +3513,7 @@ async function baixarPDF(
                         "helvetica",
                         "italic"
                     );
+
 
                     pdf.setFontSize(
                         9
@@ -2916,14 +3569,17 @@ async function baixarPDF(
                 pagina
             );
 
+
             pdf.setFont(
                 "helvetica",
                 "normal"
             );
 
+
             pdf.setFontSize(
                 8
             );
+
 
             pdf.text(
                 "Pagina "
@@ -2944,7 +3600,7 @@ async function baixarPDF(
         }
 
 
-        /* NOME DO PDF */
+        /* NOME DO ARQUIVO */
 
         const data =
             new Date(
@@ -3004,8 +3660,6 @@ async function baixarPDF(
             ".pdf";
 
 
-        /* GERAR BLOB */
-
         statusApp.textContent =
             "Finalizando PDF...";
 
@@ -3028,7 +3682,7 @@ async function baixarPDF(
         }
 
 
-        /* DOWNLOAD DIRETO */
+        /* DOWNLOAD */
 
         const urlPDF =
             URL.createObjectURL(
@@ -3045,8 +3699,10 @@ async function baixarPDF(
         link.href =
             urlPDF;
 
+
         link.download =
             nomeArquivo;
+
 
         link.style.display =
             "none";
@@ -3191,6 +3847,7 @@ async function excluirRelatorio(
         const db =
             await abrirBanco();
 
+
         const transaction =
             db.transaction(
                 STORE_NAME,
@@ -3210,11 +3867,21 @@ async function excluirRelatorio(
         transaction.oncomplete =
             async () => {
 
+                /*
+                Se o relatório que estava sendo
+                editado foi excluído, volta para
+                modo novo.
+                */
+
                 if (
-                    relatorioAbertoId === id
+                    relatorioAbertoId
+                    ===
+                    id
                 ) {
 
-                    relatorioAbertoId =
+                    entrarModoNovo();
+
+                    assinaturaUltimoSalvamento =
                         null;
 
                 }
@@ -3235,6 +3902,7 @@ async function excluirRelatorio(
             erro
         );
 
+
         alert(
             "Não foi possível excluir o relatório."
         );
@@ -3245,7 +3913,7 @@ async function excluirRelatorio(
 
 
 /* =========================================================
-   ABRIR PAINEL DE RELATÓRIOS
+   PAINEL DE RELATÓRIOS
 ========================================================= */
 
 btnRelatorios.addEventListener(
@@ -3261,6 +3929,7 @@ btnRelatorios.addEventListener(
             painelRelatorios.style.display =
                 "none";
 
+
             return;
 
         }
@@ -3274,8 +3943,11 @@ btnRelatorios.addEventListener(
 
 
         painelRelatorios.scrollIntoView({
-            behavior: "smooth",
-            block: "start"
+            behavior:
+                "smooth",
+
+            block:
+                "start"
         });
 
     }
@@ -3283,7 +3955,7 @@ btnRelatorios.addEventListener(
 
 
 /* =========================================================
-   LIMPAR FORMULÁRIO
+   LIMPAR / NOVO RELATÓRIO
 ========================================================= */
 
 btnLimpar.addEventListener(
@@ -3307,10 +3979,19 @@ btnLimpar.addEventListener(
         fotosAntes =
             [];
 
+
         fotosDepois =
             [];
 
-        relatorioAbertoId =
+
+        /*
+        Volta completamente ao modo Novo.
+        */
+
+        entrarModoNovo();
+
+
+        assinaturaUltimoSalvamento =
             null;
 
 
@@ -3337,8 +4018,11 @@ btnLimpar.addEventListener(
 
 
         window.scrollTo({
-            top: 0,
-            behavior: "smooth"
+            top:
+                0,
+
+            behavior:
+                "smooth"
         });
 
     }
@@ -3371,14 +4055,24 @@ window.addEventListener(
 );
 
 
-if (!navigator.onLine) {
+if (
+    !navigator.onLine
+) {
 
     statusApp.textContent =
         "Modo offline — o aplicativo continua disponível.";
 
 }
 
+
+/* =========================================================
+   ESTADO INICIAL
+========================================================= */
+
+entrarModoNovo();
+
 </script>
 
 </body>
+
 </html>
