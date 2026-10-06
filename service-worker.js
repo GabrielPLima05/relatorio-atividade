@@ -1,5 +1,5 @@
 const CACHE_NAME =
-    "relatorio-atividade-v6-2-pdf-fix";
+    "relatorio-atividade-v6-3";
 
 
 const ARQUIVOS_OFFLINE = [
@@ -78,7 +78,8 @@ self.addEventListener(
                                 nome => {
 
                                     if (
-                                        nome !==
+                                        nome
+                                        !==
                                         CACHE_NAME
                                     ) {
 
@@ -119,7 +120,8 @@ self.addEventListener(
     event => {
 
         if (
-            event.request.method !==
+            event.request.method
+            !==
             "GET"
         ) {
 
@@ -129,15 +131,16 @@ self.addEventListener(
 
 
         /*
-        NAVEGAÇÃO / INDEX.HTML
+        Para navegação:
+        internet primeiro.
 
-        Rede primeiro.
-        Se não houver internet,
-        usa o index salvo.
+        Assim recebe novas versões
+        quando existir conexão.
         */
 
         if (
-            event.request.mode ===
+            event.request.mode
+            ===
             "navigate"
         ) {
 
@@ -199,9 +202,8 @@ self.addEventListener(
 
 
         /*
-        ARQUIVOS ESTÁTICOS
-
-        Cache primeiro.
+        Demais arquivos:
+        cache primeiro.
         */
 
         event.respondWith(
@@ -214,7 +216,9 @@ self.addEventListener(
                 .then(
                     cached => {
 
-                        if (cached) {
+                        if (
+                            cached
+                        ) {
 
                             return cached;
 
@@ -229,8 +233,11 @@ self.addEventListener(
                             response => {
 
                                 if (
-                                    !response ||
-                                    response.status !== 200
+                                    !response
+                                    ||
+                                    response.status
+                                    !==
+                                    200
                                 ) {
 
                                     return response;
@@ -274,7 +281,7 @@ self.addEventListener(
 
 
 /* =========================================================
-   ATUALIZAÇÃO MANUAL
+   SKIP WAITING
 ========================================================= */
 
 self.addEventListener(
@@ -282,7 +289,8 @@ self.addEventListener(
     event => {
 
         if (
-            event.data ===
+            event.data
+            ===
             "SKIP_WAITING"
         ) {
 
