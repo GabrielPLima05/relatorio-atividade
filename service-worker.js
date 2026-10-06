@@ -1,17 +1,24 @@
 "use strict";
 
+/* =========================================================
+   RELATÓRIO DE REALIZAÇÃO DE ATIVIDADE
+   SERVICE WORKER
+   VERSÃO 6.0
+========================================================= */
+
 
 /* =========================================================
-   VERSÃO
+   CONFIGURAÇÃO DO CACHE
 ========================================================= */
 
 const CACHE_NAME =
-    "relatorio-atividade-v5";
+    "relatorio-atividade-v6";
 
 
-/* =========================================================
-   ARQUIVOS ESSENCIAIS
-========================================================= */
+/*
+ * Arquivos necessários para o aplicativo
+ * funcionar offline.
+ */
 
 const ARQUIVOS_OFFLINE = [
 
@@ -32,6 +39,11 @@ self.addEventListener(
     "install",
     function (event) {
 
+        console.log(
+            "[Service Worker V6] Instalando..."
+        );
+
+
         event.waitUntil(
 
             caches
@@ -42,8 +54,23 @@ self.addEventListener(
                 .then(
                     function (cache) {
 
+                        console.log(
+                            "[Service Worker V6] Salvando arquivos offline..."
+                        );
+
+
                         return cache.addAll(
                             ARQUIVOS_OFFLINE
+                        );
+
+                    }
+                )
+
+                .then(
+                    function () {
+
+                        console.log(
+                            "[Service Worker V6] Arquivos armazenados."
                         );
 
                     }
@@ -53,7 +80,8 @@ self.addEventListener(
 
 
         /*
-         * Não espera o Service Worker antigo
+         * Faz a nova versão assumir o controle
+         * sem esperar o Service Worker antigo
          * ser encerrado.
          */
 
@@ -71,6 +99,11 @@ self.addEventListener(
     "activate",
     function (event) {
 
+        console.log(
+            "[Service Worker V6] Ativando..."
+        );
+
+
         event.waitUntil(
 
             caches
@@ -84,10 +117,27 @@ self.addEventListener(
                             nomesCaches.map(
                                 function (nomeCache) {
 
+                                    /*
+                                     * Apaga caches antigos:
+                                     *
+                                     * v1
+                                     * v2
+                                     * v3
+                                     * v4
+                                     * v5
+                                     * etc.
+                                     */
+
                                     if (
                                         nomeCache !==
                                         CACHE_NAME
                                     ) {
+
+                                        console.log(
+                                            "[Service Worker V6] Removendo cache antigo:",
+                                            nomeCache
+                                        );
+
 
                                         return caches.delete(
                                             nomeCache
@@ -107,8 +157,8 @@ self.addEventListener(
                     function () {
 
                         /*
-                         * Assume imediatamente o controle
-                         * das páginas abertas.
+                         * Faz o V6 assumir imediatamente
+                         * as páginas abertas.
                          */
 
                         return self.clients.claim();
@@ -123,12 +173,17 @@ self.addEventListener(
 
 
 /* =========================================================
-   FETCH
+   REQUISIÇÕES
 ========================================================= */
 
 self.addEventListener(
     "fetch",
     function (event) {
+
+        /*
+         * Não interferimos em POST,
+         * PUT, DELETE etc.
+         */
 
         if (
             event.request.method !==
@@ -140,14 +195,19 @@ self.addEventListener(
         }
 
 
-        /*
-         * =============================================
-         * NAVEGAÇÃO / HTML
-         *
-         * INTERNET PRIMEIRO
-         * CACHE COMO RESERVA
-         * =============================================
-         */
+        /* =================================================
+           NAVEGAÇÃO / INDEX.HTML
+
+           ESTRATÉGIA:
+
+           INTERNET PRIMEIRO
+                  ↓
+           Atualiza o cache
+                  ↓
+           Sem internet?
+                  ↓
+           Abre versão offline
+        ================================================= */
 
         if (
             event.request.mode ===
@@ -159,41 +219,64 @@ self.addEventListener(
                 fetch(
                     event.request,
                     {
+
+                        /*
+                         * Evita receber uma cópia antiga
+                         * do HTML pelo cache HTTP.
+                         */
+
                         cache:
                             "no-store"
+
                     }
                 )
 
                 .then(
-                    function (resposta) {
+                    function (response) {
 
                         /*
-                         * Guarda a versão nova
-                         * do HTML no cache.
+                         * Só armazenamos respostas válidas.
                          */
 
-                        const copia =
-                            resposta.clone();
+                        if (
+                            response &&
+                            response.status === 200
+                        ) {
+
+                            const copia =
+                                response.clone();
 
 
-                        caches
-                            .open(
-                                CACHE_NAME
-                            )
+                            caches
+                                .open(
+                                    CACHE_NAME
+                                )
 
-                            .then(
-                                function (cache) {
+                                .then(
+                                    function (cache) {
 
-                                    cache.put(
-                                        "./index.html",
-                                        copia
-                                    );
+                                        /*
+                                         * Atualiza a versão offline
+                                         * do index.html.
+                                         */
 
-                                }
-                            );
+                                        cache.put(
+                                            "./index.html",
+                                            copia
+                                        );
+
+                                    }
+                                );
+
+                        }
 
 
-                        return resposta;
+                        /*
+                         * Mostra a versão recebida
+                         * pela internet.
+                         */
+
+                        return response;
 
                     }
                 )
@@ -201,9 +284,14 @@ self.addEventListener(
                 .catch(
                     function () {
 
+                        console.log(
+                            "[Service Worker V6] Sem internet. Abrindo versão offline."
+                        );
+
+
                         /*
-                         * Sem internet:
-                         * usa a última versão armazenada.
+                         * Se estiver offline,
+                         * abre o index.html salvo.
                          */
 
                         return caches.match(
@@ -221,14 +309,23 @@ self.addEventListener(
         }
 
 
-        /*
-         * =============================================
-         * DEMAIS ARQUIVOS
-         *
-         * CACHE PRIMEIRO
-         * INTERNET COMO RESERVA
-         * =============================================
-         */
+        /* =================================================
+           ARQUIVOS ESTÁTICOS
+
+           manifest.json
+           icon.png
+           etc.
+
+           ESTRATÉGIA:
+
+           CACHE PRIMEIRO
+                  ↓
+           Se não existir
+                  ↓
+           INTERNET
+                  ↓
+           Salva no cache
+        ================================================= */
 
         event.respondWith(
 
@@ -240,6 +337,10 @@ self.addEventListener(
                 .then(
                     function (arquivoCache) {
 
+                        /*
+                         * Arquivo encontrado localmente.
+                         */
+
                         if (
                             arquivoCache
                         ) {
@@ -249,26 +350,42 @@ self.addEventListener(
                         }
 
 
+                        /*
+                         * Arquivo não encontrado.
+                         *
+                         * Tenta buscar na internet.
+                         */
+
                         return fetch(
                             event.request
                         )
 
                         .then(
-                            function (resposta) {
+                            function (response) {
+
+                                /*
+                                 * Não armazenamos respostas
+                                 * inválidas.
+                                 */
 
                                 if (
-                                    !resposta ||
-                                    resposta.status !== 200
+                                    !response ||
+                                    response.status !== 200
                                 ) {
 
-                                    return resposta;
+                                    return response;
 
                                 }
 
 
                                 const copia =
-                                    resposta.clone();
+                                    response.clone();
 
+
+                                /*
+                                 * Salva para uso futuro
+                                 * sem internet.
+                                 */
 
                                 caches
                                     .open(
@@ -287,7 +404,34 @@ self.addEventListener(
                                     );
 
 
-                                return resposta;
+                                return response;
+
+                            }
+                        )
+
+                        .catch(
+                            function (erro) {
+
+                                console.log(
+                                    "[Service Worker V6] Recurso indisponível offline:",
+                                    event.request.url
+                                );
+
+
+                                /*
+                                 * Para recursos não essenciais,
+                                 * deixamos a requisição falhar
+                                 * normalmente.
+                                 */
+
+                                return new Response(
+                                    "",
+                                    {
+                                        status: 503,
+                                        statusText:
+                                            "Offline"
+                                    }
+                                );
 
                             }
                         );
@@ -296,6 +440,34 @@ self.addEventListener(
                 )
 
         );
+
+    }
+);
+
+
+/* =========================================================
+   MENSAGENS
+========================================================= */
+
+/*
+ * Permite que futuramente o index.html
+ * solicite uma atualização imediata
+ * do Service Worker.
+ */
+
+self.addEventListener(
+    "message",
+    function (event) {
+
+        if (
+            event.data &&
+            event.data.type ===
+            "SKIP_WAITING"
+        ) {
+
+            self.skipWaiting();
+
+        }
 
     }
 );
