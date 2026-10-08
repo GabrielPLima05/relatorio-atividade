@@ -42,9 +42,6 @@ body {
     padding: 15px;
 }
 
-/* =========================================================
-   CABEÇALHO
-========================================================= */
 
 .cabecalho {
     background: #17365d;
@@ -94,9 +91,6 @@ body {
     opacity: .85;
 }
 
-/* =========================================================
-   CARDS
-========================================================= */
 
 .card {
     background: white;
@@ -111,10 +105,6 @@ body {
     color: #17365d;
     font-size: 17px;
 }
-
-/* =========================================================
-   CAMPOS
-========================================================= */
 
 .campo {
     display: block;
@@ -183,9 +173,6 @@ textarea {
     display: none;
 }
 
-/* =========================================================
-   GALERIA
-========================================================= */
 
 .galeria {
     display: grid;
@@ -248,9 +235,6 @@ textarea {
     line-height: 1.4;
 }
 
-/* =========================================================
-   BOTÕES
-========================================================= */
 
 .acoes {
     display: flex;
@@ -296,9 +280,6 @@ button {
     color: #b42318;
 }
 
-/* =========================================================
-   RELATÓRIOS
-========================================================= */
 
 #painelRelatorios {
     display: none;
@@ -352,9 +333,6 @@ button {
     color: #b42318;
 }
 
-/* =========================================================
-   VISUALIZAÇÃO
-========================================================= */
 
 #visualizador {
     display: none;
@@ -407,9 +385,6 @@ button {
     text-align: center;
 }
 
-/* =========================================================
-   RODAPÉ
-========================================================= */
 
 .rodape {
     text-align: center;
@@ -422,9 +397,6 @@ button {
     color: #17365d;
 }
 
-/* =========================================================
-   RESPONSIVO
-========================================================= */
 
 @media (min-width: 650px) {
 
@@ -768,10 +740,6 @@ Versão 6.3
 "use strict";
 
 
-/* =========================================================
-   ELEMENTOS
-========================================================= */
-
 const el =
     id =>
         document.getElementById(id);
@@ -852,9 +820,6 @@ const fecharVisualizacao =
     el("fecharVisualizacao");
 
 
-/* =========================================================
-   ESTADO DO FORMULÁRIO
-========================================================= */
 
 let fotosAntes =
     [];
@@ -863,13 +828,7 @@ let fotosDepois =
     [];
 
 
-/*
-true =
-um relatório salvo foi aberto para edição.
 
-false =
-formulário representa um novo relatório.
-*/
 
 let modoEdicao =
     false;
@@ -879,18 +838,12 @@ let relatorioAbertoId =
     null;
 
 
-/*
-Usado para impedir que o mesmo formulário
-seja salvo duas vezes sem nenhuma alteração.
-*/
 
 let assinaturaUltimoSalvamento =
     null;
 
 
-/* =========================================================
-   MODO NOVO / EDIÇÃO
-========================================================= */
+
 
 function atualizarIndicadorModo() {
 
@@ -947,9 +900,6 @@ function entrarModoEdicao(
 }
 
 
-/* =========================================================
-   ASSINATURA DO FORMULÁRIO
-========================================================= */
 
 function criarAssinaturaAtual() {
 
@@ -1025,9 +975,7 @@ function criarAssinaturaAtual() {
 }
 
 
-/* =========================================================
-   SERVICE WORKER
-========================================================= */
+
 
 if (
     "serviceWorker"
@@ -1068,10 +1016,6 @@ if (
 
 }
 
-
-/* =========================================================
-   INSTALAÇÃO
-========================================================= */
 
 let eventoInstalacao =
     null;
@@ -1144,9 +1088,6 @@ window.addEventListener(
 );
 
 
-/* =========================================================
-   INDEXEDDB
-========================================================= */
 
 const DB_NAME =
     "RelatoriosAtividadeDB";
@@ -1232,10 +1173,6 @@ function abrirBanco() {
 }
 
 
-/* =========================================================
-   GERAR ID
-========================================================= */
-
 function gerarId() {
 
     if (
@@ -1258,10 +1195,6 @@ function gerarId() {
 
 }
 
-
-/* =========================================================
-   FOTOS
-========================================================= */
 
 function adicionarFotos(
     input,
@@ -1317,10 +1250,6 @@ function adicionarFotos(
 
 }
 
-
-/* =========================================================
-   RENDERIZAR GALERIA
-========================================================= */
 
 function renderizarGaleria(
     lista,
@@ -1496,9 +1425,6 @@ function renderizarGaleria(
 }
 
 
-/* =========================================================
-   EVENTOS DAS FOTOS
-========================================================= */
 
 cameraAntes.addEventListener(
     "change",
@@ -1560,10 +1486,6 @@ galeriaDepoisInput.addEventListener(
 );
 
 
-/* =========================================================
-   OBTER DADOS
-========================================================= */
-
 function obterDados() {
 
     return {
@@ -1589,11 +1511,6 @@ function obterDados() {
     };
 
 }
-
-
-/* =========================================================
-   SALVAR RELATÓRIO
-========================================================= */
 
 btnSalvar.addEventListener(
     "click",
@@ -1662,14 +1579,6 @@ btnSalvar.addEventListener(
             const agora =
                 new Date();
 
-
-            /*
-            SOMENTE em modo edição usamos
-            o ID já existente.
-
-            Em modo novo sempre geramos
-            outro ID.
-            */
 
             const idSalvar =
                 (
@@ -1746,11 +1655,6 @@ btnSalvar.addEventListener(
                 modoEdicao
             ) {
 
-                /*
-                Continua editando o relatório
-                que foi aberto.
-                */
-
                 relatorioAbertoId =
                     idSalvar;
 
@@ -1764,15 +1668,6 @@ btnSalvar.addEventListener(
             }
             else {
 
-                /*
-                Após salvar um NOVO relatório,
-                não mantemos o ID associado
-                ao formulário.
-
-                Portanto, se o usuário alterar
-                os dados e salvar novamente,
-                será criado outro relatório.
-                */
 
                 entrarModoNovo();
 
@@ -1806,10 +1701,6 @@ btnSalvar.addEventListener(
     }
 );
 
-
-/* =========================================================
-   BUSCAR RELATÓRIO
-========================================================= */
 
 async function buscarRelatorio(
     id
@@ -1863,10 +1754,6 @@ async function buscarRelatorio(
 
 }
 
-
-/* =========================================================
-   LISTAR RELATÓRIOS
-========================================================= */
 
 async function listarRelatorios() {
 
@@ -2218,10 +2105,6 @@ async function listarRelatorios() {
 }
 
 
-/* =========================================================
-   ABRIR PARA EDIÇÃO
-========================================================= */
-
 async function abrirRelatorio(
     id
 ) {
@@ -2294,20 +2177,11 @@ async function abrirRelatorio(
         );
 
 
-        /*
-        SOMENTE abrir um relatório salvo
-        ativa modo de edição.
-        */
 
         entrarModoEdicao(
             relatorio.id
         );
 
-
-        /*
-        Estado original carregado.
-        Se salvar sem alterar, não faz nada.
-        */
 
         assinaturaUltimoSalvamento =
             criarAssinaturaAtual();
@@ -2350,9 +2224,6 @@ async function abrirRelatorio(
 }
 
 
-/* =========================================================
-   VISUALIZAÇÃO
-========================================================= */
 
 async function criarFotosVisualizacao(
     fotos
@@ -2475,9 +2346,6 @@ async function criarFotosVisualizacao(
 }
 
 
-/* =========================================================
-   VISUALIZAR RELATÓRIO
-========================================================= */
 
 async function visualizarRelatorio(
     relatorio
@@ -2679,10 +2547,6 @@ fecharVisualizacao.addEventListener(
     }
 );
 
-
-/* =========================================================
-   PREPARAR IMAGEM PARA PDF
-========================================================= */
 
 async function prepararImagemPDF(
     blob
@@ -2905,10 +2769,6 @@ async function prepararImagemPDF(
 }
 
 
-/* =========================================================
-   NOME DO ARQUIVO
-========================================================= */
-
 function limparNomeArquivo(
     texto
 ) {
@@ -2939,9 +2799,6 @@ function limparNomeArquivo(
 }
 
 
-/* =========================================================
-   GERAR E BAIXAR PDF
-========================================================= */
 
 async function baixarPDF(
     relatorio
@@ -3294,7 +3151,6 @@ async function baixarPDF(
             5;
 
 
-        /* FOTOS */
 
         async function adicionarGrupoFotos(
             titulo,
@@ -3600,7 +3456,6 @@ async function baixarPDF(
         }
 
 
-        /* NOME DO ARQUIVO */
 
         const data =
             new Date(
@@ -3775,10 +3630,6 @@ async function baixarPDF(
 }
 
 
-/* =========================================================
-   BAIXAR RELATÓRIO ATUAL
-========================================================= */
-
 btnBaixarAtual.addEventListener(
     "click",
     async () => {
@@ -3823,9 +3674,6 @@ btnBaixarAtual.addEventListener(
 );
 
 
-/* =========================================================
-   EXCLUIR
-========================================================= */
 
 async function excluirRelatorio(
     id
@@ -3867,11 +3715,6 @@ async function excluirRelatorio(
         transaction.oncomplete =
             async () => {
 
-                /*
-                Se o relatório que estava sendo
-                editado foi excluído, volta para
-                modo novo.
-                */
 
                 if (
                     relatorioAbertoId
@@ -3912,10 +3755,6 @@ async function excluirRelatorio(
 }
 
 
-/* =========================================================
-   PAINEL DE RELATÓRIOS
-========================================================= */
-
 btnRelatorios.addEventListener(
     "click",
     async () => {
@@ -3954,9 +3793,6 @@ btnRelatorios.addEventListener(
 );
 
 
-/* =========================================================
-   LIMPAR / NOVO RELATÓRIO
-========================================================= */
 
 btnLimpar.addEventListener(
     "click",
@@ -4029,9 +3865,6 @@ btnLimpar.addEventListener(
 );
 
 
-/* =========================================================
-   ONLINE / OFFLINE
-========================================================= */
 
 window.addEventListener(
     "online",
@@ -4065,9 +3898,6 @@ if (
 }
 
 
-/* =========================================================
-   ESTADO INICIAL
-========================================================= */
 
 entrarModoNovo();
 
