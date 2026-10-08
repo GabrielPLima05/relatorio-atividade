@@ -17,9 +17,6 @@ const ARQUIVOS_OFFLINE = [
 ];
 
 
-/* =========================================================
-   INSTALAÇÃO
-========================================================= */
 
 self.addEventListener(
     "install",
@@ -56,9 +53,6 @@ self.addEventListener(
 );
 
 
-/* =========================================================
-   ATIVAÇÃO
-========================================================= */
 
 self.addEventListener(
     "activate",
@@ -111,9 +105,6 @@ self.addEventListener(
 );
 
 
-/* =========================================================
-   FETCH
-========================================================= */
 
 self.addEventListener(
     "fetch",
@@ -130,13 +121,7 @@ self.addEventListener(
         }
 
 
-        /*
-        Para navegação:
-        internet primeiro.
 
-        Assim recebe novas versões
-        quando existir conexão.
-        */
 
         if (
             event.request.mode
@@ -201,10 +186,6 @@ self.addEventListener(
         }
 
 
-        /*
-        Demais arquivos:
-        cache primeiro.
-        */
 
         event.respondWith(
 
@@ -280,9 +261,6 @@ self.addEventListener(
 );
 
 
-/* =========================================================
-   SKIP WAITING
-========================================================= */
 
 self.addEventListener(
     "message",
